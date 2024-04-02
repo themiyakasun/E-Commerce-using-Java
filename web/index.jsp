@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="b" uri="/WEB-INF/tlds/buttonTags" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +7,7 @@
         <title>E-Commerce</title>
         
         <!--CSS-->
-        <link rel="stylesheet" type="text/css" src="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,5 +16,8 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        
+        <p>Testing button component</p>
+        <b:Button text="Submit" outlined="false" rounded="true" />
     </body>
 </html>
