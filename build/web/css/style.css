@@ -16,6 +16,7 @@
 ul[role='list'],
 ol[role='list'] {
     list-style: none;
+    margin-bottom: 0 !important;
 }
 
 /* Set core root defaults */
@@ -35,12 +36,8 @@ body {
 }
 
 /* A elements that don't have a class get default styles */
-a:not([class]) {
-    text-decoration-skip-ink: auto;
-}
-
 a {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 /* Make images easier to work with */
@@ -49,6 +46,12 @@ picture,
 svg {
     max-width: 100%;
     display: block;
+}
+
+button {
+    background: transparent;
+    outline: none;
+    border: none;
 }
 
 
@@ -86,4 +89,69 @@ svg {
     font-weight: 500;
     line-height: 28px;
     letter-spacing: -0.4px;
+}
+
+
+/* Navbar */
+.nav-wrapper {
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+}
+.logo-wrapper .mobile-nav-toggle {
+    display: none;
+}
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+.nav-list li a {
+    color: #141718;
+    font-family: "Space Grotesk";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+}
+.nav-icons {
+    display: flex;
+    gap: 16px;
+}
+.nav-icons button {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+.nav-icons .cart-button {
+    display: flex;
+    align-items: center;
+}
+.nav-icons .cart-button span {
+    background-color: #141718;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .logo-wrapper .mobile-nav-toggle {
+        display: block;
+    }
+    .nav-list,
+    .search-button,
+    .profile-button {
+        display: none;
+    }
 }
