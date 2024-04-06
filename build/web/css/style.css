@@ -17,6 +17,7 @@ ul[role='list'],
 ol[role='list'] {
     list-style: none;
     margin-bottom: 0 !important;
+    padding-left: 0 !important;
 }
 
 /* Set core root defaults */
@@ -89,6 +90,7 @@ button {
     font-weight: 500;
     line-height: 28px;
     letter-spacing: -0.4px;
+    width: 100%;
 }
 
 
@@ -144,6 +146,113 @@ button {
     justify-content: center;
     align-items: center;
 }
+.mobile-nav {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    z-index: 10;
+}
+.mobile-nav > * {
+    width: 100%;
+}
+.mobile-nav-top,
+.mobile-nav-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.mobile-nav .top-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mobile-nav .search {
+    display: flex;
+    height: 46px;
+    padding: 0px 16px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    border: 1px solid #6C7275;
+    border-radius: 6px;
+}
+.mobile-nav .search input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+}
+.mobile-nav .mobile-nav-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+}
+.mobile-nav .mobile-nav-list li {
+    width: 100%;
+}
+.mobile-nav .mobile-nav-list li a{
+    display: block;
+    width: 100%;
+    padding-bottom: 8px;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    color: #141718;
+    border-bottom: 1px solid #E8ECEF;
+}
+.mobile-nav-bottom .action-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: -0.4px;
+    color: #6C7275;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #E8ECEF;
+}
+.mobile-nav-bottom .action-wrapper .action-icon {
+    display: flex;    
+}
+.mobile-nav-bottom .action-wrapper .action-icon span {
+    background-color: #141718;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 10px;
+}
+
+
 
 @media only screen and (max-width: 768px) {
     .logo-wrapper .mobile-nav-toggle {
