@@ -3,7 +3,7 @@
     <div class="container">
         <div class="nav-wrapper">
             <div class="logo-wrapper">
-                <button class="mobile-nav-toggle">
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle" onclick="openMobileNav()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M7 8H17M7 12H17M7 16H17" stroke="#141718" stroke-width="1.5" stroke-linecap="round"/>
                         <path d="M7 8H17M7 12H17M7 16H17" stroke="black" stroke-opacity="0.2" stroke-width="1.5" stroke-linecap="round"/>
@@ -44,14 +44,14 @@
         </div>
     </div>
     
-    <div class="mobile-nav">
+    <div class="mobile-nav" id="mobile-nav">
         <div class="mobile-nav-top">
             <div class="top-wrapper">
             <div>
                 <img src="assets/logo.png" />
             </div>
             
-            <button>
+                <button onclick="closeMobileNav()">
                 <img src="assets/icons/close.png"/>
             </button>
             </div>
