@@ -1,9 +1,18 @@
 
-# Package Files #
-*.jar
-*.war
-*.ear
-*.xml
+# GlassFish server specific files
+/glassfish-resources.xml
+/glassfish-web.xml
+
+# IDE settings
+/.idea/
+*.iml
+
+# Compiled files
+*.class
+
+# OS-specific files
+.DS_Store
+Thumbs.db
 
 /nbproject/private/
 /nbproject/build/
