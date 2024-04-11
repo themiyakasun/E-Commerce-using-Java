@@ -52,6 +52,16 @@ function loadContent(page, clickedButton) {
                     prevButton = prevButton.previousElementSibling;
                 }
             }
+            
+            if(clickedButton.classList.contains("place-order-btn")){
+                var orderBtn = document.getElementById("order-button");
+                orderBtn.classList.add("active");
+                var prevButton = orderBtn.previousElementSibling;
+                while (prevButton) {
+                    prevButton.classList.add("pass");
+                    prevButton = prevButton.previousElementSibling;
+                }
+            }
         }
     };
     xhttp.open("GET", page, true);
@@ -86,4 +96,19 @@ function updateSubtotal() {
     var price = parseFloat(document.querySelector('.price').innerText.replace('$', ''));
     var subtotal = quantity * price;
     document.querySelector('.sub-total').innerText = '$' + subtotal.toFixed(2);
+}
+
+
+//Payment Method Select
+function showPaymentInfo(paymentMethod) {
+    var cardInfo = document.getElementById("card-info");
+    var paypalInfo = document.getElementById("paypal-info");
+    
+    if (paymentMethod === "credit-card") {
+        cardInfo.style.display = "block";
+        paypalInfo.style.display = "none";
+    } else if (paymentMethod === "paypal") {
+        cardInfo.style.display = "none";
+        paypalInfo.style.display = "block";
+    }
 }

@@ -16,7 +16,7 @@
                         <span class="text">Checkout details</span>
                     </div>
                 </button>
-                <button class="process-element" id="order-button" data-process-button-id="order-button" onclick="loadContent('includes/orderSection.jsp', this)">
+                <button class="process-element" id="order-button" data-process-button-id="order-button" onclick="loadContent('includes/orderCompleteSection.jsp', this)">
                     <div class="process">
                         <span class="circle">3</span>
                         <span class="text">Order complete</span>
