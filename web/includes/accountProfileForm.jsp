@@ -1,20 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>User Registration Form</title>
-</head>
-<style>
-        table {
-            border-collapse: separate;
-            border-spacing: 0 10px;
-        }
-        td {
-            padding: 5px;
-        }
-    </style>
-<body><h1>MY ACCOUNT</h1><center>
+<h1>MY ACCOUNT</h1><center>
     <h2>Account Details</h2>
     <form action="update" method="post">
         <table>
@@ -51,5 +35,4 @@
         <input type="submit" value="Submit">
     </form>
     </form></center>
-</body>
-</html>
+

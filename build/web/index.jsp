@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="b" uri="/WEB-INF/tlds/buttonTags" %>
 <!DOCTYPE html>
-<html>
-    
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>E-Commerce</title>
@@ -54,7 +53,7 @@
         <script src="js/index.js"></script>
         
     </body>
-</html>
+
         
 
         
