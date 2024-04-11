@@ -913,3 +913,95 @@ input[type='radio']:checked:after {
         width: 100%;
     }
 }
+
+/* Order Complete Section */
+.order-complete-box {
+    display: flex;
+    padding: 80px 95px;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    border-radius: 8px;
+    background: #FFF;
+    box-shadow: 20px 10px 20px 10px rgba(15, 15, 15, 0.20);
+}
+.order-complete-box h2 {
+    font-family: Poppins;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 34px;
+    letter-spacing: -0.6px;
+    color: #6C7275;
+}
+.order-complete-box h1 {
+    font-family: Poppins;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 44px;
+    letter-spacing: -0.4px;
+    color: #23262F;
+    max-width: 492px;
+    text-align: center;
+}
+.order-complete-box .ordered-items {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 546px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+}
+.order-complete-box .ordered-items .ordered-item {
+    display: flex;
+    width: 80px;
+    height: 96px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+}
+.order-complete-box .ordered-items .ordered-item .circle {
+    display: flex;
+    flex-wrap: wrap;
+    width: 32px;
+    padding: 4px 11px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 80px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #141718;
+    color: #fff;
+    position: absolute;
+    top: -20px;
+    right: -10px;
+}
+.order-complete-box .order-details {
+    display: flex;
+    max-width: 548px;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+.order-complete-box .order-details .titles,
+.order-complete-box .order-details .details{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+.order-complete-box .order-details .titles li {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    color: #6C7275;
+}
+.order-complete-box .order-details .details li {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    color: #141718;
+}

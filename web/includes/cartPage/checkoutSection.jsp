@@ -148,7 +148,7 @@
                 </div>
             </div>
         </div>
-        <div class="place-order-btn" onclick="loadContent('includes/orderCompleteSection.jsp', this)">
+        <div class="place-order-btn" onclick="loadContent('includes/cartPage/orderCompleteSection.jsp', this)">
             <b:Button rounded="false" outlined="false" text="Place Order" name="order"/>
         </div>
     </div>

@@ -20,7 +20,7 @@
         <%@include file="includes/navbar.jsp" %>
         <%@include file="includes/search.jsp" %>
         
-        <%@include file="includes/title.jsp" %>
+        <%@include file="includes/cartPage/title.jsp" %>
         
         <div id="content-container"></div>
         
@@ -28,7 +28,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>
         document.addEventListener("DOMContentLoaded", function() {
-            loadContent('includes/cartSection.jsp', document.getElementById("cart-button"));
+            loadContent('includes/cartPage/cartSection.jsp', document.getElementById("cart-button"));
         });
         </script>
         <script src="js/index.js"></script>

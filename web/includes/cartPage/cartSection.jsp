@@ -90,7 +90,7 @@
                     </span>
                 </div>
                 
-                <div class="checkout-btn" onclick="loadContent('includes/checkoutSection.jsp', this)">
+                <div class="checkout-btn" onclick="loadContent('includes/cartPage/checkoutSection.jsp', this)">
                     <b:Button rounded="false" outlined="false" text="Checkout" name="checkout"/>
                 </div>
             </div>
