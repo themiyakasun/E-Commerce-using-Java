@@ -31,8 +31,9 @@
         </div>
         
         <section>
-            <div class="container">
-                <div class="row">
+            <div class="album py-5 bg-body-tertiary">
+                <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     <div class="col-md-3">
                         <a href="#" class="pro-card-wrapper">
                             <div class="pro-card" data-product-id="1">
@@ -138,7 +139,7 @@
                     </div>
                 </div>
                                     
-                <div class="row">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     <div class="col-md-3">
                         <a href="#" class="pro-card-wrapper">
                             <div class="pro-card" data-product-id="5">
@@ -244,7 +245,7 @@
                     </div>
                 </div>
                                     
-                <div class="row">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     <div class="col-md-3">
                         <a href="#" class="pro-card-wrapper">
                             <div class="pro-card" data-product-id="9">
@@ -352,6 +353,7 @@
                 <!--Show more btn-->
                 <button class="sm-btn">Show More</button>                
                 
+            </div>
             </div>
         </section>
                                     
