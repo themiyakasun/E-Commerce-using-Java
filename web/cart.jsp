@@ -28,37 +28,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>
         document.addEventListener("DOMContentLoaded", function() {
-    // Trigger loadContent with cart.jsp when the page loads
-    loadContent('includes/cartSection.jsp', document.getElementById("cart-button"));
-});
-
-function loadContent(page, clickedButton) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("content-container").innerHTML = this.responseText;
-            
-            // Remove the "active" class from all buttons
-            var buttons = document.getElementsByClassName("process-element");
-            for (var i = 0; i < buttons.length; i++) {
-                buttons[i].classList.remove("active");
-                buttons[i].classList.remove("pass");
-            }
-            
-            // Add the "active" class to the clicked button
-            clickedButton.classList.add("active");
-            
-            // Add the "pass" class to previous buttons if needed
-            var prevButton = clickedButton.previousElementSibling;
-            while (prevButton) {
-                prevButton.classList.add("pass");
-                prevButton = prevButton.previousElementSibling;
-            }
-        }
-    };
-    xhttp.open("GET", page, true);
-    xhttp.send();
-}
+            loadContent('includes/cartSection.jsp', document.getElementById("cart-button"));
+        });
         </script>
         <script src="js/index.js"></script>
         
