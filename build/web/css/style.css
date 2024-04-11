@@ -464,3 +464,117 @@ body {
     font-weight: 600;
     color: #141718;
 }
+
+/*Shop Page*/
+.container {
+    position: relative;
+}
+
+#hero-shop {
+    width: 100%;
+    height: auto;
+}
+
+.hero-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.hero-text h1, p {
+    margin-bottom: 20px;
+}
+
+/*Product card list*/
+section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.pro-card-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 30px;
+    
+}
+
+.sm-btn {
+  margin: 50px 0; /* Added margin to top of Show More button */
+  padding: 15px 30px; /* Added padding to the Show More button */
+  background-color: #fff; /* Blue background color */
+  color: #111; /* White text color */
+  border: 2px solid #000; /* Black border */
+  border-radius: 40px;
+  cursor: pointer;
+  display: block; /* Make the button a block-level element */
+  margin-left: auto; /* Center the button horizontally */
+  margin-right: auto;
+  text-align: center; /* Center the text horizontally */
+}
+
+.sm-btn:hover {
+  background-color: #0056b3; /* Darker blue background color on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .pro-card-wrapper {
+        flex: 0 0 calc(33.33% - 20px); /* 3 cards per row */
+    }
+}
+
+@media (max-width: 992px) {
+    .pro-card-wrapper {
+        flex: 0 0 calc(50% - 20px); /* 2 cards per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .pro-card-wrapper {
+        flex: 0 0 100%; /* 1 card per row */
+    }
+}
+
+/*NewLetter*/
+.email {
+    height: 50px;
+    position: relative;
+    border-bottom: 2px solid #111;
+}
+
+.hero-text h2 {
+    font-weight: 600;
+}
+
+.email input {
+    height: 50px;
+    width: 450px;
+    padding-left: 50px;
+    font-size: 18px;
+    outline: none;
+    border: none;
+}
+
+.email i {
+    position: absolute;
+    left: 25px;
+    top: 55%;
+    transform: translate(-50%, -50%);
+}
+
+.email .submit-btn {
+    position: absolute;
+    top: 55%;
+    right: -30px;
+    transform: translate(-50%, -50%);
+    padding: 8px 12px;
+    font-size: 18px;
+}
+
