@@ -16,9 +16,23 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     </head>
     <body>
-            
+        <header class="header">
+                       
         <%@include file="includes/navbar.jsp" %>
         <%@include file="includes/search.jsp" %>
+        
+        <div class="container">
+            <div class="hero-wrapper">
+                <div class="hero-text">
+            <h1>More than just a game. It’s a lifestyle.</h1>
+            <p>Whether you’re just starting out, have played your whole life or you're a Tour pro, your swing is like a fingerprint.</p>
+            <a>
+                <b:Button text="Shopping Now" rounded="false" outlined="false"/>
+            </a>
+        </div>
+            </div>
+        </div>
+        </header>
         
         
         <div class="row">
