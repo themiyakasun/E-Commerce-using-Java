@@ -1,1 +1,1 @@
-how to setup the project
+how to setup the project:
