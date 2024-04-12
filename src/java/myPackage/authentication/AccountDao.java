@@ -28,10 +28,10 @@ public class AccountDao {
     private static final String INSERT_USERS_SQL = "INSERT INTO user" + " (first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address) VALUES " +
         " (?,?,?,?,?,?,?,?,?);";
 
-    private static final String SELECT_USER_BY_ID = "select first_name,last_name, email  from user where id =?";
+    private static final String SELECT_USER_BY_ID = "select first_name,last_name, display_name,email from user where id =?";
     private static final String SELECT_ALL_USERS = "select * from user";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
-    private static final String UPDATE_USERS_SQL = "update user set first_name=?, last_name=?, display_name=?, email=? WHERE id=?";
+    private static final String UPDATE_USERS_SQL = "update user set first_name=?, last_name=?, display_name=?, email=?, password=?  WHERE id=?";
  //Create or Insert user
 
     public AccountDao() {}
@@ -99,8 +99,10 @@ public class AccountDao {
                 
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
+                 String display_name = rs.getString("display_name");
                 String email = rs.getString("email");
-                account = new Account(id,first_name,last_name,email);
+                
+                account = new Account(id,first_name,last_name,display_name,email);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -180,7 +182,8 @@ public class AccountDao {
             statement.setString(2, account.getLast_name());
             statement.setString(3, account.getDisplay_name());
             statement.setString(4, account.getEmail());
-            statement.setInt(5, account.getId());
+            statement.setString(5, account.getPassword());
+            statement.setInt(6, account.getId());
         
         System.out.println("hi this is dao after seting values");    
             rowUpdated = statement.executeUpdate() > 0;

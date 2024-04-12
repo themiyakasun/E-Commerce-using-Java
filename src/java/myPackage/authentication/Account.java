@@ -58,12 +58,15 @@ public class Account {
         this.last_name = last_name;
         this.display_name = display_name;
         this.email = email;
+        
     }
 
-    public Account(int id, String first_name, String last_name) {
+    public Account(int id, String first_name, String last_name,String email) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
+        this.email = email;
+        
     }
 
     public Account(int id, String first_name, String last_name, String display_name, String email) {
@@ -72,14 +75,17 @@ public class Account {
         this.last_name = last_name;
         this.display_name = display_name;
         this.email = email;
-        
     }
+    
 
-    public Account(int id, String first_name, String last_name, String email) {
+
+    public Account(int id, String first_name, String last_name, String display_name, String email, String password) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
+        this.display_name = display_name;
         this.email = email;
+        this.password = password;
     }
 
     
