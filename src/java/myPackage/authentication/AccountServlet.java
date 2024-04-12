@@ -102,23 +102,47 @@ public class AccountServlet extends HttpServlet {
         response.sendRedirect("list");
     }
 
+//    private void updateUser(HttpServletRequest request, HttpServletResponse response)
+//    throws SQLException, IOException {
+//        int id = Integer.parseInt(request.getParameter("id"));
+//        String first_name = request.getParameter("firsr_name");
+//        String last_name =  request.getParameter("last_name");
+//        String display_name= request.getParameter("display_name");
+//        String email = request.getParameter("email");
+//        String password = request.getParameter("password");
+//        String billing_phone = request.getParameter("billing_phone");
+//        String billing_address = request.getParameter("billing_address");
+//        String shipping_phone=  request.getParameter("shipping_phone");
+//        String shipping_address = request.getParameter("shipping_address");
+//        Account newAccount = new Account(first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address);
+//
+//        accountDao.updateUser(newAccount);
+//        response.sendRedirect("list");
+//    }
+    
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String first_name = request.getParameter("firsr_name");
-        String last_name =  request.getParameter("last_name");
-        String display_name= request.getParameter("display_name");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String billing_phone = request.getParameter("billing_phone");
-        String billing_address = request.getParameter("billing_address");
-        String shipping_phone=  request.getParameter("shipping_phone");
-        String shipping_address = request.getParameter("shipping_address");
-        Account newAccount = new Account(first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address);
+    int id = Integer.parseInt(request.getParameter("id"));
+    System.out.println(id);
+    String first_name = request.getParameter("first_name");
+    System.out.println(first_name);
+    String last_name = request.getParameter("last_name");
+    System.out.println(last_name);
+    String display_name = request.getParameter("display_name");
+    System.out.println(display_name);
+    String email = request.getParameter("email");
+    System.out.println(email);
+    
+    System.out.println("hi this is servlet");
+    
+    Account account = new Account(id,first_name, last_name, display_name, email);
+    
+    System.out.println("this is servlet and after making object");
+    
+    accountDao.updateUser(account);
+    response.sendRedirect("list"); // Assuming you have a page named "list" to redirect after updating
+}
 
-        accountDao.updateUser(newAccount);
-        response.sendRedirect("list");
-    }
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException {

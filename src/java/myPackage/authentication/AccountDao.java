@@ -31,8 +31,7 @@ public class AccountDao {
     private static final String SELECT_USER_BY_ID = "select first_name,last_name, email  from user where id =?";
     private static final String SELECT_ALL_USERS = "select * from user";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
-    private static final String UPDATE_USERS_SQL = "update users set first_name = ?,last_name = ?, display_name = ?, email = ?, password = ?,   where id = ?;";
-
+    private static final String UPDATE_USERS_SQL = "update user set first_name=?, last_name=?, display_name=?, email=? WHERE id=?";
  //Create or Insert user
 
     public AccountDao() {}
@@ -97,10 +96,11 @@ public class AccountDao {
 //                account = new Account(id,first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address);
 //            }
             while (rs.next()) {
+                
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
                 String email = rs.getString("email");
-                account = new Account(first_name,last_name,email);
+                account = new Account(id,first_name,last_name,email);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -150,25 +150,45 @@ public class AccountDao {
         return rowDeleted;
     }
 //update user
+//    public boolean updateUser(Account account) throws SQLException {
+//        boolean rowUpdated;
+//        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+//            statement.setString(1, account.getFirst_name());
+//            statement.setString(2, account.getLast_name());
+//            statement.setString(3, account.getDisplay_name());
+//            statement.setString(4, account.getEmail());
+//            statement.setString(5, account.getPassword());
+//            statement.setString(6, account.getBilling_phone());
+//            statement.setString(7, account.getBilling_address());
+//            statement.setString(8, account.getShipping_phone());
+//            statement.setString(9,account .getShipping_address());
+//            statement.setInt(10, account.getId());
+//
+//            rowUpdated = statement.executeUpdate() > 0;
+//        }
+//        return rowUpdated;
+//    }
+
+   
+
     public boolean updateUser(Account account) throws SQLException {
         boolean rowUpdated;
+        System.out.println("hi this is Dao");
+        
         try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
             statement.setString(1, account.getFirst_name());
             statement.setString(2, account.getLast_name());
             statement.setString(3, account.getDisplay_name());
             statement.setString(4, account.getEmail());
-            statement.setString(5, account.getPassword());
-            statement.setString(6, account.getBilling_phone());
-            statement.setString(7, account.getBilling_address());
-            statement.setString(8, account.getShipping_phone());
-            statement.setString(9,account .getShipping_address());
-            statement.setInt(10, account.getId());
-
+            statement.setInt(5, account.getId());
+        
+        System.out.println("hi this is dao after seting values");    
             rowUpdated = statement.executeUpdate() > 0;
         }
         return rowUpdated;
     }
 
+    
     private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
             if (e instanceof SQLException) {
