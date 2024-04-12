@@ -28,7 +28,7 @@ public class AccountDao {
     private static final String INSERT_USERS_SQL = "INSERT INTO user" + " (first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address) VALUES " +
         " (?,?,?,?,?,?,?,?,?);";
 
-    private static final String SELECT_USER_BY_ID = "select first_name,last_name, display_name,email from user where id =?";
+    private static final String SELECT_USER_BY_ID = "select first_name,last_name, display_name,email,password from user where id =?";
     private static final String SELECT_ALL_USERS = "select * from user";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update user set first_name=?, last_name=?, display_name=?, email=?, password=?  WHERE id=?";
@@ -99,10 +99,13 @@ public class AccountDao {
                 
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
-                 String display_name = rs.getString("display_name");
+                String display_name = rs.getString("display_name");
                 String email = rs.getString("email");
+                String password = rs.getString("password");
                 
-                account = new Account(id,first_name,last_name,display_name,email);
+                
+                
+                account = new Account(id,first_name,last_name,display_name,email,password);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -206,5 +209,9 @@ public class AccountDao {
                 }
             }
         }
+    }
+
+    boolean checkPassword(int id, String old_password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

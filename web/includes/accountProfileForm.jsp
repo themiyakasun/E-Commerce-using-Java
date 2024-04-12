@@ -16,7 +16,16 @@
 <% } %>
 
 
-
+ <%-- Check if there's an error message --%>
+    <% if (request.getAttribute("error") != null) { %>
+        <script>
+            // Extract the error message
+            var errorMessage = "<%= request.getAttribute("error") %>";
+            // Display the error message in a pop-up dialog
+            alert(errorMessage);
+        </script>
+    <% } %>
+    
 
     <form action="myaccount" method="post">
         <table>
@@ -42,9 +51,16 @@
             <br><br>
             <tr>
                 <td>Change Password </td></tr>
+               
+             <tr>
+                <input type="hidden" name="real_password" value="${user.password}"/>
+                <td><label for="password">Old Password: </label></td>
+                <td><input type="password" id="old_password" name="old_password" placeholder="Enter your old password" required></td>
+            </tr>
+            
             <tr>
                 <td><label for="password">New Password:</label></td>
-                <td><input type="password" id="password" name="password" placeholder="Enter your new password" required></td>
+                <td><input type="password" id="new_password" name="new_password" placeholder="Enter your new password" required></td>
             </tr>
             <tr>
                 <td><label for="confirm_password">Confirm Password:</label></td>
