@@ -13,7 +13,7 @@
             </div>
             
             <ul class="nav-list" role="list">
-                <li><a href="">Home</a></li>
+                <li><a href="index.jsp">Home</a></li>
                 <li><a href="">Shop</a></li>
                 <li><a href="">Contact us</a></li>
             </ul>
