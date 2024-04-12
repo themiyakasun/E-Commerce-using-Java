@@ -68,7 +68,7 @@ function loadContent(page, clickedButton) {
             if(clickedButton.id === "cart-button") {
                 title = "Cart";
             } else if(clickedButton.id === "checkout-button") {
-                title = "Details";
+                title = "Checkout";
             } else if(clickedButton.id === "order-button") {
                 title = "Complete!";
             }
