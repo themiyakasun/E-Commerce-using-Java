@@ -1,8 +1,9 @@
 <h1>MY ACCOUNT</h1><center>
     <h2>Account Details</h2>
-    <form action="update" method="post">
+    <form action="myaccount" method="post">
         <table>
             <tr>
+                <input type="hidden" name="requestType" value="update"/>
                 <input type="hidden" name="id" value="${user.id}"/>
                 <td><label for="first_name">First Name:</label></td>
                 <td><input type="text" id="first_name" value="${user.first_name}" name="first_name"  required></td>

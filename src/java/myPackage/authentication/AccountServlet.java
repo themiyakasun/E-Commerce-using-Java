@@ -7,6 +7,8 @@ package myPackage.authentication;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/")
+@WebServlet("/myaccount")
 public class AccountServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final int demoUserId=1;
@@ -29,38 +31,58 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        doGet(request, response);
+//        doGet(request, response);
+    String requestType = request.getParameter("requestType");
+    
+        try {
+            switch (requestType) {
+                case "update":
+                    updateUser(request, response);
+                    break;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        System.out.println("In Do Post");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String action = request.getServletPath();
-
+        String action = request.getPathInfo();
+        System.out.println(action);
         try {
-            switch (action) {
-               case "/new":
-                    showNewForm(request, response);
-                    break;
-                case "/insert":
-                    insertUser(request, response);
-                    break;
-                case "/delete":
-                    deleteUser(request, response);
-                    break;
-                case "/edit":
-                    showEditForm(request, response);
-                    break;
-                case "/update":
-                    updateUser(request, response);
-                    break;
-                default:
-                    getUser(request, response);
-                    break;
-            }
+            getUser(request, response);
+            
         } catch (SQLException ex) {
-            throw new ServletException(ex);
-        }
+            Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+//        try {
+//            switch (action) {
+//               case "/new":
+//                    showNewForm(request, response);
+//                    break;
+//                case "/insert":
+//                    insertUser(request, response);
+//                    break;
+//                case "/delete":
+//                    deleteUser(request, response);
+//                    break;
+//                case "/edit":
+//                    showEditForm(request, response);
+//                    break;
+//                case "/update":
+//                    updateUser(request, response);
+//                    break;
+//                case "/get":
+//                    getUser(request, response);
+//                    break;    
+//            }
+//        } catch (SQLException ex) {
+//            throw new ServletException(ex);
+//        }
+        
     }
 
     private void getUser(HttpServletRequest request, HttpServletResponse response)
@@ -141,7 +163,7 @@ public class AccountServlet extends HttpServlet {
     System.out.println("this is servlet and after making object");
     
     accountDao.updateUser(account);
-    response.sendRedirect("list"); // Assuming you have a page named "list" to redirect after updating
+    response.sendRedirect("myaccount"); // Assuming you have a page named "list" to redirect after updating
 }
 
 
