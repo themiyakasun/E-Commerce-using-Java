@@ -1,7 +1,7 @@
 <section class="title-section">
     <div class="container">
         <div class="title-wrapper">
-            <h1>Cart</h1>
+            <h1 class="title" id="title">Cart</h1>
             
             <div class="process-wrapper">
                 <button class="process-element" id="cart-button" data-process-button-id="cart-button" onclick="loadContent('includes/cartPage/cartSection.jsp', this)">

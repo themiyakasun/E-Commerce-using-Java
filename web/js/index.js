@@ -62,6 +62,17 @@ function loadContent(page, clickedButton) {
                     prevButton = prevButton.previousElementSibling;
                 }
             }
+                                  
+            // Update title based on clicked button
+            var title = "";
+            if(clickedButton.id === "cart-button") {
+                title = "Cart";
+            } else if(clickedButton.id === "checkout-button") {
+                title = "Checkout";
+            } else if(clickedButton.id === "order-button") {
+                title = "Complete!";
+            }
+            document.getElementById("title").innerText = title;
         }
     };
     xhttp.open("GET", page, true);

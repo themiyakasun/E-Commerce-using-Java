@@ -21,7 +21,7 @@ public class AccountDao {
 
 
 
-    private String jdbcURL = "jdbc:mysql://localhost:3306/account?useSSL=false";
+    private String jdbcURL = "jdbc:mysql://localhost:3306/3legant?useSSL=false";
     private String jdbcUsername = "root";
     private String jdbcPassword = "";
 
