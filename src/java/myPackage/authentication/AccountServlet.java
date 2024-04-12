@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/myaccount")
 public class AccountServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final int demoUserId=1;
+    private static final int demoUserId=10;
     private AccountDao accountDao;
 
     public AccountServlet() {
@@ -150,10 +150,28 @@ public class AccountServlet extends HttpServlet {
     System.out.println(display_name);
     String email = request.getParameter("email");
     System.out.println(email);
+    String password = request.getParameter("password");
+    System.out.println(password);
+    String confirmPassword = request.getParameter("confirm_password");
+
+// Validate password confirmation
+    if (!password.equals(confirmPassword)) {
+    // If passwords don't match, return an error message
+    request.setAttribute("error", "Passwords do not match!");
+    // Forward the request back to the form
+    RequestDispatcher dispatcher = request.getRequestDispatcher("includes/accountProfileForm.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException ex) {
+            Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return; // Exit method to prevent further processing
+}
+
     
     System.out.println("hi this is servlet");
     
-    Account account = new Account(id,first_name, last_name, display_name, email);
+    Account account = new Account(id,first_name, last_name, display_name, email,password);
     
     System.out.println("this is servlet and after making object");
     
