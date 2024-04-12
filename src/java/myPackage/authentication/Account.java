@@ -53,6 +53,37 @@ public class Account {
         this.email = email;
     }
 
+    public Account(String first_name, String last_name, String display_name, String email) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.display_name = display_name;
+        this.email = email;
+    }
+
+    public Account(int id, String first_name, String last_name) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+    }
+
+    public Account(int id, String first_name, String last_name, String display_name, String email) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.display_name = display_name;
+        this.email = email;
+        
+    }
+
+    public Account(int id, String first_name, String last_name, String email) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+    }
+
+    
+
     public void setId(int id) {
         this.id = id;
     }

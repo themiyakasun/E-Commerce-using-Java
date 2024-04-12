@@ -3,6 +3,7 @@
     <form action="update" method="post">
         <table>
             <tr>
+                <input type="hidden" name="id" value="${user.id}"/>
                 <td><label for="first_name">First Name:</label></td>
                 <td><input type="text" id="first_name" value="${user.first_name}" name="first_name"  required></td>
             </tr>
@@ -20,7 +21,7 @@
             </tr>
 
             <br><br>
-            <tr>
+<!--            <tr>
                 <td>Change Password </td></tr>
             <tr>
                 <td><label for="password">New Password:</label></td>
@@ -29,7 +30,7 @@
             <tr>
                 <td><label for="confirm_password">Confirm Password:</label></td>
                 <td><input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required></td>
-            </tr>
+            </tr>-->
         </table>
         <br>
         <input type="submit" value="Submit">
