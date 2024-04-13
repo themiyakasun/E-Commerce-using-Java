@@ -29,6 +29,7 @@ public class AccountDao {
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update user set first_name=?, last_name=?, display_name=?, email=?, password=?  WHERE id=?";
     private static final String UPDATE_BILLING_ADDRESS = "update user set billing_name=?,billing_phone=?,billing_address=?  WHERE id=?";
+    private static final String UPDATE_SHIPPING_ADDRESS = "update user set shipping_name=?,shipping_phone=?,shipping_address=?  WHERE id=?";
 //Create or Insert user
 
     public AccountDao() {}
@@ -121,7 +122,7 @@ public class AccountDao {
         }
         return rowUpdated;
     }
-     public boolean updateBillingAdress(Account account) throws SQLException {
+    public boolean updateBillingAdress(Account account) throws SQLException {
         boolean rowUpdated;
         System.out.println("hi this is Dao");
         
@@ -129,6 +130,23 @@ public class AccountDao {
             statement.setString(1, account.getBilling_name());
             statement.setString(2, account.getBilling_phone());
             statement.setString(3, account.getBilling_address());
+            statement.setInt(4, account.getId());
+        
+        System.out.println("hi this is dao after seting values");    
+            rowUpdated = statement.executeUpdate() > 0;
+                    System.out.println("hi this is after raw update");    
+        }
+        return rowUpdated;
+    }
+    
+    public boolean updateShippingAddress(Account account) throws SQLException {
+        boolean rowUpdated;
+        System.out.println("hi this is Dao");
+        
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_SHIPPING_ADDRESS);) {
+            statement.setString(1, account.getShipping_name());
+            statement.setString(2, account.getShipping_phone());
+            statement.setString(3, account.getShipping_address());
             statement.setInt(4, account.getId());
         
         System.out.println("hi this is dao after seting values");    

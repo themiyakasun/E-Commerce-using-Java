@@ -34,7 +34,10 @@ public class AccountServlet extends HttpServlet {
                 break;
             case "up_billing_addr":
                 updateBillingAddr(request, response);
-                break;      
+                break;
+            case "up_shipping_addr":
+                updateShippingAddr(request, response);
+                break;       
         }
     } catch (SQLException ex) {
         Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,6 +81,7 @@ public class AccountServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("includes/accountAddressForm.jsp");
         dispatcher.forward(request, response);
     }
+    
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -94,21 +98,21 @@ public class AccountServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void insertUser(HttpServletRequest request, HttpServletResponse response)
-    throws SQLException, IOException {
-        String first_name = request.getParameter("firsr_name");
-        String last_name =  request.getParameter("last_name");
-        String display_name= request.getParameter("display_name");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String billing_phone = request.getParameter("billing_phone");
-        String billing_address = request.getParameter("billing_address");
-        String shipping_phone=  request.getParameter("shipping_phone");
-        String shipping_address = request.getParameter("shipping_address");
-        Account newAccount = new Account(first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address);
-        accountDao.insertUser(newAccount);
-        response.sendRedirect("list");
-    }
+//    private void insertUser(HttpServletRequest request, HttpServletResponse response)
+//    throws SQLException, IOException {
+//        String first_name = request.getParameter("firsr_name");
+//        String last_name =  request.getParameter("last_name");
+//        String display_name= request.getParameter("display_name");
+//        String email = request.getParameter("email");
+//        String password = request.getParameter("password");
+//        String billing_phone = request.getParameter("billing_phone");
+//        String billing_address = request.getParameter("billing_address");
+//        String shipping_phone=  request.getParameter("shipping_phone");
+//        String shipping_address = request.getParameter("shipping_address");
+//        Account newAccount = new Account(first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address);
+//        accountDao.insertUser(newAccount);
+//        response.sendRedirect("list");
+//    }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException {
@@ -156,9 +160,22 @@ public class AccountServlet extends HttpServlet {
         String billing_name = request.getParameter("billing_name");
         String billing_phone = request.getParameter("billing_phone");
         String billing_address = request.getParameter("billing_address");
-        Account account = new Account(id,billing_name,billing_phone, billing_address);
+        Account account = new Account(id,billing_name,billing_phone, billing_address,true);
         System.out.println("this is servlet and after making object");
         accountDao.updateBillingAdress(account);
+        response.sendRedirect("myaccount?action=address");
+    }
+    
+    private void updateShippingAddr(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println(id); 
+        String shipping_name = request.getParameter("shipping_name");
+        String shipping_phone = request.getParameter("shipping_phone");
+        String shipping_address = request.getParameter("shipping_address");
+        Account account = new Account(id,shipping_name,shipping_phone, shipping_address,false);
+        System.out.println("this is servlet and after making object");
+        accountDao.updateShippingAddress(account);
         response.sendRedirect("myaccount?action=address");
     }
 }

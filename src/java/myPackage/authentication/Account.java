@@ -24,49 +24,6 @@ public class Account {
     protected String shipping_address;
     protected String billing_name;
     protected String shipping_name;
-    
-
-    public Account(int id, String first_name, String last_name, String display_name, String email, String password, String billing_phone, String billing_address, String shipping_phone, String shipping_address) {
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.display_name = display_name;
-        this.email = email;
-        this.password = password;
-        this.billing_phone = billing_phone;
-        this.billing_address = billing_address;
-        this.shipping_phone = shipping_phone;
-        this.shipping_address = shipping_address;
-    }
-
-    public Account(String first_name, String last_name, String display_name, String email, String password, String billing_phone, String billing_address, String shipping_phone, String shipping_address) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.display_name = display_name;
-        this.email = email;
-        this.password = password;
-        this.billing_phone = billing_phone;
-        this.billing_address = billing_address;
-        this.shipping_phone = shipping_phone;
-        this.shipping_address = shipping_address;
-    }
-
-
-    public Account(String first_name, String last_name, String display_name, String email) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.display_name = display_name;
-        this.email = email;
-        
-    
-    }
-
-    public Account(int id, String billing_name,String billing_phone, String billing_address) {
-        this.id = id;
-        this.billing_name = billing_name;
-        this.billing_phone = billing_phone;
-        this.billing_address=billing_address;
-    }
 
     public Account(int id, String first_name, String last_name, String display_name, String email, String password, String billing_phone, String billing_address, String shipping_phone, String shipping_address, String billing_name, String shipping_name) {
         this.id = id;
@@ -82,10 +39,6 @@ public class Account {
         this.billing_name = billing_name;
         this.shipping_name = shipping_name;
     }
-    
-    
-    
-
 
     public Account(int id, String first_name, String last_name, String display_name, String email, String password) {
         this.id = id;
@@ -96,8 +49,20 @@ public class Account {
         this.password = password;
     }
 
+    public Account(int id, String name, String phone, String address,boolean is_billing) {
+        if(is_billing){
+            this.id = id;
+            this.billing_name = name;
+            this.billing_phone = phone;
+            this.billing_address = address;
+        } else {
+            this.id = id;
+            this.shipping_name = name;
+            this.shipping_phone = phone;
+            this.shipping_address = address;
+        }  
+    }
     
-
     public void setId(int id) {
         this.id = id;
     }
@@ -105,17 +70,7 @@ public class Account {
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
-    
-    
-    public void setBilling_name(String billing_name) {
-        this.billing_name = billing_name;
-    }
 
-    public void setShipping_name(String shipping_name) {
-        this.shipping_name = shipping_name;
-    }
-
-    
     public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
@@ -148,16 +103,18 @@ public class Account {
         this.shipping_address = shipping_address;
     }
 
+    public void setBilling_name(String billing_name) {
+        this.billing_name = billing_name;
+    }
+
+    public void setShipping_name(String shipping_name) {
+        this.shipping_name = shipping_name;
+    }
+
     public int getId() {
         return id;
     }
 
-    public String getBilling_name() {
-        return billing_name;
-    }
-    public String getShipping_name() {
-        return shipping_name;
-    }
     public String getFirst_name() {
         return first_name;
     }
@@ -193,6 +150,19 @@ public class Account {
     public String getShipping_address() {
         return shipping_address;
     }
+
+    public String getBilling_name() {
+        return billing_name;
+    }
+
+    public String getShipping_name() {
+        return shipping_name;
+    }
+
+
+
+
+    
 
 
 }
