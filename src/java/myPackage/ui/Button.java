@@ -11,6 +11,7 @@ public class Button extends SimpleTagSupport {
     private boolean outlined;
     private boolean rounded;
     private String name;
+    private String onclick;
 
     
     @Override
@@ -38,7 +39,7 @@ public class Button extends SimpleTagSupport {
                 buttonStyle += " border-radius: 8px;";
             }
 
-            out.println(String.format("<button class=\"button\" style=\"" + buttonStyle + "\" name="+ name +">%s</button>", text));
+            out.println(String.format("<button class=\"button\" style=\"" + buttonStyle + "\" onclick="+ onclick +">%s</button>", text));
 
 
         } catch (java.io.IOException ex) {
@@ -60,6 +61,9 @@ public class Button extends SimpleTagSupport {
     
     public void setName(String name){
         this.name = name;
+    }
+    public void setOnclick(String onclick){
+        this.onclick = onclick;
     }
     
 }
