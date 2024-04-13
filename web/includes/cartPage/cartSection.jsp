@@ -1,4 +1,6 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="b" uri="/WEB-INF/tlds/buttonTags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section class="cart-section">
     <div class="container">
         <div class="cart-section-wrapper">
@@ -12,12 +14,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                <c:forEach items="${cartItems}" var="item">
                     <tr>
                         <td>
                             <div class="cart-product-details">
                                 <img src="assets/pro1.png" class="pro-img"/>
                                 <div class="pro-details">
-                                    <h3>Tray Table</h3>
+                                    <h3>${item.productName}</h3>
                                     <span>Color: Black</span>
                                     <button class="remove-btn">
                                         <img src="assets/icons/close.png"/>
@@ -30,7 +33,7 @@
                             <div class="cart-product-element">
                                 <div class="quantity-wrapper">
                                     <button class="minus-btn" id="minus-btn" onclick="minus()"><img src="assets/icons/Minus.png" /></button>
-                                    <input type="text" value="2" id="quantity"/>
+                                    <input type="text" value="${item.quantity}" id="quantity"/>
                                     <button class="add-btn" id="add-btn" onclick="add()"><img src="assets/icons/Add.png" /></button>
                                 </div>
                             </div>
@@ -50,6 +53,7 @@
                             </div>
                         </td>
                     </tr>
+                </c:forEach>
                 </tbody>
             </table>
             

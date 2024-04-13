@@ -36,7 +36,6 @@ public class AddToCartServlet extends HttpServlet {
         try(Connection conn = DbUtil.getConnection()){
             if(productExists > 0){
                 updateQuantityInCart(userId, productId, quantity);
-                System.out.println("<alert>Product quantity updated successfully</alert>");
                 response.getWriter().write("Product quantity updated successfully");
             }else {
                 String query = "INSERT INTO cart (user_id, pro_id, quantity, sub_total, date) VALUES (?, ?, ?, ?, ?)";
@@ -47,14 +46,18 @@ public class AddToCartServlet extends HttpServlet {
                     statement.setInt(3, quantity);
                     statement.setFloat(4, subTotal);
                     statement.setTimestamp(5, new java.sql.Timestamp(System.currentTimeMillis()));
-                    statement.executeUpdate();                    
-                    System.out.println("<alert>Product add Successfully</alert>");
-                }    
+                    statement.executeUpdate();
+                    response.getWriter().write("Product added to cart successfully");                    
+                }   
+
             }
                    
         }catch(SQLException e){
             e.getMessage();
         }
+        
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
     }
     
     private int checkProductExists(int userId, int productId){
