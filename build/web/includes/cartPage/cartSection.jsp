@@ -14,46 +14,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${cartItems}" var="item">
-                    <tr>
-                        <td>
-                            <div class="cart-product-details">
-                                <img src="assets/pro1.png" class="pro-img"/>
-                                <div class="pro-details">
-                                    <h3>${item.productName}</h3>
-                                    <span>Color: Black</span>
-                                    <button class="remove-btn">
-                                        <img src="assets/icons/close.png"/>
-                                        Remove
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="cart-product-element">
-                                <div class="quantity-wrapper">
-                                    <button class="minus-btn" id="minus-btn" onclick="minus()"><img src="assets/icons/Minus.png" /></button>
-                                    <input type="text" value="${item.quantity}" id="quantity"/>
-                                    <button class="add-btn" id="add-btn" onclick="add()"><img src="assets/icons/Add.png" /></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="cart-product-element">
-                                <div class="price">
-                                    $19.00
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="cart-product-element">
-                                <div class="sub-total">
-                                    $38.00
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </c:forEach>
                 </tbody>
             </table>
             
