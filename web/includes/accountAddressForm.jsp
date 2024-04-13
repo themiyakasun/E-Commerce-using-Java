@@ -76,7 +76,7 @@
                 </div>
                 <div class="card-body">
                     <form action="myaccount" method="post" class="custom-form">
-                     <input type="hidden" name="requestType" value="update"/>
+                     <input type="hidden" name="requestType" value="up_shipping_addr"/>
                       <input type="hidden" name="id" value="${user.id}"/>
                         <!-- Address Fields -->
                         <div class="form-group">
