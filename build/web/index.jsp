@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="b" uri="/WEB-INF/tlds/buttonTags" %>
 <!DOCTYPE html>
-<html>
-    
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>E-Commerce</title>
@@ -18,9 +17,23 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
-            
+        <header class="header">
+                       
         <%@include file="includes/navbar.jsp" %>
         <%@include file="includes/search.jsp" %>
+        
+        <div class="container">
+            <div class="hero-wrapper">
+                <div class="hero-text">
+            <h1>More than just a game. It’s a lifestyle.</h1>
+            <p>Whether you’re just starting out, have played your whole life or you're a Tour pro, your swing is like a fingerprint.</p>
+            <a>
+                <b:Button text="Shopping Now" rounded="false" outlined="false"/>
+            </a>
+        </div>
+            </div>
+        </div>
+        </header>
         
         
         <div class="row">
@@ -66,7 +79,7 @@
 
         
     </body>
-</html>
+
         
 
         
