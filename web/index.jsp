@@ -41,7 +41,12 @@
                     <div class="pro-card">
                         <div class="pro-card-img">
                             <div class="pro-add-to-cart">
-                                <b:Button text="Add To Cart" rounded="false" outlined="false" name="add-to-cart"/>
+                                <form action="AddToCartServlet" method="POST">
+                                    <input type="hidden" name="pro_id" value="1" id="pro_id" />
+                                    <input type="hidden" name="quantity" value="1" id="quantity" />
+                                    <input type="hidden" name="sub_total" value="199.10" id="sub_total" />
+                                    <b:Button text="Add To Cart" rounded="false" outlined="false" onclick="addToCart()"/>
+                                </form>
                             </div>
                             <div class="new">new</div>
                             <div class="discount">-50%</div>
