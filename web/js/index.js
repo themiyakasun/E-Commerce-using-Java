@@ -123,3 +123,109 @@ function showPaymentInfo(paymentMethod) {
         paypalInfo.style.display = "block";
     }
 }
+
+//Add To Cart
+function addToCart() {
+    var formData = $("#addToCartForm").serialize();
+    $.ajax({
+        type: "POST",
+        url: contextPath + "/AddToCartServlet",
+        data: formData,
+        success: function(response) {
+            $("#loadingIndicator").hide();
+            alert(response);
+        }
+    });
+    return false;
+}
+
+// Display Cart 
+ $(document).ready(function() {
+        $.ajax({
+            url: 'CartServlet',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                var tbody = $('.cart-table tbody');
+                $.each(data, function(index, item) {
+                        var minusButton = $('<button>').addClass('minus-btn').attr('id', 'minus-btn').append(
+                        $('<img>').attr('src', 'assets/icons/Minus.png')
+                        ).click(function() {
+                            minus();
+                        });
+                        var addButton = $('<button>').addClass('add-btn').attr('id', 'add-btn').append(
+                        $('<img>').attr('src', 'assets/icons/Add.png')
+                        ).click(function() {
+                            add();
+                        });
+                        var removeButton = $('<button>').addClass('remove-btn').append(
+                            $('<img>').attr('src', 'assets/icons/close.png')
+                        ).text('Remove').data('cart-id', item.cartId).click(function() {
+                            removeCartItem(item.cartId);
+                        });
+                        
+                    var row = $('<tr>').attr({id: 'cartItem_' + item.cartId});
+
+                    var productDetailsColumn = $('<td>').append(
+                        $('<div>').addClass('cart-product-details').append(
+                            $('<img>').attr('src', 'assets/' + item.productImage).addClass('pro-img'),
+                            $('<div>').addClass('pro-details').append(
+                                $('<h3>').text(item.productName),
+                                $('<span>').text('Color: Black'),
+                                removeButton
+                            )
+                        )
+                    );
+                    var quantityColumn = $('<td>').append(
+                        $('<div>').addClass('cart-product-element').append(
+                            $('<div>').addClass('quantity-wrapper').append(
+                                minusButton,
+                                $('<input>').attr({
+                                    type: 'text',
+                                    value: item.quantity,
+                                    id: 'quantity'
+                                }),
+                                addButton
+                            )
+                        )
+                    );
+
+                    var priceColumn = $('<td>').append(
+                        $('<div>').addClass('cart-product-element').append(
+                            $('<div>').addClass('price').text('$' + item.price)
+                        )
+                    );
+
+                    var subtotalColumn = $('<td>').append(
+                        $('<div>').addClass('cart-product-element').append(
+                            $('<div>').addClass('sub-total').text('$' + (item.quantity * item.price).toFixed(2))
+                        )
+                    );
+                    row.append(productDetailsColumn, quantityColumn, priceColumn, subtotalColumn);
+                    tbody.append(row);
+                });
+            },
+            error: function() {
+                alert('Error fetching cart items.');
+            }
+        });
+    });
+    
+//Remove Cart Item
+function removeCartItem(cartId) {
+    $.ajax({
+        url: 'RemoveCartItemServlet',
+        type: 'POST',
+        data: { cart_id: cartId },
+        success: function(response) {
+            if (response.success) {
+                $('#cartItem_' + cartId).remove();
+            } else {
+                alert('Failed to remove item from cart.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error removing item:', error);
+        }
+    });
+}
