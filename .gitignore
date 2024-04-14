@@ -1,12 +1,1 @@
-
-# Package Files #
-*.jar
-*.war
-*.ear
-*.xml
-
-/nbproject/private/
-/nbproject/build/
-/nbproject/genfiles/
-/nbproject/priv/
-/build/
+/dist/
