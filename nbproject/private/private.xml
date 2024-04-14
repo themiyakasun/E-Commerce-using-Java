@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/D:/Uni/Year%202/Sem%201/DEA/E-Commerce-using-Java/src/java/myPackage/cart/CartServlet.java</file>
             <file>file:/D:/Uni/Year%202/Sem%201/DEA/E-Commerce-using-Java/web/cart.jsp</file>
-            <file>file:/D:/Uni/Year%202/Sem%201/DEA/E-Commerce-using-Java/src/java/myPackage/cart/AddToCartServlet.java</file>
+            <file>file:/D:/Uni/Year%202/Sem%201/DEA/E-Commerce-using-Java/src/java/myPackage/cart/CartItem.java</file>
+            <file>file:/D:/Uni/Year%202/Sem%201/DEA/E-Commerce-using-Java/web/js/index.js</file>
             <file>file:/D:/Uni/Year%202/Sem%201/DEA/E-Commerce-using-Java/web/includes/cartPage/cartSection.jsp</file>
-            <file>file:/D:/Uni/Year%202/Sem%201/DEA/E-Commerce-using-Java/web/index.jsp</file>
-=======
->>>>>>> d3b030a455688893efbcc86aee7ef76f213116f6
+            <file>file:/D:/Uni/Year%202/Sem%201/DEA/E-Commerce-using-Java/src/java/myPackage/cart/RemoveCartItemServlet.java</file>
         </group>
     </open-files>
 </project-private>
