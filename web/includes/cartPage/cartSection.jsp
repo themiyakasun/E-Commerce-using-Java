@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="b" uri="/WEB-INF/tlds/buttonTags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section class="cart-section">
     <div class="container">
         <div class="cart-section-wrapper">
@@ -14,46 +13,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${cartItems}" var="item">
-                    <tr>
-                        <td>
-                            <div class="cart-product-details">
-                                <img src="assets/pro1.png" class="pro-img"/>
-                                <div class="pro-details">
-                                    <h3>${item.productName}</h3>
-                                    <span>Color: Black</span>
-                                    <button class="remove-btn">
-                                        <img src="assets/icons/close.png"/>
-                                        Remove
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="cart-product-element">
-                                <div class="quantity-wrapper">
-                                    <button class="minus-btn" id="minus-btn" onclick="minus()"><img src="assets/icons/Minus.png" /></button>
-                                    <input type="text" value="${item.quantity}" id="quantity"/>
-                                    <button class="add-btn" id="add-btn" onclick="add()"><img src="assets/icons/Add.png" /></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="cart-product-element">
-                                <div class="price">
-                                    $19.00
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="cart-product-element">
-                                <div class="sub-total">
-                                    $38.00
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </c:forEach>
                 </tbody>
             </table>
             
@@ -63,21 +22,21 @@
                 <div class="shipping-details">
                     <div class="radio-inputs-wrapper">
                         <div class="radio-input">
-                            <input type="radio" name="shipping-method" />
+                            <input type="radio" name="shipping-method" id="shipping-method" value="0" onclick="getShipping()"/>
                             <label>Free shipping</label>
                         </div>
                         <p>$0.00</p>
                     </div>
                     <div class="radio-inputs-wrapper">
                         <div class="radio-input">
-                            <input type="radio"name="shipping-method"/>
+                            <input type="radio"name="shipping-method" value="15" onclick="getShipping()"/>
                             <label>Express shipping</label>
                         </div>
                         <p>+$15.00</p>
                     </div>
                 </div>
                 
-                <div class="cart-sum-sub-total">
+                <div class="cart-sum-sub-total" id="cart-sum-sub-total">
                     <span class="text">
                         Subtotal
                     </span>
@@ -89,8 +48,10 @@
                     <span class="text">
                         Total
                     </span>
-                    <span class="price">
+                    <span class="price" id="cart-full-total" value="0">
                         $1234.00
+                    </span>
+                    <span class="shipping" id="shipping-cost" hidden>$0.00
                     </span>
                 </div>
                 
