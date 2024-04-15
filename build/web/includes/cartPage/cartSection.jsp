@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="b" uri="/WEB-INF/tlds/buttonTags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section class="cart-section">
     <div class="container">
         <div class="cart-section-wrapper">
@@ -23,21 +22,21 @@
                 <div class="shipping-details">
                     <div class="radio-inputs-wrapper">
                         <div class="radio-input">
-                            <input type="radio" name="shipping-method" />
+                            <input type="radio" name="shipping-method" id="shipping-method" value="0" onclick="getShipping()"/>
                             <label>Free shipping</label>
                         </div>
                         <p>$0.00</p>
                     </div>
                     <div class="radio-inputs-wrapper">
                         <div class="radio-input">
-                            <input type="radio"name="shipping-method"/>
+                            <input type="radio"name="shipping-method" value="15" onclick="getShipping()"/>
                             <label>Express shipping</label>
                         </div>
                         <p>+$15.00</p>
                     </div>
                 </div>
                 
-                <div class="cart-sum-sub-total">
+                <div class="cart-sum-sub-total" id="cart-sum-sub-total">
                     <span class="text">
                         Subtotal
                     </span>
@@ -49,8 +48,10 @@
                     <span class="text">
                         Total
                     </span>
-                    <span class="price">
+                    <span class="price" id="cart-full-total" value="0">
                         $1234.00
+                    </span>
+                    <span class="shipping" id="shipping-cost" hidden>$0.00
                     </span>
                 </div>
                 

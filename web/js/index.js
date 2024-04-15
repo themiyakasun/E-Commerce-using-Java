@@ -80,34 +80,66 @@ function loadContent(page, clickedButton) {
 }
 
 //Quantity 
-function minus(){
-    var quantityInput = document.getElementById('quantity');
+function minus(cartId) {
+    var quantityInput = document.getElementById('quantity_' + cartId);
     if (quantityInput) {
         var currentValue = parseInt(quantityInput.value);
+        if(currentValue === 1){
+            document.getElementById('minus-btn_' + cartId).disabled = true;
+        }
         if (!isNaN(currentValue) && currentValue > 0) {
             quantityInput.value = currentValue - 1;
-            updateSubtotal();
+            updateSubtotal(cartId);
+            updateCartTotal();
         }
     }
 }
 
-function add(){
-    var quantityInput = document.getElementById('quantity');
+function add(cartId) {
+    var quantityInput = document.getElementById('quantity_' + cartId);
     if (quantityInput) {
         var currentValue = parseInt(quantityInput.value);
         if (!isNaN(currentValue)) {
             quantityInput.value = currentValue + 1;
-            updateSubtotal();
+            updateSubtotal(cartId);
+            updateCartTotal();
         }
     }
 }
 
-function updateSubtotal() {
-    var quantity = parseInt(document.getElementById('quantity').value);
-    var price = parseFloat(document.querySelector('.price').innerText.replace('$', ''));
+function updateSubtotal(cartId) {
+    var quantity = parseInt(document.getElementById('quantity_' + cartId).value);
+    var price = parseFloat(document.querySelector('#cartItem_' + cartId + ' .price').innerText.replace('$', ''));
     var subtotal = quantity * price;
-    document.querySelector('.sub-total').innerText = '$' + subtotal.toFixed(2);
+    document.querySelector('#cartItem_' + cartId + ' .sub-total').textContent = '$' + subtotal.toFixed(2);
 }
+
+function updateCartTotal() {
+    var sumSubtotal = 0;
+    $('.sub-total').each(function() {
+        var subtotal = parseFloat($(this).text().replace('$', ''));
+        sumSubtotal += subtotal;
+    });
+    var shippingCost = parseFloat($('.cart-sum-total .shipping').text().trim().substring(1));
+    $('.cart-sum-sub-total .price').text('$' + sumSubtotal.toFixed(2));
+    updateCartWithShippingTotal(sumSubtotal + shippingCost);
+}
+
+function updateCartWithShippingTotal(subTotal){
+    $('.cart-sum-total .price').text('$' + subTotal.toFixed(2));
+}
+
+window.getShipping = function(){
+    var selectedValue = parseFloat($('input[name="shipping-method"]:checked').val());
+    var totalString = $('.cart-sum-total .price').text();
+    var totalNumeric = parseFloat(totalString.substring(1));
+    var previousShippingString = $('.cart-sum-total .shipping').text().trim();
+    var previousShipping = previousShippingString ? parseFloat(previousShippingString.substring(1)) : 0;
+    var newTotal = totalNumeric - previousShipping + selectedValue;
+    $('.cart-sum-total .price').text('$' + newTotal.toFixed(2));
+    $('.cart-sum-total .shipping').text('$' + selectedValue.toFixed(2));
+};
+
 
 
 //Payment Method Select
@@ -141,30 +173,37 @@ function addToCart() {
 
 // Display Cart 
  $(document).ready(function() {
+    function fetchCartItemsAndUpdateTotal() {
         $.ajax({
             url: 'CartServlet',
             type: 'GET',
             dataType: 'json',
             success: function(data) {
                 var tbody = $('.cart-table tbody');
+                var sumSubtotal = 0; 
+                var cartItemQuantities = {};
                 $.each(data, function(index, item) {
-                        var minusButton = $('<button>').addClass('minus-btn').attr('id', 'minus-btn').append(
+                    var minusButton = $('<button>').addClass('minus-btn').attr({id:'minus-btn_' + item.cartId, 'data-cart-id': item.cartId}).append(
                         $('<img>').attr('src', 'assets/icons/Minus.png')
-                        ).click(function() {
-                            minus();
-                        });
-                        var addButton = $('<button>').addClass('add-btn').attr('id', 'add-btn').append(
+                    ).click(function() {
+                        var cartId = $(this).attr('data-cart-id');
+                        minus(cartId);
+                    }).prop('disabled', false);
+
+                    var addButton = $('<button>').addClass('add-btn').attr({id:'add-btn', 'data-cart-id': item.cartId}).append(
                         $('<img>').attr('src', 'assets/icons/Add.png')
-                        ).click(function() {
-                            add();
-                        });
-                        var removeButton = $('<button>').addClass('remove-btn').append(
-                            $('<img>').attr('src', 'assets/icons/close.png')
-                        ).text('Remove').data('cart-id', item.cartId).click(function() {
-                            removeCartItem(item.cartId);
-                        });
-                        
-                    var row = $('<tr>').attr({id: 'cartItem_' + item.cartId});
+                    ).click(function() {
+                        var cartId = $(this).attr('data-cart-id');
+                        add(cartId);
+                    });
+
+                    var removeButton = $('<button>').addClass('remove-btn').append(
+                        $('<img>').attr('src', 'assets/icons/close.png')
+                    ).text('Remove').data('cart-id', item.cartId).click(function() {
+                        removeCartItem(item.cartId);
+                    });
+
+                    var row = $('<tr>').addClass('cart-item').attr({id: 'cartItem_' + item.cartId});
 
                     var productDetailsColumn = $('<td>').append(
                         $('<div>').addClass('cart-product-details').append(
@@ -176,6 +215,7 @@ function addToCart() {
                             )
                         )
                     );
+
                     var quantityColumn = $('<td>').append(
                         $('<div>').addClass('cart-product-element').append(
                             $('<div>').addClass('quantity-wrapper').append(
@@ -183,7 +223,7 @@ function addToCart() {
                                 $('<input>').attr({
                                     type: 'text',
                                     value: item.quantity,
-                                    id: 'quantity'
+                                    id: 'quantity_' + item.cartId
                                 }),
                                 addButton
                             )
@@ -196,20 +236,32 @@ function addToCart() {
                         )
                     );
 
+                    var subtotal = item.quantity * item.price;
                     var subtotalColumn = $('<td>').append(
                         $('<div>').addClass('cart-product-element').append(
-                            $('<div>').addClass('sub-total').text('$' + (item.quantity * item.price).toFixed(2))
+                            $('<div>').addClass('sub-total').attr({id: 'subtotal_' + item.cartId}).text('$' + subtotal.toFixed(2))
                         )
                     );
+
+                    sumSubtotal += subtotal;
                     row.append(productDetailsColumn, quantityColumn, priceColumn, subtotalColumn);
                     tbody.append(row);
+
+                    cartItemQuantities[item.cartId] = item.quantity;
                 });
+                $('.cart-sum-sub-total .price').text('$' + sumSubtotal.toFixed(2));
+                $('.cart-sum-total .price').text('$' + sumSubtotal.toFixed(2));
             },
             error: function() {
                 alert('Error fetching cart items.');
             }
         });
-    });
+    }
+    
+    fetchCartItemsAndUpdateTotal();
+ });
+ 
+ 
     
 //Remove Cart Item
 function removeCartItem(cartId) {
@@ -218,11 +270,7 @@ function removeCartItem(cartId) {
         type: 'POST',
         data: { cart_id: cartId },
         success: function(response) {
-            if (response.success) {
-                $('#cartItem_' + cartId).remove();
-            } else {
-                alert('Failed to remove item from cart.');
-            }
+            location.reload();
         },
         error: function(xhr, status, error) {
             console.error('Error removing item:', error);

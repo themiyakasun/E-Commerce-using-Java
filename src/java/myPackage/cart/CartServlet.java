@@ -30,28 +30,32 @@ public class CartServlet extends HttpServlet {
     
     private ArrayList<CartItem> getCartItemsFromDb() {
         ArrayList<CartItem> cartItems = new ArrayList<>();
+        int userId = 2;
         try (Connection conn = DbUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM cart");
-             ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                int cartId = rs.getInt("cart_id");
-                int productId = rs.getInt("pro_id");
-                int quantity = rs.getInt("quantity");
-                double sub_total = rs.getDouble("sub_total");
-                try(PreparedStatement stmtPro = conn.prepareStatement("SELECT * FROM products WHERE pro_id = ?")){
-                    stmtPro.setInt(1, productId);
-                    ResultSet result = stmtPro.executeQuery();
-                    while(result.next()){
-                        String productName = result.getString("pro_name");
-                        String productImage = result.getString("pro_img");
-                        double price = result.getDouble("pro_price");
-                        
-                        cartItems.add(new CartItem(cartId, productId, productName, productImage, quantity, price, sub_total));
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM cart WHERE user_id = ?")) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                    int cartId = rs.getInt("cart_id");
+                    int productId = rs.getInt("pro_id");
+                    int quantity = rs.getInt("quantity");
+                    double sub_total = rs.getDouble("sub_total");
+                    try (PreparedStatement stmtPro = conn.prepareStatement("SELECT * FROM products WHERE pro_id = ?")) {
+                        stmtPro.setInt(1, productId);
+                        try (ResultSet result = stmtPro.executeQuery()) {
+                            while (result.next()) {
+                                String productName = result.getString("pro_name");
+                                String productImage = result.getString("pro_img");
+                                double price = result.getDouble("pro_price");
+
+                                cartItems.add(new CartItem(cartId, productId, productName, productImage, quantity, price, sub_total));
+                            }
+                        }
                     }
                 }
             }
         } catch (SQLException e) {
-            e.getMessage();
+            e.printStackTrace(); // Log the exception for debugging
         }
         return cartItems;
     }
