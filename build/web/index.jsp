@@ -1,3 +1,9 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@ page import="java.sql.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="b" uri="/WEB-INF/tlds/buttonTags" %>
 <!DOCTYPE html>
@@ -19,7 +25,6 @@
             
         <%@include file="includes/navbar.jsp" %>
         <%@include file="includes/search.jsp" %>
-        
         
         <div class="row">
             <div class="col-md-3">
