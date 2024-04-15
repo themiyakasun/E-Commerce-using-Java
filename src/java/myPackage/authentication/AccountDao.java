@@ -18,21 +18,19 @@ import java.util.List;
  * @author fernandomnr
  */
 public class AccountDao {
-
-
-
     private String jdbcURL = "jdbc:mysql://localhost:3306/3legant?useSSL=false";
     private String jdbcUsername = "root";
     private String jdbcPassword = "";
 
     private static final String INSERT_USERS_SQL = "INSERT INTO user" + " (first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address) VALUES " +
         " (?,?,?,?,?,?,?,?,?);";
-
-    private static final String SELECT_USER_BY_ID = "select first_name,last_name, display_name,email,password from user where id =?";
+    private static final String SELECT_USER_BY_ID = "select first_name,last_name, display_name,email,password,billing_phone,billing_address,shipping_phone,shipping_address, billing_name, shipping_name from user where id =?";
     private static final String SELECT_ALL_USERS = "select * from user";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update user set first_name=?, last_name=?, display_name=?, email=?, password=?  WHERE id=?";
- //Create or Insert user
+    private static final String UPDATE_BILLING_ADDRESS = "update user set billing_name=?,billing_phone=?,billing_address=?  WHERE id=?";
+    private static final String UPDATE_SHIPPING_ADDRESS = "update user set shipping_name=?,shipping_phone=?,shipping_address=?  WHERE id=?";
+//Create or Insert user
 
     public AccountDao() {}
 
@@ -81,54 +79,7 @@ public class AccountDao {
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
-
-            // Step 4: Process the ResultSet object.
-//            while (rs.next()) {
-//                String first_name = rs.getString("first_name");
-//                String last_name = rs.getString("last_name");
-//                String display_name = rs.getString("display_name");
-//                String email = rs.getString("email");
-//                String password = rs.getString("password");
-//                String billing_phone = rs.getString("billing_phone");
-//                String billing_address = rs.getString("billing_address");
-//                String shipping_phone = rs.getString("shipping_phone");
-//                String shipping_address = rs.getString("shipping_address");
-//                account = new Account(id,first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address);
-//            }
-            while (rs.next()) {
-                
-                String first_name = rs.getString("first_name");
-                String last_name = rs.getString("last_name");
-                String display_name = rs.getString("display_name");
-                String email = rs.getString("email");
-                String password = rs.getString("password");
-                
-                
-                
-                account = new Account(id,first_name,last_name,display_name,email,password);
-            }
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
-        return account;
-    }
-//Select all users
-    public List < Account > selectAllUsers() {
-
-        // using try-with-resources to avoid closing resources (boiler plate code)
-        List < Account > account = new ArrayList < > ();
-        // Step 1: Establishing a Connection
-        try (Connection connection = getConnection();
-
-            // Step 2:Create a statement using connection object
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);) {
-            System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
-            ResultSet rs = preparedStatement.executeQuery();
-
-            // Step 4: Process the ResultSet object.
-            while (rs.next()) {
-                int id = rs.getInt("id");
+            while (rs.next()) {               
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
                 String display_name = rs.getString("display_name");
@@ -138,45 +89,21 @@ public class AccountDao {
                 String billing_address = rs.getString("billing_address");
                 String shipping_phone = rs.getString("shipping_phone");
                 String shipping_address = rs.getString("shipping_address");
-                account.add(new Account(id,first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address ));
+                String billing_name = rs.getString("billing_name");
+                String shipping_name = rs.getString("shipping_name");
+                
+                System.out.println("first_name: "+first_name);
+                System.out.println("billing_name: "+billing_name);
+                System.out.println("shipping_name: "+shipping_name);              
+                account = new Account(id,first_name,last_name,display_name,email,password,billing_phone,billing_address,shipping_phone,shipping_address,billing_name,shipping_name);
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
         return account;
     }
-//delete user
-    public boolean deleteUser(int id) throws SQLException {
-        boolean rowDeleted;
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
-            statement.setInt(1, id);
-            rowDeleted = statement.executeUpdate() > 0;
-        }
-        return rowDeleted;
-    }
-//update user
-//    public boolean updateUser(Account account) throws SQLException {
-//        boolean rowUpdated;
-//        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
-//            statement.setString(1, account.getFirst_name());
-//            statement.setString(2, account.getLast_name());
-//            statement.setString(3, account.getDisplay_name());
-//            statement.setString(4, account.getEmail());
-//            statement.setString(5, account.getPassword());
-//            statement.setString(6, account.getBilling_phone());
-//            statement.setString(7, account.getBilling_address());
-//            statement.setString(8, account.getShipping_phone());
-//            statement.setString(9,account .getShipping_address());
-//            statement.setInt(10, account.getId());
-//
-//            rowUpdated = statement.executeUpdate() > 0;
-//        }
-//        return rowUpdated;
-//    }
-
-   
-
-    public boolean updateUser(Account account) throws SQLException {
+    
+     public boolean updateUser(Account account) throws SQLException {
         boolean rowUpdated;
         System.out.println("hi this is Dao");
         
@@ -190,11 +117,45 @@ public class AccountDao {
         
         System.out.println("hi this is dao after seting values");    
             rowUpdated = statement.executeUpdate() > 0;
+                    System.out.println("hi this is after raw update");    
+
         }
         return rowUpdated;
     }
-
+    public boolean updateBillingAdress(Account account) throws SQLException {
+        boolean rowUpdated;
+        System.out.println("hi this is Dao");
+        
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_BILLING_ADDRESS);) {
+            statement.setString(1, account.getBilling_name());
+            statement.setString(2, account.getBilling_phone());
+            statement.setString(3, account.getBilling_address());
+            statement.setInt(4, account.getId());
+        
+        System.out.println("hi this is dao after seting values");    
+            rowUpdated = statement.executeUpdate() > 0;
+                    System.out.println("hi this is after raw update");    
+        }
+        return rowUpdated;
+    }
     
+    public boolean updateShippingAddress(Account account) throws SQLException {
+        boolean rowUpdated;
+        System.out.println("hi this is Dao");
+        
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_SHIPPING_ADDRESS);) {
+            statement.setString(1, account.getShipping_name());
+            statement.setString(2, account.getShipping_phone());
+            statement.setString(3, account.getShipping_address());
+            statement.setInt(4, account.getId());
+        
+        System.out.println("hi this is dao after seting values");    
+            rowUpdated = statement.executeUpdate() > 0;
+                    System.out.println("hi this is after raw update");    
+        }
+        return rowUpdated;
+    }
+   
     private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
             if (e instanceof SQLException) {
