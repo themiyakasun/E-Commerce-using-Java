@@ -19,35 +19,10 @@
             
         <%@include file="includes/navbar.jsp" %>
         <%@include file="includes/search.jsp" %>
+        <%@include file="includes/contact_us.jsp" %>
         
         
-        <div class="row">
-            <div class="col-md-3">
-                <a href="#" class="pro-card-wrapper">
-                    <div class="pro-card">
-                        <div class="pro-card-img">
-                            <div class="pro-add-to-cart">
-                                <b:Button text="Add To Cart" rounded="false" outlined="false" name="add-to-cart"/>
-                            </div>
-                            <div class="new">new</div>
-                            <div class="discount">-50%</div>
-                            <button class="add-to-wishlist"><img src="assets/icons/wishlist.png" /></button>
-                            <img src="assets/pro1.png" />
-                        </div>
-                        <div class="pro-card-details">
-                            <div class="rating">
-                                <img src="assets/icons/star.png" />
-                            </div>
-                            <h2>Loveseat Sofa</h2>
-                            <div class="prices">
-                                <span class="discount-price">$199.00</span>
-                                <span class="price"><s>$400.00</s></span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
+        
                 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="js/index.js"></script>
