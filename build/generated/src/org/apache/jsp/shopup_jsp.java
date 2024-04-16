@@ -3,6 +3,12 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import myPackage.DbUtil;
 
 public final class shopup_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -49,6 +55,12 @@ public final class shopup_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
@@ -204,7 +216,7 @@ public final class shopup_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        \n");
       out.write("        <div class=\"container\">\n");
       out.write("            <img id=\"hero-shop\" src=\"assets/Elements/cover.png\">\n");
-      out.write("            <div class=\"hero-text\">\n");
+      out.write("            <div class=\"hero-content\">\n");
       out.write("                <p>Home > Shop</p>\n");
       out.write("                <h1>Shop Page</h1>\n");
       out.write("                <p>Let’s design the place you always imagined.</p>\n");
@@ -212,9 +224,22 @@ public final class shopup_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        </div>\n");
       out.write("        \n");
       out.write("        <section>\n");
-      out.write("                <div class=\"container\">\n");
-      out.write("                <div class=\"row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3\">\n");
-      out.write("                    <div class=\"col-md-3\">\n");
+      out.write("            <div class=\"container\">\n");
+      out.write("               <div class=\"row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3\">\n");
+      out.write("               ");
+
+                   try {
+                       Class.forName("com.mysql.cj.jdbc.Driver");
+                       Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/3legant?useSSL=false", "root", "");
+                       Statement st = con.createStatement();
+            
+                       String str = "SELECT * FROM products";
+                       ResultSet rs = st.executeQuery(str);
+            
+                       while(rs.next()) {
+               
+      out.write("   \n");
+      out.write("               <div class=\"col-md-3\">\n");
       out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
       out.write("                            <div class=\"pro-card\" data-product-id=\"1\">\n");
       out.write("                                <div class=\"pro-card-img\">\n");
@@ -227,349 +252,45 @@ public final class shopup_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                    <div class=\"new\">new</div>\n");
       out.write("                                    <div class=\"discount\">-50%</div>\n");
       out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/pro1.png\" />\n");
+      out.write("                                    <img src=\"assets/Elements/");
+      out.print( rs.getString("image") );
+      out.write("\" />\n");
       out.write("                                </div>\n");
       out.write("                                <div class=\"pro-card-details\">\n");
       out.write("                                <div class=\"rating\">\n");
       out.write("                                    <img src=\"assets/icons/star.png\" />\n");
       out.write("                                </div>\n");
-      out.write("                                <h2>Loveseat Sofa</h2>\n");
+      out.write("                                <h2>");
+      out.print( rs.getString("name") );
+      out.write("</h2>\n");
       out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$199.00</span>\n");
-      out.write("                                    <span class=\"price\"><s>$400.00</s></span>\n");
+      out.write("                                    <span class=\"discount-price\">$");
+      out.print( rs.getString("discount_price") );
+      out.write("</span>\n");
+      out.write("                                    <span class=\"price\"><s>$");
+      out.print( rs.getString("price") );
+      out.write("</s></span>\n");
       out.write("                                </div>\n");
       out.write("                                </div>\n");
       out.write("                            </div>\n");
       out.write("                        </a>\n");
       out.write("                    </div>\n");
-      out.write("                                    \n");
-      out.write("                    <div class=\"col-md-3\">\n");
-      out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
-      out.write("                            <div class=\"pro-card\" data-product-id=\"2\">\n");
-      out.write("                                <div class=\"pro-card-img\">\n");
-      out.write("                                    <div class=\"pro-add-to-cart\">\n");
-      out.write("                                        ");
-      if (_jspx_meth_b_Button_2(_jspx_page_context))
-        return;
+      out.write("                ");
+ 
+                    }
+                    rs.close();
+                    st.close();
+                    con.close();
+            
+                    } catch(SQLException e) {
+                       e.printStackTrace();
+                    }
+                
       out.write("\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"new\">new</div>\n");
-      out.write("                                    <div class=\"discount\">-50%</div>\n");
-      out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/Elements/product2.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <div class=\"pro-card-details\">\n");
-      out.write("                                <div class=\"rating\">\n");
-      out.write("                                    <img src=\"assets/icons/star.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <h2>Luxury Sofa</h2>\n");
-      out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$299.00</span>\n");
-      out.write("                                    <span class=\"price\"><s>$500.00</s></span>\n");
-      out.write("                                </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </a>\n");
-      out.write("                    </div>\n");
-      out.write("                                    \n");
-      out.write("                    <div class=\"col-md-3\">\n");
-      out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
-      out.write("                            <div class=\"pro-card\" data-product-id=\"3\">\n");
-      out.write("                                <div class=\"pro-card-img\">\n");
-      out.write("                                    <div class=\"pro-add-to-cart\">\n");
-      out.write("                                        ");
-      if (_jspx_meth_b_Button_3(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"new\">new</div>\n");
-      out.write("                                    <div class=\"discount\">-50%</div>\n");
-      out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/Elements/product3.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <div class=\"pro-card-details\">\n");
-      out.write("                                <div class=\"rating\">\n");
-      out.write("                                    <img src=\"assets/icons/star.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <h2>Table Lamp</h2>\n");
-      out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$19.00</span>\n");
-      out.write("                                    <span class=\"price\"><s></s></span>\n");
-      out.write("                                </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </a>\n");
-      out.write("                    </div>\n");
-      out.write("                                    \n");
-      out.write("                    <div class=\"col-md-3\">\n");
-      out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
-      out.write("                            <div class=\"pro-card\" data-product-id=\"4\">\n");
-      out.write("                                <div class=\"pro-card-img\">\n");
-      out.write("                                    <div class=\"pro-add-to-cart\">\n");
-      out.write("                                        ");
-      if (_jspx_meth_b_Button_4(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"new\">new</div>\n");
-      out.write("                                    <div class=\"discount\">-50%</div>\n");
-      out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/Elements/product4.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <div class=\"pro-card-details\">\n");
-      out.write("                                <div class=\"rating\">\n");
-      out.write("                                    <img src=\"assets/icons/star.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <h2>Cozy Sofa</h2>\n");
-      out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$299.00</span>\n");
-      out.write("                                    <span class=\"price\"><s></s></span>\n");
-      out.write("                                </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </a>\n");
-      out.write("                    </div>\n");
-      out.write("                </div>\n");
-      out.write("                                    \n");
-      out.write("                <div class=\"row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3\">\n");
-      out.write("                    <div class=\"col-md-3\">\n");
-      out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
-      out.write("                            <div class=\"pro-card\" data-product-id=\"5\">\n");
-      out.write("                                <div class=\"pro-card-img\">\n");
-      out.write("                                    <div class=\"pro-add-to-cart\">\n");
-      out.write("                                        ");
-      if (_jspx_meth_b_Button_5(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"new\">new</div>\n");
-      out.write("                                    <div class=\"discount\">-50%</div>\n");
-      out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/Elements/product5.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <div class=\"pro-card-details\">\n");
-      out.write("                                <div class=\"rating\">\n");
-      out.write("                                    <img src=\"assets/icons/star.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <h2>White Drawer Unit</h2>\n");
-      out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$89.99</span>\n");
-      out.write("                                    <span class=\"price\"><s></s></span>\n");
-      out.write("                                </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </a>\n");
-      out.write("                    </div>\n");
-      out.write("                                    \n");
-      out.write("                    <div class=\"col-md-3\">\n");
-      out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
-      out.write("                            <div class=\"pro-card\" data-product-id=\"6\">\n");
-      out.write("                                <div class=\"pro-card-img\">\n");
-      out.write("                                    <div class=\"pro-add-to-cart\">\n");
-      out.write("                                        ");
-      if (_jspx_meth_b_Button_6(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"new\">new</div>\n");
-      out.write("                                    <div class=\"discount\">-50%</div>\n");
-      out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/Elements/product6.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <div class=\"pro-card-details\">\n");
-      out.write("                                <div class=\"rating\">\n");
-      out.write("                                    <img src=\"assets/icons/star.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <h2>Black Tray Table</h2>\n");
-      out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$19.99</span>\n");
-      out.write("                                    <span class=\"price\"><s></s></span>\n");
-      out.write("                                </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </a>\n");
-      out.write("                    </div>\n");
-      out.write("                                    \n");
-      out.write("                    <div class=\"col-md-3\">\n");
-      out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
-      out.write("                            <div class=\"pro-card\" data-product-id=\"7\">\n");
-      out.write("                                <div class=\"pro-card-img\">\n");
-      out.write("                                    <div class=\"pro-add-to-cart\">\n");
-      out.write("                                        ");
-      if (_jspx_meth_b_Button_7(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"new\">new</div>\n");
-      out.write("                                    <div class=\"discount\">-50%</div>\n");
-      out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/Elements/product7.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <div class=\"pro-card-details\">\n");
-      out.write("                                <div class=\"rating\">\n");
-      out.write("                                    <img src=\"assets/icons/star.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <h2>Table Lamp</h2>\n");
-      out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$19.00</span>\n");
-      out.write("                                    <span class=\"price\"><s></s></span>\n");
-      out.write("                                </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </a>\n");
-      out.write("                    </div>\n");
-      out.write("                                    \n");
-      out.write("                    <div class=\"col-md-3\">\n");
-      out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
-      out.write("                            <div class=\"pro-card\" data-product-id=\"8\">\n");
-      out.write("                                <div class=\"pro-card-img\">\n");
-      out.write("                                    <div class=\"pro-add-to-cart\">\n");
-      out.write("                                        ");
-      if (_jspx_meth_b_Button_8(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"new\">new</div>\n");
-      out.write("                                    <div class=\"discount\">-50%</div>\n");
-      out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/Elements/product8.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <div class=\"pro-card-details\">\n");
-      out.write("                                <div class=\"rating\">\n");
-      out.write("                                    <img src=\"assets/icons/star.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <h2>Black Brow Side Table</h2>\n");
-      out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$16.99</span>\n");
-      out.write("                                    <span class=\"price\"><s></s></span>\n");
-      out.write("                                </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </a>\n");
-      out.write("                    </div>\n");
-      out.write("                </div>\n");
-      out.write("                                    \n");
-      out.write("                <div class=\"row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3\">\n");
-      out.write("                    <div class=\"col-md-3\">\n");
-      out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
-      out.write("                            <div class=\"pro-card\" data-product-id=\"9\">\n");
-      out.write("                                <div class=\"pro-card-img\">\n");
-      out.write("                                    <div class=\"pro-add-to-cart\">\n");
-      out.write("                                        ");
-      if (_jspx_meth_b_Button_9(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"new\">new</div>\n");
-      out.write("                                    <div class=\"discount\">-50%</div>\n");
-      out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/Elements/product9.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <div class=\"pro-card-details\">\n");
-      out.write("                                <div class=\"rating\">\n");
-      out.write("                                    <img src=\"assets/icons/star.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <h2>Light Beige Pillow</h2>\n");
-      out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$3.99</span>\n");
-      out.write("                                    <span class=\"price\"><s></s></span>\n");
-      out.write("                                </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </a>\n");
-      out.write("                    </div>\n");
-      out.write("                                    \n");
-      out.write("                    <div class=\"col-md-3\">\n");
-      out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
-      out.write("                            <div class=\"pro-card\" data-product-id=\"10\">\n");
-      out.write("                                <div class=\"pro-card-img\">\n");
-      out.write("                                    <div class=\"pro-add-to-cart\">\n");
-      out.write("                                        ");
-      if (_jspx_meth_b_Button_10(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"new\">new</div>\n");
-      out.write("                                    <div class=\"discount\">-50%</div>\n");
-      out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/Elements/product10.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <div class=\"pro-card-details\">\n");
-      out.write("                                <div class=\"rating\">\n");
-      out.write("                                    <img src=\"assets/icons/star.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <h2>Table Lamp</h2>\n");
-      out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$39.99</span>\n");
-      out.write("                                    <span class=\"price\"><s></s></span>\n");
-      out.write("                                </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </a>\n");
-      out.write("                    </div>\n");
-      out.write("                                    \n");
-      out.write("                    <div class=\"col-md-3\">\n");
-      out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
-      out.write("                            <div class=\"pro-card\" data-product-id=\"11\">\n");
-      out.write("                                <div class=\"pro-card-img\">\n");
-      out.write("                                    <div class=\"pro-add-to-cart\">\n");
-      out.write("                                        ");
-      if (_jspx_meth_b_Button_11(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"new\">new</div>\n");
-      out.write("                                    <div class=\"discount\">-50%</div>\n");
-      out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/Elements/product11.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <div class=\"pro-card-details\">\n");
-      out.write("                                <div class=\"rating\">\n");
-      out.write("                                    <img src=\"assets/icons/star.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <h2>Bamboo Basket</h2>\n");
-      out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$9.99</span>\n");
-      out.write("                                    <span class=\"price\"><s></s></span>\n");
-      out.write("                                </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </a>\n");
-      out.write("                    </div>\n");
-      out.write("                                    \n");
-      out.write("                    <div class=\"col-md-3\">\n");
-      out.write("                        <a href=\"#\" class=\"pro-card-wrapper\">\n");
-      out.write("                            <div class=\"pro-card\" data-product-id=\"12\">\n");
-      out.write("                                <div class=\"pro-card-img\">\n");
-      out.write("                                    <div class=\"pro-add-to-cart\">\n");
-      out.write("                                        ");
-      if (_jspx_meth_b_Button_12(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"new\">new</div>\n");
-      out.write("                                    <div class=\"discount\">-50%</div>\n");
-      out.write("                                    <button class=\"add-to-wishlist\"><img src=\"assets/icons/wishlist.png\" /></button>\n");
-      out.write("                                    <img src=\"assets/Elements/product12.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <div class=\"pro-card-details\">\n");
-      out.write("                                <div class=\"rating\">\n");
-      out.write("                                    <img src=\"assets/icons/star.png\" />\n");
-      out.write("                                </div>\n");
-      out.write("                                <h2>Off White Pillow</h2>\n");
-      out.write("                                <div class=\"prices\">\n");
-      out.write("                                    <span class=\"discount-price\">$7.99</span>\n");
-      out.write("                                    <span class=\"price\"><s></s></span>\n");
-      out.write("                                </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </a>\n");
-      out.write("                    </div>\n");
-      out.write("                </div>\n");
       out.write("                <!--Show more btn-->\n");
       out.write("                <button class=\"sm-btn\">Show More</button>                \n");
       out.write("                \n");
-      out.write("            </div>\n");
+      out.write("               </div>\n");
       out.write("            </div>\n");
       out.write("        </section>\n");
       out.write("                                    \n");
@@ -633,171 +354,6 @@ public final class shopup_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_b_Button_1.setOutlined(false);
     _jspx_th_b_Button_1.setName("add-to-cart");
     _jspx_th_b_Button_1.doTag();
-    return false;
-  }
-
-  private boolean _jspx_meth_b_Button_2(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  b:Button
-    myPackage.ui.Button _jspx_th_b_Button_2 = (_jspx_resourceInjector != null) ? _jspx_resourceInjector.createTagHandlerInstance(myPackage.ui.Button.class) : new myPackage.ui.Button();
-    _jspx_th_b_Button_2.setJspContext(_jspx_page_context);
-    _jspx_th_b_Button_2.setText("Add To Cart");
-    _jspx_th_b_Button_2.setRounded(false);
-    _jspx_th_b_Button_2.setOutlined(false);
-    _jspx_th_b_Button_2.setName("add-to-cart");
-    _jspx_th_b_Button_2.doTag();
-    return false;
-  }
-
-  private boolean _jspx_meth_b_Button_3(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  b:Button
-    myPackage.ui.Button _jspx_th_b_Button_3 = (_jspx_resourceInjector != null) ? _jspx_resourceInjector.createTagHandlerInstance(myPackage.ui.Button.class) : new myPackage.ui.Button();
-    _jspx_th_b_Button_3.setJspContext(_jspx_page_context);
-    _jspx_th_b_Button_3.setText("Add To Cart");
-    _jspx_th_b_Button_3.setRounded(false);
-    _jspx_th_b_Button_3.setOutlined(false);
-    _jspx_th_b_Button_3.setName("add-to-cart");
-    _jspx_th_b_Button_3.doTag();
-    return false;
-  }
-
-  private boolean _jspx_meth_b_Button_4(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  b:Button
-    myPackage.ui.Button _jspx_th_b_Button_4 = (_jspx_resourceInjector != null) ? _jspx_resourceInjector.createTagHandlerInstance(myPackage.ui.Button.class) : new myPackage.ui.Button();
-    _jspx_th_b_Button_4.setJspContext(_jspx_page_context);
-    _jspx_th_b_Button_4.setText("Add To Cart");
-    _jspx_th_b_Button_4.setRounded(false);
-    _jspx_th_b_Button_4.setOutlined(false);
-    _jspx_th_b_Button_4.setName("add-to-cart");
-    _jspx_th_b_Button_4.doTag();
-    return false;
-  }
-
-  private boolean _jspx_meth_b_Button_5(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  b:Button
-    myPackage.ui.Button _jspx_th_b_Button_5 = (_jspx_resourceInjector != null) ? _jspx_resourceInjector.createTagHandlerInstance(myPackage.ui.Button.class) : new myPackage.ui.Button();
-    _jspx_th_b_Button_5.setJspContext(_jspx_page_context);
-    _jspx_th_b_Button_5.setText("Add To Cart");
-    _jspx_th_b_Button_5.setRounded(false);
-    _jspx_th_b_Button_5.setOutlined(false);
-    _jspx_th_b_Button_5.setName("add-to-cart");
-    _jspx_th_b_Button_5.doTag();
-    return false;
-  }
-
-  private boolean _jspx_meth_b_Button_6(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  b:Button
-    myPackage.ui.Button _jspx_th_b_Button_6 = (_jspx_resourceInjector != null) ? _jspx_resourceInjector.createTagHandlerInstance(myPackage.ui.Button.class) : new myPackage.ui.Button();
-    _jspx_th_b_Button_6.setJspContext(_jspx_page_context);
-    _jspx_th_b_Button_6.setText("Add To Cart");
-    _jspx_th_b_Button_6.setRounded(false);
-    _jspx_th_b_Button_6.setOutlined(false);
-    _jspx_th_b_Button_6.setName("add-to-cart");
-    _jspx_th_b_Button_6.doTag();
-    return false;
-  }
-
-  private boolean _jspx_meth_b_Button_7(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  b:Button
-    myPackage.ui.Button _jspx_th_b_Button_7 = (_jspx_resourceInjector != null) ? _jspx_resourceInjector.createTagHandlerInstance(myPackage.ui.Button.class) : new myPackage.ui.Button();
-    _jspx_th_b_Button_7.setJspContext(_jspx_page_context);
-    _jspx_th_b_Button_7.setText("Add To Cart");
-    _jspx_th_b_Button_7.setRounded(false);
-    _jspx_th_b_Button_7.setOutlined(false);
-    _jspx_th_b_Button_7.setName("add-to-cart");
-    _jspx_th_b_Button_7.doTag();
-    return false;
-  }
-
-  private boolean _jspx_meth_b_Button_8(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  b:Button
-    myPackage.ui.Button _jspx_th_b_Button_8 = (_jspx_resourceInjector != null) ? _jspx_resourceInjector.createTagHandlerInstance(myPackage.ui.Button.class) : new myPackage.ui.Button();
-    _jspx_th_b_Button_8.setJspContext(_jspx_page_context);
-    _jspx_th_b_Button_8.setText("Add To Cart");
-    _jspx_th_b_Button_8.setRounded(false);
-    _jspx_th_b_Button_8.setOutlined(false);
-    _jspx_th_b_Button_8.setName("add-to-cart");
-    _jspx_th_b_Button_8.doTag();
-    return false;
-  }
-
-  private boolean _jspx_meth_b_Button_9(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  b:Button
-    myPackage.ui.Button _jspx_th_b_Button_9 = (_jspx_resourceInjector != null) ? _jspx_resourceInjector.createTagHandlerInstance(myPackage.ui.Button.class) : new myPackage.ui.Button();
-    _jspx_th_b_Button_9.setJspContext(_jspx_page_context);
-    _jspx_th_b_Button_9.setText("Add To Cart");
-    _jspx_th_b_Button_9.setRounded(false);
-    _jspx_th_b_Button_9.setOutlined(false);
-    _jspx_th_b_Button_9.setName("add-to-cart");
-    _jspx_th_b_Button_9.doTag();
-    return false;
-  }
-
-  private boolean _jspx_meth_b_Button_10(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  b:Button
-    myPackage.ui.Button _jspx_th_b_Button_10 = (_jspx_resourceInjector != null) ? _jspx_resourceInjector.createTagHandlerInstance(myPackage.ui.Button.class) : new myPackage.ui.Button();
-    _jspx_th_b_Button_10.setJspContext(_jspx_page_context);
-    _jspx_th_b_Button_10.setText("Add To Cart");
-    _jspx_th_b_Button_10.setRounded(false);
-    _jspx_th_b_Button_10.setOutlined(false);
-    _jspx_th_b_Button_10.setName("add-to-cart");
-    _jspx_th_b_Button_10.doTag();
-    return false;
-  }
-
-  private boolean _jspx_meth_b_Button_11(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  b:Button
-    myPackage.ui.Button _jspx_th_b_Button_11 = (_jspx_resourceInjector != null) ? _jspx_resourceInjector.createTagHandlerInstance(myPackage.ui.Button.class) : new myPackage.ui.Button();
-    _jspx_th_b_Button_11.setJspContext(_jspx_page_context);
-    _jspx_th_b_Button_11.setText("Add To Cart");
-    _jspx_th_b_Button_11.setRounded(false);
-    _jspx_th_b_Button_11.setOutlined(false);
-    _jspx_th_b_Button_11.setName("add-to-cart");
-    _jspx_th_b_Button_11.doTag();
-    return false;
-  }
-
-  private boolean _jspx_meth_b_Button_12(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  b:Button
-    myPackage.ui.Button _jspx_th_b_Button_12 = (_jspx_resourceInjector != null) ? _jspx_resourceInjector.createTagHandlerInstance(myPackage.ui.Button.class) : new myPackage.ui.Button();
-    _jspx_th_b_Button_12.setJspContext(_jspx_page_context);
-    _jspx_th_b_Button_12.setText("Add To Cart");
-    _jspx_th_b_Button_12.setRounded(false);
-    _jspx_th_b_Button_12.setOutlined(false);
-    _jspx_th_b_Button_12.setName("add-to-cart");
-    _jspx_th_b_Button_12.doTag();
     return false;
   }
 }

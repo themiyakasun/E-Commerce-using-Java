@@ -1,7 +1,7 @@
 <!--News Letter-->
         <div class="container">
             <img id="hero-shop" src="assets/Elements/newsletter.png">
-            <div class="hero-text">
+            <div class="hero-content">
                 <h2>Join Our Newsletter</h2>
                 <p>Sign up for deals, new products and promotions</p>
                 <div class="email">
