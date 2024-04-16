@@ -49,7 +49,6 @@
                         Total
                     </span>
                     <span class="price" id="cart-full-total" value="0">
-                        $1234.00
                     </span>
                     <span class="shipping" id="shipping-cost" hidden>$0.00
                     </span>

@@ -51,6 +51,7 @@ function loadContent(page, clickedButton) {
                     prevButton.classList.add("pass");
                     prevButton = prevButton.previousElementSibling;
                 }
+                checkList();
             }
             
             if(clickedButton.classList.contains("place-order-btn")){
@@ -129,6 +130,11 @@ function updateCartWithShippingTotal(subTotal){
     $('.cart-sum-total .price').text('$' + subTotal.toFixed(2));
 }
 
+//function getStoredTotal() {
+//    return sessionStorage.getItem('cartTotal');
+//}
+
+
 window.getShipping = function(){
     var selectedValue = parseFloat($('input[name="shipping-method"]:checked').val());
     var totalString = $('.cart-sum-total .price').text();
@@ -181,7 +187,6 @@ function addToCart() {
             success: function(data) {
                 var tbody = $('.cart-table tbody');
                 var sumSubtotal = 0; 
-                var cartItemQuantities = {};
                 $.each(data, function(index, item) {
                     var minusButton = $('<button>').addClass('minus-btn').attr({id:'minus-btn_' + item.cartId, 'data-cart-id': item.cartId}).append(
                         $('<img>').attr('src', 'assets/icons/Minus.png')
@@ -246,9 +251,8 @@ function addToCart() {
                     sumSubtotal += subtotal;
                     row.append(productDetailsColumn, quantityColumn, priceColumn, subtotalColumn);
                     tbody.append(row);
-
-                    cartItemQuantities[item.cartId] = item.quantity;
                 });
+                
                 $('.cart-sum-sub-total .price').text('$' + sumSubtotal.toFixed(2));
                 $('.cart-sum-total .price').text('$' + sumSubtotal.toFixed(2));
             },
@@ -260,8 +264,6 @@ function addToCart() {
     
     fetchCartItemsAndUpdateTotal();
  });
- 
- 
     
 //Remove Cart Item
 function removeCartItem(cartId) {
@@ -271,6 +273,19 @@ function removeCartItem(cartId) {
         data: { cart_id: cartId },
         success: function(response) {
             location.reload();
+        },
+        error: function(xhr, status, error) {
+            console.error('Error removing item:', error);
+        }
+    });
+}
+
+function checkList(){
+    $.ajax({
+    url: 'AddCartDetailsServlet',
+    type: 'POST',
+        data: { total: total },
+        success: function(response) {
         },
         error: function(xhr, status, error) {
             console.error('Error removing item:', error);

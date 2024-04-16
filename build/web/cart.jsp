@@ -33,5 +33,6 @@
         });
         </script>
         <script src="js/index.js"></script>
+        <script src="js/cart.js"></script>
         
     </body>
