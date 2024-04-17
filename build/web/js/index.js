@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //Mobile Nav Toggle
 window.openMobileNav = function() {
     var mobileNav = document.getElementById("mobile-nav");
@@ -335,3 +336,5 @@ function sendData() {
 
 
     
+=======
+>>>>>>> 11517838f3ef5ded5dc4e311e76c3452d40845b8
