@@ -1,11 +1,13 @@
 package myPackage.cart;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,25 +33,68 @@ public class CartDetailsServlet extends HttpServlet {
         String shippingMethod = request.getParameter("shipping_method");
         int userId = getUserIdFromSession();
         
-        
-        try(Connection conn = DbUtil.getConnection()){
-            String query = "INSERT INTO orders (order_code, user_id, cart_items, total, shipping_method) VALUES (?, ?, ?, ?, ?)";
-            try(PreparedStatement statement = conn.prepareStatement(query)){
-                String orderCode = generateUniqueOrderCode(conn);
-                statement.setString(1, orderCode);
-                statement.setInt(2, userId);
-                statement.setString(3, cartItemsJson);
-                statement.setFloat(4, totalFloat);
-                statement.setString(5, shippingMethod);
-                statement.executeUpdate();
+        try (Connection conn = DbUtil.getConnection()) {
+            conn.setAutoCommit(false); // Start transaction
+            
+            // Insert into Orders table
+            int orderId = insertOrder(conn, userId, totalFloat, shippingMethod);
+            
+            if (orderId != -1) {
+                // Insert into Order_Items table
+                insertOrderItems(conn, orderId, cartItemsJson);
                 
+                conn.commit(); // Commit transaction
+                
+                // Response
                 response.setContentType("text/plain");
                 PrintWriter out = response.getWriter();
                 out.print("Success: Order placed successfully!");
+            } else {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to insert order.");
             }
         }catch(SQLException e){
             e.printStackTrace();
             e.getMessage();
+        }
+    }
+    
+    private int insertOrder(Connection conn, int userId, float totalFloat, String shippingMethod) throws SQLException {
+        String query = "INSERT INTO orders (order_code, user_id, total, shipping_method) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            String code = generateUniqueOrderCode(conn);
+            statement.setString(1, code);
+            statement.setInt(2, userId);
+            statement.setFloat(3, totalFloat);
+            statement.setString(4, shippingMethod);
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows == 0) {
+                return -1;
+            }
+
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    return -1;
+                }
+            }
+        }
+    }
+
+    private void insertOrderItems(Connection conn, int orderId, String cartItemsJson) throws SQLException {
+        Gson gson = new Gson();
+        CartItem[] cartItems = gson.fromJson(cartItemsJson, CartItem[].class);
+
+        String query = "INSERT INTO order_items (order_id, pro_id, quantity) VALUES (?, ?, ?)";
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            for (CartItem item : cartItems) {
+                statement.setInt(1, orderId);
+                statement.setInt(2, item.getProductId());
+                statement.setInt(3, item.getQuantity());
+                statement.addBatch();
+            }
+            statement.executeBatch();
         }
     }
     
@@ -87,6 +132,7 @@ public class CartDetailsServlet extends HttpServlet {
     private int getUserIdFromSession() {
         return 2;
     }
+    
 }
 
 

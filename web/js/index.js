@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //Mobile Nav Toggle
 window.openMobileNav = function() {
     var mobileNav = document.getElementById("mobile-nav");
@@ -304,17 +303,18 @@ function sendData() {
 
       cartItems.push({
         cartId: cartId,
-        proId: proId,
+        productId: proId,
         quantity: quantity
       });
     });
-
+    
+    console.log(JSON.stringify(cartItems));
     $.ajax({
         url: contextPath + '/CartDetailsServlet',
         type: 'POST',
         data: {
             total_price: total,
-            cart_items: JSON.stringify(cartItems),  // Convert cart items to JSON string
+            cart_items: JSON.stringify(cartItems), 
             shipping_method: shippingMethod
         },
         success: function(response) {
@@ -331,10 +331,3 @@ function sendData() {
         }
     });
 }
-
-
-
-
-    
-=======
->>>>>>> 11517838f3ef5ded5dc4e311e76c3452d40845b8
