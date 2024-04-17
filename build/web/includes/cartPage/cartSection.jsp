@@ -55,7 +55,7 @@
                     </span>
                 </div>
                 
-                <div class="checkout-btn" onclick="loadContent('includes/cartPage/checkoutSection.jsp', this)">
+                <div class="checkout-btn" onclick="sendData()">
                     <b:Button rounded="false" outlined="false" text="Checkout" name="checkout"/>
                 </div>
             </div>
