@@ -19,7 +19,7 @@ window.toggleSearch = function(){
 window.toggleProfileDropdown = function(){
     var profileDropdown = document.getElementById("profile-dropdown");
     profileDropdown.classList.toggle("active");
-}
+};
 
 //Cart Page section change
 function loadContent(page, clickedButton) {
@@ -44,14 +44,13 @@ function loadContent(page, clickedButton) {
             }
             
             if(clickedButton.classList.contains("checkout-btn")){
-                var checkoutBtn = document.getElementById("checkout-button");
-                checkoutBtn.classList.add("active");
-                var prevButton = checkoutBtn.previousElementSibling;
-                while (prevButton) {
-                    prevButton.classList.add("pass");
-                    prevButton = prevButton.previousElementSibling;
-                }
-                checkList();
+                    var checkoutBtn = document.getElementById("checkout-button");
+                    checkoutBtn.classList.add("active");
+                    var prevButton = checkoutBtn.previousElementSibling;
+                    while (prevButton) {
+                        prevButton.classList.add("pass");
+                        prevButton = prevButton.previousElementSibling;
+                    }
             }
             
             if(clickedButton.classList.contains("place-order-btn")){
@@ -177,6 +176,8 @@ function addToCart() {
     return false;
 }
 
+
+
 // Display Cart 
  $(document).ready(function() {
     function fetchCartItemsAndUpdateTotal() {
@@ -208,7 +209,7 @@ function addToCart() {
                         removeCartItem(item.cartId);
                     });
 
-                    var row = $('<tr>').addClass('cart-item').attr({id: 'cartItem_' + item.cartId});
+                    var row = $('<tr>').addClass('cart-item').attr({id: 'cartItem_' + item.cartId, 'data-pro-id': item.productId });
 
                     var productDetailsColumn = $('<td>').append(
                         $('<div>').addClass('cart-product-details').append(
@@ -251,10 +252,12 @@ function addToCart() {
                     sumSubtotal += subtotal;
                     row.append(productDetailsColumn, quantityColumn, priceColumn, subtotalColumn);
                     tbody.append(row);
+
                 });
                 
                 $('.cart-sum-sub-total .price').text('$' + sumSubtotal.toFixed(2));
                 $('.cart-sum-total .price').text('$' + sumSubtotal.toFixed(2));
+                
             },
             error: function() {
                 alert('Error fetching cart items.');
@@ -263,6 +266,7 @@ function addToCart() {
     }
     
     fetchCartItemsAndUpdateTotal();
+     
  });
     
 //Remove Cart Item
@@ -280,15 +284,54 @@ function removeCartItem(cartId) {
     });
 }
 
-function checkList(){
+//Send Cart Data
+function sendData() {
+    var total = $('.cart-sum-total .price').text().trim();
+    var total = total.replace('$', '');
+    var cartItems = [];
+    var shipping = parseInt($('input[name=shipping-method]:checked').val());
+    if(shipping === 15){
+        shippingMethod = 'Express Shipping';
+    }else {
+        shippingMethod = "Free Shiping";
+    }
+
+    $('.cart-item').each(function() {
+      var cartId = $(this).attr('id').split('_')[1];
+      var proId = $(this).data('pro-id');
+      var quantity = parseInt($('input[id^=quantity_]', this).val()); 
+
+      cartItems.push({
+        cartId: cartId,
+        proId: proId,
+        quantity: quantity
+      });
+    });
+
     $.ajax({
-    url: 'AddCartDetailsServlet',
-    type: 'POST',
-        data: { total: total },
-        success: function(response) {
+        url: contextPath + '/CartDetailsServlet',
+        type: 'POST',
+        data: {
+            total_price: total,
+            cart_items: JSON.stringify(cartItems),  // Convert cart items to JSON string
+            shipping_method: shippingMethod
         },
-        error: function(xhr, status, error) {
-            console.error('Error removing item:', error);
+        success: function(response) {
+            if (response.startsWith("Success")) {
+                window.location.href = 'checkout.jsp';
+            } else {
+                console.error("Error in processing order:", response);
+                alert("Error in processing order. Please try again later.");
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX Error:", textStatus, errorThrown);
+            alert("Error sending data. Please try again later.");
         }
     });
 }
+
+
+
+
+    

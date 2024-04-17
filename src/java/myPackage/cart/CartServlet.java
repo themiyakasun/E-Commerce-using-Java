@@ -55,7 +55,7 @@ public class CartServlet extends HttpServlet {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Log the exception for debugging
+            e.printStackTrace();
         }
         return cartItems;
     }

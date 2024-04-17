@@ -5,16 +5,16 @@
         <servlet-class>myPackage.cart.CartServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddCartDetailsServlet</servlet-name>
-        <servlet-class>myPackage.cart.AddCartDetailsServlet</servlet-class>
+        <servlet-name>CartDetailsServlet</servlet-name>
+        <servlet-class>myPackage.cart.CartDetailsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/CartServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddCartDetailsServlet</servlet-name>
-        <url-pattern>/AddCartDetailsServlet</url-pattern>
+        <servlet-name>CartDetailsServlet</servlet-name>
+        <url-pattern>/CartDetailsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

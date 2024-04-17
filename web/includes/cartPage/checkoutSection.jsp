@@ -118,10 +118,8 @@
                             <div class='details'>
                                 <h3>Tray Table</h3>
                                 <span>Color: Black</span>
-                                <div class="quantity-wrapper">
-                                    <button class="minus-btn" id="minus-btn" onclick="minus()"><img src="assets/icons/Minus.png" /></button>
-                                    <input type="text" value="2" id="quantity"/>
-                                    <button class="add-btn" id="add-btn" onclick="add()"><img src="assets/icons/Add.png" /></button>
+                                <div>
+                                    x2
                                 </div>
                             </div>
                         </div>

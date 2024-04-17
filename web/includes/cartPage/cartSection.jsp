@@ -49,12 +49,13 @@
                         Total
                     </span>
                     <span class="price" id="cart-full-total" value="0">
+                        $1234.00
                     </span>
                     <span class="shipping" id="shipping-cost" hidden>$0.00
                     </span>
                 </div>
                 
-                <div class="checkout-btn" onclick="loadContent('includes/cartPage/checkoutSection.jsp', this)">
+                <div class="checkout-btn" onclick="sendData()">
                     <b:Button rounded="false" outlined="false" text="Checkout" name="checkout"/>
                 </div>
             </div>
