@@ -20,6 +20,14 @@
         <servlet-name>AddressInfoServlet</servlet-name>
         <servlet-class>myPackage.cart.AddressInfoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckoutDetailsServlet</servlet-name>
+        <servlet-class>myPackage.cart.CheckoutDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderCompleteServlet</servlet-name>
+        <servlet-class>myPackage.cart.OrderCompleteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/CartServlet</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>AddressInfoServlet</servlet-name>
         <url-pattern>/AddressInfoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutDetailsServlet</servlet-name>
+        <url-pattern>/CheckoutDetailsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderCompleteServlet</servlet-name>
+        <url-pattern>/OrderCompleteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

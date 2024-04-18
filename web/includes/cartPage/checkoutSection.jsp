@@ -51,9 +51,9 @@
                         <div class="input-box">
                             <label>Country*</label>
                             <select id="country">
-                                <option>Country</option>
-                                <option>Srilanka</option>
-                                <option>India</option>
+                                <option id="db-country">Country</option>
+                                <option value="sri-lanka">Srilanka</option>
+                                <option value="india">India</option>
                             </select>
                         </div>
                     </div>
@@ -86,14 +86,14 @@
                     
                     <div class="radio-inputs-wrapper">
                         <div class="radio-input">
-                            <input type="radio" name="payment-method" id="credit-card" onclick="showPaymentInfo('credit-card')"/>
+                            <input type="radio" name="payment-method" id="credit-card" value="credit card" onclick="showPaymentInfo('credit-card')"/>
                             <label>Pay by Card Credit</label>
                         </div>
                         <p><img src="assets/icons/money.png"/></p>
                     </div>
                     <div class="radio-inputs-wrapper">
                         <div class="radio-input">
-                            <input type="radio" name="payment-method" id="paypal" onclick="showPaymentInfo('paypal')" />
+                            <input type="radio" name="payment-method" id="paypal" value="paypal" onclick="showPaymentInfo('paypal')" />
                             <label>Paypal</label>
                         </div>                      
                     </div>
@@ -146,7 +146,7 @@
                 </div>
             </div>
         </div>
-        <div class="place-order-btn" onclick="loadContent('includes/cartPage/orderCompleteSection.jsp', this)">
+        <div class="place-order-btn" onclick="sendCheckoutData()">
             <b:Button rounded="false" outlined="false" text="Place Order" name="order"/>
         </div>
     </div>

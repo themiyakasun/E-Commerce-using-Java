@@ -5,7 +5,7 @@
         active = "cart";
     }else if(path.equals("/checkout.jsp")){
         active = "checkout";
-    }else if(path.equals("/order-complete.jsp")){
+    }else if(path.equals("/orderComplete.jsp")){
         active = "orderComplete";
     }
 

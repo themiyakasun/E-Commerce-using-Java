@@ -2,18 +2,26 @@ package myPackage.cart;
 
 public class OrderItem {
     private int orderId;
+    private String orderCode;
     private double total;
     private String shippingMethod;
+    private String status;
+    private String paymentMethod;
+    private String orderedDate;
     private int proId;
     private int quantity;
     private String productName;
     private String productImg;
     private double productPrice;
     
-    public OrderItem(int orderId, double total, String shippingMethod, int proId, int quantity, String productName, String productImg, double productPrice){
+    public OrderItem(int orderId, String orderCode, double total, String shippingMethod, String status, String paymentMethod, String orderedDate, int proId, int quantity, String productName, String productImg, double productPrice){
         this.orderId = orderId;
+        this.orderCode = orderCode;
         this.total = total;
         this.shippingMethod = shippingMethod;
+        this.status = status;
+        this.paymentMethod = paymentMethod;
+        this.orderedDate = orderedDate;
         this.proId = proId;
         this.quantity = quantity;
         this.productName = productName;
@@ -27,6 +35,14 @@ public class OrderItem {
     
     public void setOrderId(int orderId){
         this.orderId = orderId;
+    }
+    
+    public String getOrderCode(){
+        return orderCode;
+    }
+    
+    public void setOrderCode(String orderCode){
+        this.orderCode = orderCode;
     }
     
     public double getTotal(){
@@ -43,6 +59,30 @@ public class OrderItem {
     
     public void setShippingMethod(String shippingMethod){
         this.shippingMethod = shippingMethod;
+    }
+    
+    public String getStatus(){
+        return status;
+    }
+    
+    public void setStatus(String status){
+        this.status = status;
+    }
+    
+    public String getPaymentMethod(){
+        return paymentMethod;
+    }
+    
+    public void setPaymentMethod(String paymentMethod){
+        this.paymentMethod = paymentMethod;
+    }
+    
+    public String getOrderedDate(){
+        return orderedDate;
+    }
+    
+    public void setOrderedDate(String orderedDate){
+        this.orderedDate = orderedDate;
     }
     
     public int getProId(){
