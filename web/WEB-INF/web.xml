@@ -8,6 +8,14 @@
         <servlet-name>CartDetailsServlet</servlet-name>
         <servlet-class>myPackage.cart.CartDetailsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderSummaryServlet</servlet-name>
+        <servlet-class>myPackage.cart.OrderSummaryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ContactInformation</servlet-name>
+        <servlet-class>myPackage.cart.ContactInformation</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/CartServlet</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>CartDetailsServlet</servlet-name>
         <url-pattern>/CartDetailsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderSummaryServlet</servlet-name>
+        <url-pattern>/OrderSummaryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactInformation</servlet-name>
+        <url-pattern>/ContactInformation</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
