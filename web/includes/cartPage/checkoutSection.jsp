@@ -44,13 +44,13 @@
                     <div class="input-wrapper">
                         <div class="input-box">
                             <label>Street Address*</label>
-                            <input type="text" placeholder="Street Address" name="address" required/>
+                            <input type="text" placeholder="Street Address" name="address" id="street" required/>
                         </div>
                     </div>
                     <div class="input-wrapper">
                         <div class="input-box">
                             <label>Country*</label>
-                            <select>
+                            <select id="country">
                                 <option>Country</option>
                                 <option>Srilanka</option>
                                 <option>India</option>
@@ -60,7 +60,7 @@
                     <div class="input-wrapper">
                         <div class="input-box">
                             <label>Town/city*</label>
-                            <input type="text" placeholder="Town/city" name="city" required/>
+                            <input type="text" placeholder="Town/city" name="city" id="city" required/>
                         </div>
                     </div>
                     <div class="input-wrapper">
@@ -68,13 +68,13 @@
                             <div class="col-md-6">
                                 <div class="input-box">
                                     <label>State</label>
-                                    <input type="text" placeholder="State" name="state"/>
+                                    <input type="text" placeholder="State" id="state" name="state"/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="input-box">
                                     <label>Zip Code</label>
-                                    <input type="text" placeholder="Zip Code" name="zipcode"/>
+                                    <input type="text" placeholder="Zip Code" id="postalCode" name="zipcode"/>
                                 </div>
                             </div>
                         </div>

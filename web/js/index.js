@@ -343,11 +343,34 @@ function addToCart() {
             }
         });
     }
+    
+    function fetchAddressInformation(){
+        $.ajax({
+            url: 'AddressInfoServlet',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){
+                if(data.length > 0){
+                    var addressInfo = data[0];
+                    
+                    $('#street').val(addressInfo.streetAddress);
+                    $('#city').val(addressInfo.city);
+                    $('#state').val(addressInfo.state);
+                    $('#postalCode').val(addressInfo.postalCode);
+                    $('#country').val(addressInfo.country);
+                }
+            },
+            error: function(){
+                alert('Error fetching contact information.');
+            }
+        });
+    }
 
     
     fetchCartItemsAndUpdateTotal();
     fetchOrderSummary();
     fetchContactInformation();
+    fetchAddressInformation();
      
  });
     
