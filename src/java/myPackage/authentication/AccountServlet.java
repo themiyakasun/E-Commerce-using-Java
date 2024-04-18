@@ -68,7 +68,7 @@ public class AccountServlet extends HttpServlet {
     throws SQLException, IOException, ServletException {
          Account user = accountDao.selectUser(demoUserId);
         request.setAttribute("user", user);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("includes/accountProfileForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("includes/AccountProfile/accountProfileForm.jsp");
         dispatcher.forward(request, response);
     }
     
@@ -78,7 +78,7 @@ public class AccountServlet extends HttpServlet {
         request.setAttribute("user", user);
         System.out.println(user.getBilling_name());
         System.out.println(user.getShipping_name());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("includes/accountAddressForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("includes/AccountProfile/accountAddressForm.jsp");
         dispatcher.forward(request, response);
     }
     
@@ -91,8 +91,8 @@ public class AccountServlet extends HttpServlet {
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Account existingAccount = accountDao.selectUser(id);
+        int user_id = Integer.parseInt(request.getParameter("user_id"));
+        Account existingAccount = accountDao.selectUser(user_id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
         request.setAttribute("account", existingAccount);
         dispatcher.forward(request, response);
@@ -116,7 +116,7 @@ public class AccountServlet extends HttpServlet {
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int user_id = Integer.parseInt(request.getParameter("user_id"));
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");
         String display_name = request.getParameter("display_name");
@@ -128,7 +128,7 @@ public class AccountServlet extends HttpServlet {
 
         if (!real_password.equals(old_password)) {
            request.setAttribute("error", "Old password is incorrect!");
-           RequestDispatcher dispatcher = request.getRequestDispatcher("includes/accountProfileForm.jsp");
+           RequestDispatcher dispatcher = request.getRequestDispatcher("includes/AccountProfile/accountProfileForm.jsp");
             try {
                 dispatcher.forward(request, response);
             } catch (ServletException ex) {
@@ -138,7 +138,7 @@ public class AccountServlet extends HttpServlet {
         }
         if (!new_password.equals(confirmPassword)) {
             request.setAttribute("error", "Passwords do not match!");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("includes/accountProfileForm.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("includes/AccountProfile/accountProfileForm.jsp");
             try {
                 dispatcher.forward(request, response);
             } catch (ServletException ex) {
@@ -147,7 +147,7 @@ public class AccountServlet extends HttpServlet {
             return;
         }
         System.out.println("hi this is servlet");
-        Account account = new Account(id,first_name, last_name, display_name, email,new_password);
+        Account account = new Account(user_id,first_name, last_name, display_name, email,new_password);
         System.out.println("this is servlet and after making object");   
         accountDao.updateUser(account);
         response.sendRedirect("myaccount?action=details"); 
@@ -155,12 +155,12 @@ public class AccountServlet extends HttpServlet {
     
     private void updateBillingAddr(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id); 
+        int user_id = Integer.parseInt(request.getParameter("user_id"));
+        System.out.println(user_id); 
         String billing_name = request.getParameter("billing_name");
         String billing_phone = request.getParameter("billing_phone");
         String billing_address = request.getParameter("billing_address");
-        Account account = new Account(id,billing_name,billing_phone, billing_address,true);
+        Account account = new Account(user_id,billing_name,billing_phone, billing_address,true);
         System.out.println("this is servlet and after making object");
         accountDao.updateBillingAdress(account);
         response.sendRedirect("myaccount?action=address");
@@ -168,12 +168,12 @@ public class AccountServlet extends HttpServlet {
     
     private void updateShippingAddr(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id); 
+        int user_id = Integer.parseInt(request.getParameter("user_id"));
+        System.out.println(user_id); 
         String shipping_name = request.getParameter("shipping_name");
         String shipping_phone = request.getParameter("shipping_phone");
         String shipping_address = request.getParameter("shipping_address");
-        Account account = new Account(id,shipping_name,shipping_phone, shipping_address,false);
+        Account account = new Account(user_id,shipping_name,shipping_phone, shipping_address,false);
         System.out.println("this is servlet and after making object");
         accountDao.updateShippingAddress(account);
         response.sendRedirect("myaccount?action=address");

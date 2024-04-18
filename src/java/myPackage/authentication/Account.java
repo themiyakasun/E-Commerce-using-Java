@@ -12,7 +12,7 @@ package myPackage.authentication;
  */
 public class Account {
 
-    protected int id;
+    protected int user_id;
     protected String first_name;
     protected String last_name;
     protected String display_name;
@@ -25,8 +25,8 @@ public class Account {
     protected String billing_name;
     protected String shipping_name;
 
-    public Account(int id, String first_name, String last_name, String display_name, String email, String password, String billing_phone, String billing_address, String shipping_phone, String shipping_address, String billing_name, String shipping_name) {
-        this.id = id;
+    public Account(int user_id, String first_name, String last_name, String display_name, String email, String password, String billing_phone, String billing_address, String shipping_phone, String shipping_address, String billing_name, String shipping_name) {
+        this.user_id = user_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.display_name = display_name;
@@ -40,8 +40,8 @@ public class Account {
         this.shipping_name = shipping_name;
     }
 
-    public Account(int id, String first_name, String last_name, String display_name, String email, String password) {
-        this.id = id;
+    public Account(int user_id, String first_name, String last_name, String display_name, String email, String password) {
+        this.user_id = user_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.display_name = display_name;
@@ -49,22 +49,22 @@ public class Account {
         this.password = password;
     }
 
-    public Account(int id, String name, String phone, String address,boolean is_billing) {
+    public Account(int user_id, String name, String phone, String address,boolean is_billing) {
         if(is_billing){
-            this.id = id;
+            this.user_id = user_id;
             this.billing_name = name;
             this.billing_phone = phone;
             this.billing_address = address;
         } else {
-            this.id = id;
+            this.user_id = user_id;
             this.shipping_name = name;
             this.shipping_phone = phone;
             this.shipping_address = address;
         }  
     }
     
-    public void setId(int id) {
-        this.id = id;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public void setFirst_name(String first_name) {
@@ -111,8 +111,8 @@ public class Account {
         this.shipping_name = shipping_name;
     }
 
-    public int getId() {
-        return id;
+    public int getUser_id() {
+        return user_id;
     }
 
     public String getFirst_name() {
