@@ -743,6 +743,7 @@ nav {
     font-weight: 600;
     line-height: 22px;
     color: #141718;
+    text-transform: capitalize;
 }
 .cart-product-details .pro-details span {
     font-size: 12px;

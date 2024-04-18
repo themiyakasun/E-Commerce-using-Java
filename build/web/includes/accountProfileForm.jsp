@@ -1,5 +1,32 @@
+
+
+
 <h1>MY ACCOUNT</h1><center>
     <h2>Account Details</h2>
+<%-- Check if there's an error message --%>
+<% if (request.getAttribute("error") != null) { %>
+    <script>
+        // Extract the error message
+        var errorMessage = "<%= request.getAttribute("error") %>";
+        // Display the error message in a pop-up dialog
+        alert(errorMessage);
+        // Redirect to the myaccount page after the user clicks OK
+        window.location.href = "myaccount";
+    </script>
+<% } %>
+
+
+ <%-- Check if there's an error message --%>
+    <% if (request.getAttribute("error") != null) { %>
+        <script>
+            // Extract the error message
+            var errorMessage = "<%= request.getAttribute("error") %>";
+            // Display the error message in a pop-up dialog
+            alert(errorMessage);
+        </script>
+    <% } %>
+    
+
     <form action="myaccount" method="post">
         <table>
             <tr>
@@ -14,7 +41,7 @@
             </tr>
             <tr>
                 <td><label for="display_name">Display Name:</label></td>
-                <td><input type="text" id="display_name" name="display_name" placeholder="Enter your display name" required></td>
+                <td><input type="text" id="display_name" value="${user.display_name}" name="display_name" placeholder="Enter your display name" ></td>
             </tr>
             <tr>
                 <td><label for="email">Email:</label></td>
@@ -22,19 +49,26 @@
             </tr>
 
             <br><br>
-<!--            <tr>
+            <tr>
                 <td>Change Password </td></tr>
+               
+             <tr>
+                <input type="hidden" name="real_password" value="${user.password}"/>
+                <td><label for="password">Old Password: </label></td>
+                <td><input type="password" id="old_password" name="old_password" placeholder="Enter your old password" required></td>
+            </tr>
+            
             <tr>
                 <td><label for="password">New Password:</label></td>
-                <td><input type="password" id="password" name="password" placeholder="Enter your new password" required></td>
+                <td><input type="password" id="new_password" name="new_password" placeholder="Enter your new password" required></td>
             </tr>
             <tr>
                 <td><label for="confirm_password">Confirm Password:</label></td>
                 <td><input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required></td>
-            </tr>-->
+            </tr>
         </table>
         <br>
         <input type="submit" value="Submit">
     </form>
     </form></center>
-
+           
