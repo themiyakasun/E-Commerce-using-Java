@@ -24,12 +24,12 @@ public class AccountDao {
 
     private static final String INSERT_USERS_SQL = "INSERT INTO user" + " (first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address) VALUES " +
         " (?,?,?,?,?,?,?,?,?);";
-    private static final String SELECT_USER_BY_ID = "select first_name,last_name, display_name,email,password,billing_phone,billing_address,shipping_phone,shipping_address, billing_name, shipping_name from user where id =?";
+    private static final String SELECT_USER_BY_ID = "select first_name,last_name, display_name,email,password,billing_phone,billing_address,shipping_phone,shipping_address, billing_name, shipping_name from user where user_id =?";
     private static final String SELECT_ALL_USERS = "select * from user";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
-    private static final String UPDATE_USERS_SQL = "update user set first_name=?, last_name=?, display_name=?, email=?, password=?  WHERE id=?";
-    private static final String UPDATE_BILLING_ADDRESS = "update user set billing_name=?,billing_phone=?,billing_address=?  WHERE id=?";
-    private static final String UPDATE_SHIPPING_ADDRESS = "update user set shipping_name=?,shipping_phone=?,shipping_address=?  WHERE id=?";
+    private static final String UPDATE_USERS_SQL = "update user set first_name=?, last_name=?, display_name=?, email=?, password=?  WHERE user_id=?";
+    private static final String UPDATE_BILLING_ADDRESS = "update user set billing_name=?,billing_phone=?,billing_address=?  WHERE user_id=?";
+    private static final String UPDATE_SHIPPING_ADDRESS = "update user set shipping_name=?,shipping_phone=?,shipping_address=?  WHERE user_id=?";
 //Create or Insert user
 
     public AccountDao() {}
@@ -69,13 +69,13 @@ public class AccountDao {
         }
     }
 //slect user by id
-    public Account selectUser(int id) {
+    public Account selectUser(int user_id) {
         Account account = null;
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
             // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, user_id);
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
@@ -95,7 +95,7 @@ public class AccountDao {
                 System.out.println("first_name: "+first_name);
                 System.out.println("billing_name: "+billing_name);
                 System.out.println("shipping_name: "+shipping_name);              
-                account = new Account(id,first_name,last_name,display_name,email,password,billing_phone,billing_address,shipping_phone,shipping_address,billing_name,shipping_name);
+                account = new Account(user_id,first_name,last_name,display_name,email,password,billing_phone,billing_address,shipping_phone,shipping_address,billing_name,shipping_name);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -113,7 +113,7 @@ public class AccountDao {
             statement.setString(3, account.getDisplay_name());
             statement.setString(4, account.getEmail());
             statement.setString(5, account.getPassword());
-            statement.setInt(6, account.getId());
+            statement.setInt(6, account.getUser_id());
         
         System.out.println("hi this is dao after seting values");    
             rowUpdated = statement.executeUpdate() > 0;
@@ -130,7 +130,7 @@ public class AccountDao {
             statement.setString(1, account.getBilling_name());
             statement.setString(2, account.getBilling_phone());
             statement.setString(3, account.getBilling_address());
-            statement.setInt(4, account.getId());
+            statement.setInt(4, account.getUser_id());
         
         System.out.println("hi this is dao after seting values");    
             rowUpdated = statement.executeUpdate() > 0;
@@ -147,7 +147,7 @@ public class AccountDao {
             statement.setString(1, account.getShipping_name());
             statement.setString(2, account.getShipping_phone());
             statement.setString(3, account.getShipping_address());
-            statement.setInt(4, account.getId());
+            statement.setInt(4, account.getUser_id());
         
         System.out.println("hi this is dao after seting values");    
             rowUpdated = statement.executeUpdate() > 0;
