@@ -59,14 +59,16 @@ public class CartDetailsServlet extends HttpServlet {
     }
     
     private int insertOrder(Connection conn, int userId, float totalFloat, String shippingMethod) throws SQLException {
-        String query = "INSERT INTO orders (order_code, user_id, total, shipping_method, ordered_date) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO orders (order_code, user_id, total, shipping_method, status, payment_method, ordered_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             String code = generateUniqueOrderCode(conn);
             statement.setString(1, code);
             statement.setInt(2, userId);
             statement.setFloat(3, totalFloat);
             statement.setString(4, shippingMethod);
-            statement.setTimestamp(5, new java.sql.Timestamp(System.currentTimeMillis()));
+            statement.setString(5, "pending");
+            statement.setString(6, "null");
+            statement.setTimestamp(7, new java.sql.Timestamp(System.currentTimeMillis()));
             int affectedRows = statement.executeUpdate();
 
             if (affectedRows == 0) {

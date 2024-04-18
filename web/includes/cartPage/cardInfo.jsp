@@ -5,7 +5,7 @@
     </div>
 </div>
 
-<div class="input-wrapper">
+<div class="input-wrapper mt-2">
     <div class="row">
         <div class="col-md-6">
             <div class="input-box">

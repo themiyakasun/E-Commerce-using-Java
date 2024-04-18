@@ -10,22 +10,6 @@
                     <span class="circle">2</span>
                     <img src="assets/pro1.png"/>
                 </div>
-                <div class="ordered-item">
-                    <span class="circle">2</span>
-                    <img src="assets/pro1.png"/>
-                </div>
-                <div class="ordered-item">
-                    <span class="circle">2</span>
-                    <img src="assets/pro1.png"/>
-                </div>
-                <div class="ordered-item">
-                    <span class="circle">2</span>
-                    <img src="assets/pro1.png"/>
-                </div>
-                <div class="ordered-item">
-                    <span class="circle">2</span>
-                    <img src="assets/pro1.png"/>
-                </div>
             </div>
             <div class="order-details">
                 <ul class="titles" role="list">
@@ -38,7 +22,7 @@
                     <li>#0123_45678</li>
                     <li>October 19, 2023</li>
                     <li>$1,345.00</li>
-                    <li>Credit Card</li>
+                    <li></li>
                 </ul>
             </div>
             
