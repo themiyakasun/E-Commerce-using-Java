@@ -12,13 +12,13 @@
                             <div class="col-md-6">
                                 <div class="input-box">
                                     <label>First Name</label>
-                                    <input type="text" placeholder="First Name" name="fname"/>
+                                    <input type="text" placeholder="First Name" name="fname" id="fname"/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="input-box">
                                     <label>Last Name</label>
-                                    <input type="text" placeholder="Last Name" name="lname"/>
+                                    <input type="text" placeholder="Last Name" name="lname" id="lname"/>
                                 </div>
                             </div>
                         </div>
@@ -27,13 +27,13 @@
                     <div class="input-wrapper">
                         <div class="input-box">
                             <label>Phone Number</label>
-                            <input type="text" placeholder="Phone Number" name="pno"/>
+                            <input type="text" placeholder="Phone Number" name="pno" id="phone"/>
                         </div>
                     </div>
                     <div class="input-wrapper">
                         <div class="input-box">
                             <label>Email Address</label>
-                            <input type="text" placeholder="Email Address" name="email"/>
+                            <input type="text" placeholder="Email Address" name="email" id="email"/>
                         </div>
                     </div>
                 </div>
@@ -118,10 +118,8 @@
                             <div class='details'>
                                 <h3>Tray Table</h3>
                                 <span>Color: Black</span>
-                                <div class="quantity-wrapper">
-                                    <button class="minus-btn" id="minus-btn" onclick="minus()"><img src="assets/icons/Minus.png" /></button>
-                                    <input type="text" value="2" id="quantity"/>
-                                    <button class="add-btn" id="add-btn" onclick="add()"><img src="assets/icons/Add.png" /></button>
+                                <div>
+                                    x2
                                 </div>
                             </div>
                         </div>
