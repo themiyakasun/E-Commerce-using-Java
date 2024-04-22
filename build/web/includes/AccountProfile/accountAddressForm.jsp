@@ -7,38 +7,37 @@
     <title>Edit Addresses</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="css/accountAddress.css"> 
     <style>
         /* Custom CSS for adjusting card size and gap */
-        .custom-card .card-body {
-            padding: 15px; /* Decrease padding inside cards */
-        }
-
-        .custom-form .form-control {
-            padding: 0.25rem 0.5rem; /* Decrease padding for form controls */
-            font-size: 0.875rem; /* Decrease font size for form controls */
-        }
-
-        .heading-gap {
-            margin-bottom: 50px; /* Add gap between heading and cards */
-        }
-
-        .custom-heading {
-            font-size: 38px; /* Decrease font size for heading */
-        }
-
-        .custom-card-container {
-            margin-left: -15px; /* Align cards a little to the left */
-        }
-
-        .card-title {
-            font-size: 18px; /* Decrease font size for card titles */
-        }
+       
     </style>
 </head>
 <body>
+ 
+<span class="openbtn" onclick="toggleNav()">&#9776;</span>
+ 
+
+<div id="mySidenav" class="sidenav">
+ 
+   <div class="profile">
+          <img src="includes/AccountProfile/logo1.png"  class="sidenavimg" >
+    </div>
+
+   
+    <a href="#" class="active">Dashboard</a>
+    <a href="myaccount?action=details">Account</a>
+    <a href="myaccount?action=address">Address</a>
+    <a href="#">Orders</a>
+    <a href="#">Wishlist</a>
+    <a href="#">Logout</a> </div>
+
+    
+    
+    
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4 custom-heading heading-gap">Address</h1>
+    <h1 class="header">ADDRESS</h1>
     <div class="row justify-content-end custom-card-container">
         <div class="col-md-4">
             <div class="card custom-card">
@@ -48,7 +47,7 @@
                 <div class="card-body">
                     <form action="myaccount" method="post" class="custom-form">
                         <input type="hidden" name="requestType" value="up_billing_addr"/>
-                         <input type="hidden" name="id" value="${user.id}"/>
+                         <input type="hidden" name="user_id" value="${user.user_id}"/>
                         <!-- Address Fields -->
                         <div class="form-group">
                             <label for="shippingName">Name:</label>
@@ -64,7 +63,8 @@
                             <textarea class="form-control" id="billing_address" name="billing_address" rows="3" >${user.billing_address}</textarea>
                         </div>
                         <!-- Add more fields as needed -->
-                        <button type="submit" class="btn btn-primary">Save Billing Address</button>
+                       <button type="submit" class="custom-submit-btn">Save Address</button>
+
                     </form>
                 </div>
             </div>
@@ -72,12 +72,12 @@
         <div class="col-md-4">
             <div class="card custom-card">
                 <div class="card-header">
-                    <h3 class="card-title">Billing Address</h3>
+                    <h3 class="card-title">Shipping Address</h3>
                 </div>
                 <div class="card-body">
                     <form action="myaccount" method="post" class="custom-form">
                      <input type="hidden" name="requestType" value="up_shipping_addr"/>
-                      <input type="hidden" name="id" value="${user.id}"/>
+                      <input type="hidden" name="user_id" value="${user.user_id}"/>
                         <!-- Address Fields -->
                         <div class="form-group">
                             <label for="billingName">Name:</label>
@@ -92,5 +92,32 @@
                             <label for="billingAddress">Address:</label>
                             <textarea class="form-control" id="shipping_address" name="shipping_address" rows="3" >${user.shipping_address}</textarea>
                         </div>
-                          <button type="submit" class="btn btn-primary">Save Shipping Address</button>
+                              <button type="submit" class="custom-submit-btn">Save Address</button>
                     </form>
+
+                        
+                        
+                        <script>
+    function toggleNav() {
+        var sidenav = document.getElementById("mySidenav");
+        if (sidenav.style.width === "250px") {
+            sidenav.style.width = "0";
+            document.body.removeEventListener("click", closeNavOutside);
+        } else {
+            sidenav.style.width = "250px";
+            document.body.addEventListener("click", closeNavOutside);
+        }
+    }
+
+    function closeNavOutside(event) {
+        var sidenav = document.getElementById("mySidenav");
+        var openbtn = document.querySelector(".openbtn");
+        if (!sidenav.contains(event.target) && event.target !== openbtn) {
+            sidenav.style.width = "0";
+            document.body.removeEventListener("click", closeNavOutside);
+        }
+    }
+</script>
+
+</body>
+</html>
