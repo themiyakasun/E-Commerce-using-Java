@@ -52,6 +52,18 @@
         <servlet-name>RemoveCategiryServlet</servlet-name>
         <servlet-class>myPackage.admin.RemoveCategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProdcutsServlet</servlet-name>
+        <servlet-class>myPackage.admin.ProductsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveProductServlet</servlet-name>
+        <servlet-class>myPackage.admin.RemoveProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetProductServlet</servlet-name>
+        <servlet-class>myPackage.admin.GetProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/CartServlet</url-pattern>
@@ -103,6 +115,18 @@
     <servlet-mapping>
         <servlet-name>RemoveCategiryServlet</servlet-name>
         <url-pattern>/RemoveCategiryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProdcutsServlet</servlet-name>
+        <url-pattern>/ProdcutsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveProductServlet</servlet-name>
+        <url-pattern>/RemoveProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetProductServlet</servlet-name>
+        <url-pattern>/GetProductServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

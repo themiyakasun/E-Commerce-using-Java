@@ -15,13 +15,15 @@ function addCategory(){
 
 $(document).ready(function() {
     function fetchCategories() {
-    $.ajax({
+        $.ajax({
         url: contextPath + '/CategoriesServlet',
         type: 'GET',
         dataType: 'json',
         success: function(categories) {
             var tbody = $('#categoriesTableBody');
+            var dropdown = $('#pro_cat');
             tbody.empty(); 
+            dropdown.empty();
             
             if (categories.length === 0) {
                 tbody.append('<tr><td colspan="5" class="text-center">No categories available</td></tr>');
@@ -39,15 +41,74 @@ $(document).ready(function() {
                         '</div>'
                     ));
                     tbody.append(row);
+                    
+                    dropdown.append($('<option>').text(category.catName).val(category.catId));
                 });
             }
         },
         error: function() {
             alert('Error fetching categories.');
         }
+        });
+    }
+    
+    function fetchProducts() {
+    $.ajax({
+        url: contextPath + '/ProductsServlet',
+        type: 'GET',
+        dataType: 'json',
+        success: function(products) {
+            populateProductGrid(products);
+        },
+        error: function() {
+            alert('Error fetching products.');
+        }
     });
 }
+
+    function populateProductGrid(products) {
+        var productGrid = $('#productGrid');
+        productGrid.empty();
+
+        if (products.length === 0) {
+            productGrid.append('<div class="col"><p>No products available</p></div>');
+        } else {
+            $.each(products, function(index, product) {
+                var card = $('<div>').addClass('col');
+                var cardBody = $('<div>').addClass('card-body text-center');
+
+                var img = $('<img>').addClass('img-fluid mb-3').attr('src', contextPath + '/uploads/' + product.proImg).attr('alt', '');
+                var title = $('<h6>').addClass('product-title').text(product.proName);
+                var price = $('<p>').addClass('product-price fs-5 mb-1').html('<span>$' + product.proPrice + '</span>');
+                var rating = $('<div>').addClass('rating mb-0');
+
+                for (var i = 0; i < Math.round(product.proReviews); i++) {
+                    rating.append('<i class="bi bi-star-fill text-warning"></i>');
+                }
+                var reviews = $('<small>').text(product.proReviews + ' Reviews');
+
+                var actions = $('<div>').addClass('actions d-flex align-items-center justify-content-center gap-2 mt-3');
+                var editButton = $('<button>').addClass('btn btn-sm btn-outline-primary').attr('onclick', 'editProduct('+ product.proId +')').html('<i class="bi bi-pencil-fill"></i> Edit');
+                var deleteButton = $('<button>').addClass('btn btn-sm btn-outline-danger').attr('onclick', 'deleteProduct('+ product.proId +')').html('<i class="bi bi-trash-fill"></i> Delete');
+
+                actions.append(editButton);
+                actions.append(deleteButton);
+
+                cardBody.append(img);
+                cardBody.append(title);
+                cardBody.append(price);
+                cardBody.append(rating);
+                cardBody.append(reviews);
+                cardBody.append(actions);
+
+                card.append(cardBody);
+                productGrid.append(card);
+            });
+        }
+    }
+    
     fetchCategories();
+    fetchProducts();
 });
 
 var editMode = false;
@@ -113,4 +174,71 @@ function deleteCategory(catId){
         }
     })
 }
+
+function addProduct(){
+    event.preventDefault();
+    var formData = new FormData($('#addProductForm')[0]);
+    
+    var fileInput = $('#pro_img')[0];
+    var fileName = "";
+    if (fileInput.files.length > 0) {
+        fileName = fileInput.files[0].name;
+    } else {
+        console.log("No file selected");
+    }
+
+    formData.append('pro_img', fileName);
+
+    $.ajax({
+        type: "POST",
+        url: contextPath + "/AddProductServlet",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#loadingIndicator").hide();
+            alert(response);
+        }
+    });
+    return false;
+}
+
+function deleteProduct(proId){
+    $.ajax({
+        url: contextPath + '/RemoveProductServlet',
+        type: 'POST',
+        data: {proId: proId},
+        success: function(response){
+            alert(response);
+            location.reload();
+            
+        },
+        error: function(){
+            alert("Error Deleting category");
+        }
+    });
+}
+
+function editProducts(proId) {
+    $.ajax({
+        url: contextPath + '/GetProductServlet',
+        type: 'GET',
+        data: { proId: proId },
+        dataType: 'json',
+        success: function(category) {
+            console.log(category);
+            var catId = category[0].catId;
+            var catName = category[0].catName;
+            var catSlug = category[0].catSlug;
+            $('#catId').val(catId);
+            $('#catName').val(catName);
+            $('#catSlug').val(catSlug);
+            switchMode(catId);
+        },
+        error: function() {
+            alert('Error fetching products data.');
+        }
+    });
+}
+
 
