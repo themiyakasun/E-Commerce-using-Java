@@ -21,6 +21,15 @@
         <main class="page-content" id="page-content">
         </main>
         
+
         <script src="../js/admin.js"></script>
+        <script>
+            var contextPath = "${pageContext.request.contextPath}";
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                loadContent('../includes/admin/categories.jsp', this);
+            });
+        </script>
     </body>
 </html>

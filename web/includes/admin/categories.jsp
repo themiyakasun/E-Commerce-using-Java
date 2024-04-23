@@ -1,4 +1,5 @@
-              <div class="card">
+<%@taglib prefix="b" uri="/WEB-INF/tlds/buttonTags" %>             
+            <div class="card">
                 <div class="card-header py-3">
                   <h6 class="mb-0">Add Product Category</h6>
                 </div>
@@ -7,27 +8,19 @@
                      <div class="col-12 col-lg-4 d-flex">
                        <div class="card border shadow-none w-100">
                          <div class="card-body">
-                           <form class="row g-3">
+                           <form id="categoryForm" class="row g-3">
                              <div class="col-12">
                                <label class="form-label">Name</label>
-                               <input type="text" class="form-control" placeholder="Category name">
+                               <input type="text" class="form-control" placeholder="Category name" name="cat_name" id="catName">
                              </div>
                              <div class="col-12">
                               <label class="form-label">Slug</label>
-                              <input type="text" class="form-control" placeholder="Slug name">
-                            </div>
-                            <div class="col-12">
-                              <label class="form-label">Parent</label>
-                              <select class="form-select">
-                                <option>Fashion</option>
-                                <option>Electronics</option>
-                                <option>Furniture</option>
-                                <option>Sports</option>
-                              </select> 
+                              <input type="text" class="form-control" placeholder="Slug name" name="cat_slug" id="catSlug">
+                              <input type="hidden" name="catId" id="catId">
                             </div>
                             <div class="col-12">
                               <div class="d-grid">
-                                <button class="btn btn-primary">Add Category</button>
+                                    <b:Button text="Add Category" rounded="false" outlined="false" onclick="addCategory()" id="catBtn"/>
                               </div>
                             </div>
                            </form>
@@ -48,20 +41,7 @@
                                    <th>Action</th>
                                  </tr>
                                </thead>
-                               <tbody>
-                                 <tr>
-                                   <td>#85462</td>
-                                   <td>Fashion</td>
-                                   <td>/fashion</td>
-                                   <td>54</td>
-                                   <td>
-                                    <div class="d-flex align-items-center gap-3 fs-6">
-                                      <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                                      <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                      <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                                    </div>
-                                   </td>
-                                 </tr>
+                               <tbody id="categoriesTableBody">
                                </tbody>
                              </table>
                           </div>
