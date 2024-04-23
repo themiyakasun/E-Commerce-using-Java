@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li>  
-                    <a onclick="loadContent('../includes/admin/addNewProduct.jsp', this)" class="process-element add-new-product" id="side-link ">
+                    <a href="addNewProduct.jsp" class="process-element add-new-product" id="side-link ">
                         <div class="parent-icon"><i class="bi bi-bag-check"></i>
                         </div>
                         <div class="menu-title">Add New Product</div>

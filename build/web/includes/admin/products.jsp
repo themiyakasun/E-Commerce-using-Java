@@ -18,7 +18,7 @@
                  </div>
                  <div class="card-body">
                    <div class="product-grid">
-                     <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3">
+                     <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3" id="productGrid">
                        <div class="col">
                         <div class="card border shadow-none mb-0">
                           <div class="card-body text-center">
