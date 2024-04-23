@@ -6,7 +6,7 @@ import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 public class Button extends SimpleTagSupport {
-
+    private String id;
     private String text;
     private boolean outlined;
     private boolean rounded;
@@ -39,12 +39,16 @@ public class Button extends SimpleTagSupport {
                 buttonStyle += " border-radius: 8px;";
             }
 
-            out.println(String.format("<button class=\"button\" style=\"" + buttonStyle + "\" onclick="+ onclick +">%s</button>", text));
+            out.println(String.format("<button class=\"button\" id=\""+ id +"\" style=\"" + buttonStyle + "\" onclick="+ onclick +">%s</button>", text));
 
 
         } catch (java.io.IOException ex) {
             throw new JspException("Error in Button tag", ex);
         }
+    }
+    
+    public void setId(String id){
+        this.id = id;
     }
 
     public void setText(String text) {

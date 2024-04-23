@@ -9,14 +9,14 @@
 
               <ul class="metismenu" id="menu">
                 <li>  
-                    <a onclick="loadContent('../includes/admin/products.jsp', this)" class="process-element" id="side-link">
+                    <a href="products.jsp" class="process-element" id="side-link">
                         <div class="parent-icon"><i class="bi bi-bag-check"></i>
                         </div>
                         <div class="menu-title">Product List</div>
                     </a>
                 </li>
                 <li>  
-                    <a onclick="loadContent('../includes/admin/categories.jsp', this)" class="process-element" id="side-link">
+                    <a href="categories.jsp" class="process-element" id="side-link">
                         <div class="parent-icon"><i class="bi bi-bag-check"></i>
                         </div>
                         <div class="menu-title">Categories</div>
