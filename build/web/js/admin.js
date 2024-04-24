@@ -23,7 +23,6 @@ $(document).ready(function() {
             var tbody = $('#categoriesTableBody');
             var dropdown = $('#pro_cat');
             tbody.empty(); 
-            dropdown.empty();
             
             if (categories.length === 0) {
                 tbody.append('<tr><td colspan="5" class="text-center">No categories available</td></tr>');
@@ -219,26 +218,25 @@ function deleteProduct(proId){
     });
 }
 
-function editProducts(proId) {
-    $.ajax({
-        url: contextPath + '/GetProductServlet',
-        type: 'GET',
-        data: { proId: proId },
-        dataType: 'json',
-        success: function(category) {
-            console.log(category);
-            var catId = category[0].catId;
-            var catName = category[0].catName;
-            var catSlug = category[0].catSlug;
-            $('#catId').val(catId);
-            $('#catName').val(catName);
-            $('#catSlug').val(catSlug);
-            switchMode(catId);
-        },
-        error: function() {
-            alert('Error fetching products data.');
-        }
-    });
+function editProduct(proId) {
+    window.location.href = contextPath + '/admin/editProduct.jsp?proId=' + proId;
 }
 
+function changeImage(){
+    event.preventDefault();
+    var imgInput = $('#image_input');
+    var imageBox = $('#image_box');
+    imageBox.addClass('hidden');
+    imgInput.removeClass('hidden');
+    imgInput.addClass('active');
+}
 
+function cancelImageChange(){
+    event.preventDefault();
+    var imgInput = $('#image_input');
+    var imageBox = $('#image_box');
+    imgInput.removeClass("active");
+    imgInput.addClass("hidden");
+    imageBox.removeClass("hidden");
+    imageBox.addClass("active");    
+}

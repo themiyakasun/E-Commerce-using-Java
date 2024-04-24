@@ -336,3 +336,11 @@ body {
 .wrapper.toggled .page-content {
 	margin-left: 70px
 }
+
+.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
