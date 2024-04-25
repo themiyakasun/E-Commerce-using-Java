@@ -59,6 +59,9 @@
                            e.printStackTrace();
                         }
                     %> 
+                    
+                    <!--Show more btn-->
+                    <button class="sm-btn">Show More</button>
                 </div>
             </div>
         </section>
