@@ -1,3 +1,8 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="b" uri="/WEB-INF/tlds/buttonTags" %>
 <!DOCTYPE html>
@@ -33,253 +38,27 @@
         <section>
             <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <div class="col-md-3">
-                        <a href="#" class="pro-card-wrapper">
-                    <div class="pro-card">
-                        <div class="pro-card-img">
-                            <div class="pro-add-to-cart">
-                                <form id="addToCartForm" method="POST">
-                                    <input type="hidden" name="pro_id" value="1" id="pro_id" />
-                                    <input type="hidden" name="quantity" value="1" id="quantity" />
-                                    <input type="hidden" name="sub_total" value="199.10" id="sub_total" />
-                                    <b:Button text="Add To Cart" rounded="false" outlined="false" onclick="addToCart()"/>
-                                </form>
-                            </div>
-                            <div class="new">new</div>
-                            <div class="discount">-50%</div>
-                            <button class="add-to-wishlist"><img src="assets/icons/wishlist.png" /></button>
-                            <img src="assets/Elements/product1.png" />
-                        </div>
-                        <div class="pro-card-details">
-                            <div class="rating">
-                                <img src="assets/icons/star.png" />
-                            </div>
-                            <h2>Loveseat Sofa</h2>
-                            <div class="prices">
-                                <span class="discount-price">$199.00</span>
-                                <span class="price"><s>$400.00</s></span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                    </div>
-                                
-                                <div class="col-md-3">
-                        <a href="#" class="pro-card-wrapper">
-                    <div class="pro-card">
-                        <div class="pro-card-img">
-                            <div class="pro-add-to-cart">
-                                <form id="addToCartForm" method="POST">
-                                    <input type="hidden" name="pro_id" value="1" id="pro_id" />
-                                    <input type="hidden" name="quantity" value="1" id="quantity" />
-                                    <input type="hidden" name="sub_total" value="199.10" id="sub_total" />
-                                    <b:Button text="Add To Cart" rounded="false" outlined="false" onclick="addToCart()"/>
-                                </form>
-                            </div>
-                            <div class="new">new</div>
-                            <div class="discount">-50%</div>
-                            <button class="add-to-wishlist"><img src="assets/icons/wishlist.png" /></button>
-                            <img src="assets/Elements/product2.png" />
-                        </div>
-                        <div class="pro-card-details">
-                            <div class="rating">
-                                <img src="assets/icons/star.png" />
-                            </div>
-                            <h2>Loveseat Sofa</h2>
-                            <div class="prices">
-                                <span class="discount-price">$199.00</span>
-                                <span class="price"><s>$400.00</s></span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                    </div>
-                                
-                                <div class="col-md-3">
-                        <a href="#" class="pro-card-wrapper">
-                    <div class="pro-card">
-                        <div class="pro-card-img">
-                            <div class="pro-add-to-cart">
-                                <form id="addToCartForm" method="POST">
-                                    <input type="hidden" name="pro_id" value="1" id="pro_id" />
-                                    <input type="hidden" name="quantity" value="1" id="quantity" />
-                                    <input type="hidden" name="sub_total" value="199.10" id="sub_total" />
-                                    <b:Button text="Add To Cart" rounded="false" outlined="false" onclick="addToCart()"/>
-                                </form>
-                            </div>
-                            <div class="new">new</div>
-                            <div class="discount">-50%</div>
-                            <button class="add-to-wishlist"><img src="assets/icons/wishlist.png" /></button>
-                            <img src="assets/Elements/product3.png" />
-                        </div>
-                        <div class="pro-card-details">
-                            <div class="rating">
-                                <img src="assets/icons/star.png" />
-                            </div>
-                            <h2>Loveseat Sofa</h2>
-                            <div class="prices">
-                                <span class="discount-price">$199.00</span>
-                                <span class="price"><s>$400.00</s></span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                    </div>
-                                
-                                <div class="col-md-3">
-                        <a href="#" class="pro-card-wrapper">
-                    <div class="pro-card">
-                        <div class="pro-card-img">
-                            <div class="pro-add-to-cart">
-                                <form id="addToCartForm" method="POST">
-                                    <input type="hidden" name="pro_id" value="1" id="pro_id" />
-                                    <input type="hidden" name="quantity" value="1" id="quantity" />
-                                    <input type="hidden" name="sub_total" value="199.10" id="sub_total" />
-                                    <b:Button text="Add To Cart" rounded="false" outlined="false" onclick="addToCart()"/>
-                                </form>
-                            </div>
-                            <div class="new">new</div>
-                            <div class="discount">-50%</div>
-                            <button class="add-to-wishlist"><img src="assets/icons/wishlist.png" /></button>
-                            <img src="assets/Elements/product4.png" />
-                        </div>
-                        <div class="pro-card-details">
-                            <div class="rating">
-                                <img src="assets/icons/star.png" />
-                            </div>
-                            <h2>Loveseat Sofa</h2>
-                            <div class="prices">
-                                <span class="discount-price">$199.00</span>
-                                <span class="price"><s>$400.00</s></span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                    </div>
-                                
-                                <div class="col-md-3">
-                        <a href="#" class="pro-card-wrapper">
-                    <div class="pro-card">
-                        <div class="pro-card-img">
-                            <div class="pro-add-to-cart">
-                                <form id="addToCartForm" method="POST">
-                                    <input type="hidden" name="pro_id" value="1" id="pro_id" />
-                                    <input type="hidden" name="quantity" value="1" id="quantity" />
-                                    <input type="hidden" name="sub_total" value="199.10" id="sub_total" />
-                                    <b:Button text="Add To Cart" rounded="false" outlined="false" onclick="addToCart()"/>
-                                </form>
-                            </div>
-                            <div class="new">new</div>
-                            <div class="discount">-50%</div>
-                            <button class="add-to-wishlist"><img src="assets/icons/wishlist.png" /></button>
-                            <img src="assets/Elements/product1.png" />
-                        </div>
-                        <div class="pro-card-details">
-                            <div class="rating">
-                                <img src="assets/icons/star.png" />
-                            </div>
-                            <h2>Loveseat Sofa</h2>
-                            <div class="prices">
-                                <span class="discount-price">$199.00</span>
-                                <span class="price"><s>$400.00</s></span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                    </div>
-                                
-                                <div class="col-md-3">
-                        <a href="#" class="pro-card-wrapper">
-                    <div class="pro-card">
-                        <div class="pro-card-img">
-                            <div class="pro-add-to-cart">
-                                <form id="addToCartForm" method="POST">
-                                    <input type="hidden" name="pro_id" value="1" id="pro_id" />
-                                    <input type="hidden" name="quantity" value="1" id="quantity" />
-                                    <input type="hidden" name="sub_total" value="199.10" id="sub_total" />
-                                    <b:Button text="Add To Cart" rounded="false" outlined="false" onclick="addToCart()"/>
-                                </form>
-                            </div>
-                            <div class="new">new</div>
-                            <div class="discount">-50%</div>
-                            <button class="add-to-wishlist"><img src="assets/icons/wishlist.png" /></button>
-                            <img src="assets/Elements/product2.png" />
-                        </div>
-                        <div class="pro-card-details">
-                            <div class="rating">
-                                <img src="assets/icons/star.png" />
-                            </div>
-                            <h2>Loveseat Sofa</h2>
-                            <div class="prices">
-                                <span class="discount-price">$199.00</span>
-                                <span class="price"><s>$400.00</s></span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                    </div>
-                                
-                                <div class="col-md-3">
-                        <a href="#" class="pro-card-wrapper">
-                    <div class="pro-card">
-                        <div class="pro-card-img">
-                            <div class="pro-add-to-cart">
-                                <form id="addToCartForm" method="POST">
-                                    <input type="hidden" name="pro_id" value="1" id="pro_id" />
-                                    <input type="hidden" name="quantity" value="1" id="quantity" />
-                                    <input type="hidden" name="sub_total" value="199.10" id="sub_total" />
-                                    <b:Button text="Add To Cart" rounded="false" outlined="false" onclick="addToCart()"/>
-                                </form>
-                            </div>
-                            <div class="new">new</div>
-                            <div class="discount">-50%</div>
-                            <button class="add-to-wishlist"><img src="assets/icons/wishlist.png" /></button>
-                            <img src="assets/Elements/product3.png" />
-                        </div>
-                        <div class="pro-card-details">
-                            <div class="rating">
-                                <img src="assets/icons/star.png" />
-                            </div>
-                            <h2>Loveseat Sofa</h2>
-                            <div class="prices">
-                                <span class="discount-price">$199.00</span>
-                                <span class="price"><s>$400.00</s></span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                    </div>
-                                
-                                <div class="col-md-3">
-                        <a href="#" class="pro-card-wrapper">
-                    <div class="pro-card">
-                        <div class="pro-card-img">
-                            <div class="pro-add-to-cart">
-                                <form id="addToCartForm" method="POST">
-                                    <input type="hidden" name="pro_id" value="1" id="pro_id" />
-                                    <input type="hidden" name="quantity" value="1" id="quantity" />
-                                    <input type="hidden" name="sub_total" value="199.10" id="sub_total" />
-                                    <b:Button text="Add To Cart" rounded="false" outlined="false" onclick="addToCart()"/>
-                                </form>
-                            </div>
-                            <div class="new">new</div>
-                            <div class="discount">-50%</div>
-                            <button class="add-to-wishlist"><img src="assets/icons/wishlist.png" /></button>
-                            <img src="assets/Elements/product4.png" />
-                        </div>
-                        <div class="pro-card-details">
-                            <div class="rating">
-                                <img src="assets/icons/star.png" />
-                            </div>
-                            <h2>Loveseat Sofa</h2>
-                            <div class="prices">
-                                <span class="discount-price">$199.00</span>
-                                <span class="price"><s>$400.00</s></span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                    </div>
+                    <% 
+                       try {
+                           Class.forName("com.mysql.cj.jdbc.Driver");
+                          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/3legant?useSSL=false", "root", "");
+                          Statement st = con.createStatement();
+            
+                          String str = "SELECT * FROM products";
+                          ResultSet rs = st.executeQuery(str);
+            
+                          while(rs.next()) {     
+                    %> 
+                    <% 
+                        }
+                        rs.close();
+                        st.close();
+                        con.close();
+            
+                        } catch(SQLException e) {
+                           e.printStackTrace();
+                        }
+                    %> 
                 </div>
             </div>
         </section>
