@@ -30,7 +30,7 @@
             </div>
         </div>
         
-        
+        <%@include file="includes/newsletter.jsp" %>
         
         <script>
             var contextPath = "${pageContext.request.contextPath}";
