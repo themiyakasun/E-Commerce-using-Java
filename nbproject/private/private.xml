@@ -7,10 +7,7 @@
             <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/web/includes/admin/editProduct.jsp</file>
             <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/web/admin/editProduct.jsp</file>
             <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/web/js/admin.js</file>
-            <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/web/includes/admin/addNewProduct.jsp</file>
-            <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/src/java/myPackage/admin/GetCategoryServlet.java</file>
-            <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/web/css/admin.css</file>
-            <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/web/includes/admin/products.jsp</file>
+            <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/src/java/myPackage/admin/UpdateCategoryServlet.java</file>
         </group>
     </open-files>
 </project-private>

@@ -41,6 +41,7 @@
                     
                     var imageUrl = '${pageContext.request.contextPath}/uploads/' + proImg;
                     
+                    $('#pro_id').val(proId);
                     $('#pro_name').val(proName);
                     $('#pro_price').val(proPrice);
                     $('#pro_img').attr('src', imageUrl);

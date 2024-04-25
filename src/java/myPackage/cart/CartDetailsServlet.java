@@ -34,18 +34,15 @@ public class CartDetailsServlet extends HttpServlet {
         int userId = getUserIdFromSession();
         
         try (Connection conn = DbUtil.getConnection()) {
-            conn.setAutoCommit(false); // Start transaction
+            conn.setAutoCommit(false); 
             
-            // Insert into Orders table
             int orderId = insertOrder(conn, userId, totalFloat, shippingMethod);
             
             if (orderId != -1) {
-                // Insert into Order_Items table
                 insertOrderItems(conn, orderId, cartItemsJson);
                 
-                conn.commit(); // Commit transaction
-                
-                // Response
+                conn.commit(); 
+
                 response.setContentType("text/plain");
                 PrintWriter out = response.getWriter();
                 out.print("Success: Order placed successfully!");

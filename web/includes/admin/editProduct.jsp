@@ -7,7 +7,7 @@
                       </div>
                     <div class="card-body">
                       <div class="border p-3 rounded">
-                      <form id="addProductForm" class="row g-3" enctype="multipart/form-data">
+                      <form id="editProductForm" class="row g-3" enctype="multipart/form-data">
                         <div class="col-12">
                           <label class="form-label">Product title</label>
                           <input type="text" class="form-control" placeholder="Product title" name="pro_name" id="pro_name">
@@ -21,7 +21,7 @@
                                 <div>
                                     <label class="form-label">Image</label>
                                     <img id="pro_img"/>
-                                    <input type="hidden" name="pro_img" id="img_input"/>
+                                    <input type="hidden" id="img_input"/>
                                 </div>
                                 <div>
                                     <b:Button text="Change Image" outlined="false" rounded="false" id="change_image" onclick="changeImage()" /> 
@@ -30,7 +30,7 @@
                         </div>
                         <div class="col-12 hidden" id="image_input">
                             <label class="form-label">Images</label>
-                            <input class="form-control" type="file" id="pro_img" name="pro_img">
+                            <input class="form-control" type="file" id="pro_img" >
                             <div class="w-50 mt-2">
                                 <b:Button text="Cancel" outlined="false" rounded="false" id="cancel" onclick="cancelImageChange()" />
                             </div>
@@ -59,7 +59,7 @@
                             <input type="hidden" name="pro_id" id="pro_id" />
                         </div>
                         <div class="col-12">
-                           <b:Button text="Edit Product" rounded="false" outlined="false" onclick="editProduct()" id="proBtn"/>
+                           <b:Button text="Edit Product" rounded="false" outlined="false" onclick="updateProduct()" id="proBtn"/>
                         </div>
                       </form>
                       </div>
