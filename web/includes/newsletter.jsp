@@ -1,5 +1,5 @@
 <!--News Letter-->
-        <div class="container">
+        <div class="container news">
             <img id="hero-shop" src="assets/Elements/newsletter.png">
             <div class="hero-content">
                 <h2>Join Our Newsletter</h2>
