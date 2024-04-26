@@ -159,10 +159,4 @@ public class Account {
         return shipping_name;
     }
 
-
-
-
-    
-
-
 }

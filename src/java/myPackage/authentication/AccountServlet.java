@@ -2,6 +2,7 @@ package myPackage.authentication;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,6 +59,10 @@ public class AccountServlet extends HttpServlet {
                 else if(action.equals("address")){
                     getAddress(request, response);           
                 }                 
+                
+                else if(action.equals("my_orders")){
+                    listOrder(request, response);           
+                }                 
             }          
         } catch (SQLException ex) {
             Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,38 +86,14 @@ public class AccountServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("includes/AccountProfile/accountAddressForm.jsp");
         dispatcher.forward(request, response);
     }
-    
+    private void listOrder(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, IOException, ServletException {
+    List<Order> orders = accountDao.selectAllOrders(demoUserId);
+    request.setAttribute("orders", orders); // Changed attribute name to "orders"
+    RequestDispatcher dispatcher = request.getRequestDispatcher("includes/AccountProfile/accountOrderList.jsp");
+    dispatcher.forward(request, response);
+}
 
-    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-    throws SQLException, ServletException, IOException {
-        int user_id = Integer.parseInt(request.getParameter("user_id"));
-        Account existingAccount = accountDao.selectUser(user_id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
-        request.setAttribute("account", existingAccount);
-        dispatcher.forward(request, response);
-    }
-
-//    private void insertUser(HttpServletRequest request, HttpServletResponse response)
-//    throws SQLException, IOException {
-//        String first_name = request.getParameter("firsr_name");
-//        String last_name =  request.getParameter("last_name");
-//        String display_name= request.getParameter("display_name");
-//        String email = request.getParameter("email");
-//        String password = request.getParameter("password");
-//        String billing_phone = request.getParameter("billing_phone");
-//        String billing_address = request.getParameter("billing_address");
-//        String shipping_phone=  request.getParameter("shipping_phone");
-//        String shipping_address = request.getParameter("shipping_address");
-//        Account newAccount = new Account(first_name,last_name,display_name, email,password,billing_phone,billing_address,shipping_phone,shipping_address);
-//        accountDao.insertUser(newAccount);
-//        response.sendRedirect("list");
-//    }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException {
