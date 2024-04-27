@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/src/java/myPackage/cart/RemoveCartItemServlet.java</file>
+            <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/src/java/myPackage/cart/OrderCompleteServlet.java</file>
+            <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/src/java/myPackage/cart/CartDetailsServlet.java</file>
+            <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/web/js/index.js</file>
+            <file>file:/D:/Uni/Year%202/Sem%201/DEA/Assignment/E-Commerce-using-Java/src/java/myPackage/cart/CheckoutDetailsServlet.java</file>
+        </group>
     </open-files>
 </project-private>
