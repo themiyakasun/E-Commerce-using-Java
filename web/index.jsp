@@ -70,6 +70,7 @@
         </div>
                                 
         <%@include file="includes/newsletter.jsp" %>
+        <%@include file="includes/newsfeed.jsp" %>
         <%@include file="includes/footer.jsp" %>
         
         <script>
