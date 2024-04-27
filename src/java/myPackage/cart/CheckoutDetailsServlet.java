@@ -37,6 +37,7 @@ public class CheckoutDetailsServlet extends HttpServlet {
             updateUser(conn, firstName, lastName, email, phoneNo, userId);
             updateAddress(conn, street, city, state, postalCode, country, userId);
             updateOrder(conn, paymentMethod, orderId);
+            deleteCartItems(conn, userId);
             
             response.setContentType("text/plain");
             PrintWriter out = response.getWriter();
@@ -95,6 +96,14 @@ public class CheckoutDetailsServlet extends HttpServlet {
             } else {
                 System.out.println("No user found with ID: " + orderId);
             }
+        }
+    }
+    
+    private void deleteCartItems(Connection conn, int userId) throws SQLException {
+        String query = "DELETE FROM cart WHERE user_id = ?";      
+        try(PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1, userId);
+            stmt.executeUpdate();
         }
     }
     

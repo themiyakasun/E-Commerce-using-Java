@@ -34,15 +34,24 @@ public class CartDetailsServlet extends HttpServlet {
         int userId = getUserIdFromSession();
         
         try (Connection conn = DbUtil.getConnection()) {
+<<<<<<< HEAD
+            conn.setAutoCommit(false);
+=======
             conn.setAutoCommit(false); 
+>>>>>>> master
             
             int orderId = insertOrder(conn, userId, totalFloat, shippingMethod);
             
             if (orderId != -1) {
+<<<<<<< HEAD
+                insertOrderItems(conn, orderId, cartItemsJson);               
+                conn.commit();
+=======
                 insertOrderItems(conn, orderId, cartItemsJson);
                 
                 conn.commit(); 
 
+>>>>>>> master
                 response.setContentType("text/plain");
                 PrintWriter out = response.getWriter();
                 out.print("Success: Order placed successfully!");
@@ -50,7 +59,6 @@ public class CartDetailsServlet extends HttpServlet {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to insert order.");
             }
         }catch(SQLException e){
-            e.printStackTrace();
             e.getMessage();
         }
     }
