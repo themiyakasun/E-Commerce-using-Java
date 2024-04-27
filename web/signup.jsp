@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sign up</title>
-        <link rel="stylesheet" href="signup.css">
+        <link rel="stylesheet" href="css/signup.css">
     </head>
     <body>
       <div class="container">
@@ -60,6 +60,6 @@
         </div>
     </table>
     </div>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
     </body>
 </html>
