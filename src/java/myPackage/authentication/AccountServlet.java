@@ -12,13 +12,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet("/myaccount")
 public class AccountServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final int demoUserId=1;
+    private static int currentUserId=1;
     private AccountDao accountDao;
+
 
     public AccountServlet() {
         this.accountDao = new AccountDao();
@@ -27,6 +29,19 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+    HttpSession session = request.getSession(false); // Pass false to avoid creating a new session if one doesn't exist
+    if(session != null){
+        Integer userId = (Integer) session.getAttribute("userId"); // Use Integer to handle possible null value
+        if(userId != null) {
+            currentUserId = userId;
+        } else {
+            currentUserId=1;
+            // Handle case where "userId" attribute is not found in session
+        }
+    } else {
+         currentUserId=1;
+        // Handle case where session is not available
+    }
     String requestType = request.getParameter("requestType");
     try {
         switch (requestType) {
@@ -49,6 +64,19 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+    HttpSession session = request.getSession(false); // Pass false to avoid creating a new session if one doesn't exist
+    if(session != null){
+        Integer userId = (Integer) session.getAttribute("userId"); // Use Integer to handle possible null value
+        if(userId != null) {
+            currentUserId = userId;
+        } else {
+            currentUserId=1;
+            // Handle case where "userId" attribute is not found in session
+        }
+    } else {
+         currentUserId=1;
+        // Handle case where session is not available
+    }
         String action = request.getParameter("action");
         System.out.println(action);
         try {
@@ -71,7 +99,7 @@ public class AccountServlet extends HttpServlet {
 
     private void getDetails(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException, ServletException {
-         Account user = accountDao.selectUser(demoUserId);
+         Account user = accountDao.selectUser(currentUserId);
         request.setAttribute("user", user);
         RequestDispatcher dispatcher = request.getRequestDispatcher("includes/AccountProfile/accountProfileForm.jsp");
         dispatcher.forward(request, response);
@@ -79,7 +107,7 @@ public class AccountServlet extends HttpServlet {
     
     private void getAddress(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException, ServletException {
-         Account user = accountDao.selectUser(demoUserId);
+         Account user = accountDao.selectUser(currentUserId);
         request.setAttribute("user", user);
         System.out.println(user.getBilling_name());
         System.out.println(user.getShipping_name());
@@ -88,7 +116,7 @@ public class AccountServlet extends HttpServlet {
     }
     private void listOrder(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException, ServletException {
-    List<Order> orders = accountDao.selectAllOrders(demoUserId);
+    List<Order> orders = accountDao.selectAllOrders(currentUserId);
     request.setAttribute("orders", orders); // Changed attribute name to "orders"
     RequestDispatcher dispatcher = request.getRequestDispatcher("includes/AccountProfile/accountOrderList.jsp");
     dispatcher.forward(request, response);
