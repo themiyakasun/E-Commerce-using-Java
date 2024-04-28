@@ -1,4 +1,4 @@
-package myPackage.shop;
+/*package myPackage.shop;
 
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -54,4 +54,4 @@ public class ShopServlet extends HttpServlet {
         
         return shops;
     }
-}
+}*/

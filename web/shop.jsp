@@ -65,19 +65,20 @@
                     </div>
   
                     <!--Show more btn-->
-                    <button class="sm-btn">Show More</button>
+                    <button class="shm-btn">Show More</button>
                 </div>
             </div>
         </section>
         
         <%@include file="includes/newsletter.jsp" %>
+        <%@include file="includes/footer.jsp" %>
         
-        <script>
+        <!--<script>
             var contextPath = "${pageContext.request.contextPath}";
-        </script>
+        </script>-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="js/index.js"></script>
-        <script src="../js/shop.js"></script>
+        <!--<script src="../js/shop.js"></script>-->
         
 
         

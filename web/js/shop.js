@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
     fetchProducts();
 });
 
@@ -84,3 +84,4 @@ function populateProductGrid(shops) {
         });
     }
 }
+*/
