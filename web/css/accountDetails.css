@@ -124,14 +124,14 @@
             background-color: #333333;
         }
 
-    @media only screen and (min-width: 768px) {
-         
-  
-    
-         .sidenav {
-                width: 250px;
-            }
-     }
+@media only screen and (min-width: 768px) {
+
+
+
+     .sidenav {
+            width: 250px;
+        }
+ }
 
      @media only screen and (max-width: 768px) {
     .card2 {

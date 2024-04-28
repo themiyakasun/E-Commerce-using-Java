@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package myPackage.authentication;
 
 import java.sql.Connection;
@@ -13,10 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author fernandomnr
- */
+
 public class AccountDao {
 
     private String jdbcURL = "jdbc:mysql://localhost:3306/3legant?useSSL=false";
@@ -39,10 +31,8 @@ public class AccountDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return connection;
@@ -50,7 +40,7 @@ public class AccountDao {
 
 //slect user by id
     public Account selectUser(int user_id) {
-        Account account = null;// Step 1: Establishing a Connection
+        Account account = null;
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
             preparedStatement.setInt(1, user_id);
@@ -99,7 +89,6 @@ public class AccountDao {
         }
         return rowUpdated;
     }
-
     public boolean updateBillingAdress(Account account) throws SQLException {
         boolean rowUpdated;
         System.out.println("hi this is Dao");

@@ -5,147 +5,18 @@
 
     <head
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/accountOrders.css"> 
         <title>User Management Application</title>
-        <style>
 
-
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-            }
-            table {
-                border-spacing: 1;
-                border-collapse: collapse;
-                background: white;
-                border-radius: 6px;
-                overflow: hidden;
-                max-width: 800px;
-                width: 70%;
-                margin-left:350px; 
-                margin-top: 100px;
-
-            }
-
-            * {
-                position: relative;
-            }
-
-            td, th {
-                padding-left: 8px;
-            }
-
-            thead tr {
-                height: 60px;
-                background: black;
-                font-size: 16px;
-                color:white;
-            }
-
-            tbody tr {
-                height: 48px;
-                border-bottom: 1px solid #E3F1D5;
-            }
-
-            td, th {
-                text-align: left;
-            }
-
-            th.l, td.l {
-                text-align: right;
-            }
-
-            th.c, td.c {
-                text-align: center;
-            }
-
-            th.r, td.r {
-                text-align: center;
-            }
-
-            .sidenav {
-                height: 100%;
-                width:0px;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                left: 0;
-                background-color: #f8f9fa;
-                padding-top: 20px;
-                overflow-y: auto;
-                transition: 0.5s;
-            }
-
-            .profile {
-                margin-top:5px;
-                text-align: center;
-                margin-bottom: 20px;
-
-            }
-
-
-
-
-            .sidenav a {
-                padding: 10px 10px;
-                text-decoration: none;
-                font-size: 16px;
-                color: #555;
-                display: block;
-                transition: background-color 0.3s;
-                margin-bottom:5px;
-
-
-            }
-
-            .sidenav a.active {
-                background-color: black;
-                color: white;
-            }
-
-            .sidenav a:hover {
-                background-color: #ccc;
-                color: #333;
-            }
-
-
-
-            .sidenavimg{
-                margin-left:-100px;
-            }
-
-           @media only screen and (min-width: 768px) {
-
-
-
-               .sidenav {
-                   width: 250px;
-               }
-           }
-
-           @media only screen and (max-width: 768px) {
-               width: 0px;
-           }
-
-
-
-
-
-        </style>
     </head>
 
     <body>
-
-
         <span class="openbtn" onclick="toggleNav()">&#9776;</span>
-
-
         <div id="mySidenav" class="sidenav">
 
             <div class="profile">
                 <img src="includes/AccountProfile/logo1.png"  class="sidenavimg" >
             </div>
-
 
             <a href="#" class="active">Dashboard</a>
             <a href="myaccount?action=details">Account</a>
@@ -153,10 +24,6 @@
             <a href="#">Orders</a>
             <a href="#">Wishlist</a>
             <a href="#">Logout</a> </div>
-
-
-
-
         <table>
             <thead>
                 <tr>

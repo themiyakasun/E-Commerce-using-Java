@@ -129,7 +129,6 @@ public class AccountServlet extends HttpServlet {
         }
         System.out.println("hi this is servlet");
         Account account = new Account(user_id,first_name, last_name, display_name, email,new_password);
-        System.out.println("this is servlet and after making object");   
         accountDao.updateUser(account);
         response.sendRedirect("myaccount?action=details"); 
     }
