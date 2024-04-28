@@ -72,6 +72,18 @@
         <servlet-name>OrdersServelt</servlet-name>
         <servlet-class>myPackage.admin.OrdersServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SignupServlet</servlet-name>
+        <servlet-class>myPackage.authentication.SignupServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SigninServlet</servlet-name>
+        <servlet-class>myPackage.authentication.SigninServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SignoutServlet</servlet-name>
+        <servlet-class>myPackage.authentication.SignoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/CartServlet</url-pattern>
@@ -143,6 +155,18 @@
     <servlet-mapping>
         <servlet-name>OrdersServelt</servlet-name>
         <url-pattern>/OrdersServelt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignupServlet</servlet-name>
+        <url-pattern>/SignupServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SigninServlet</servlet-name>
+        <url-pattern>/SigninServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignoutServlet</servlet-name>
+        <url-pattern>/SignoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

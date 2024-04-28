@@ -25,12 +25,12 @@
         <div class="container">
             <div class="hero-wrapper">
                 <div class="hero-text">
-            <h1>More than just a game. It’s a lifestyle.</h1>
-            <p>Whether you’re just starting out, have played your whole life or you're a Tour pro, your swing is like a fingerprint.</p>
-            <a>
-                <b:Button text="Shopping Now" rounded="false" outlined="false"/>
-            </a>
-        </div>
+                    <h1>More than just a game. It’s a lifestyle.</h1>
+                    <p>Whether you’re just starting out, have played your whole life or you're a Tour pro, your swing is like a fingerprint.</p>
+                    <a>
+                        <b:Button text="Shopping Now" rounded="false" outlined="false"/>
+                    </a>
+                </div>
             </div>
         </div>
         </header>
