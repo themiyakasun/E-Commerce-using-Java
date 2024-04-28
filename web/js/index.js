@@ -44,13 +44,13 @@ function loadContent(page, clickedButton) {
             }
             
             if(clickedButton.classList.contains("checkout-btn")){
-                var checkoutBtn = document.getElementById("checkout-button");
-                checkoutBtn.classList.add("active");
-                var prevButton = checkoutBtn.previousElementSibling;
-                while (prevButton) {
-                    prevButton.classList.add("pass");
-                    prevButton = prevButton.previousElementSibling;
-                }
+                    var checkoutBtn = document.getElementById("checkout-button");
+                    checkoutBtn.classList.add("active");
+                    var prevButton = checkoutBtn.previousElementSibling;
+                    while (prevButton) {
+                        prevButton.classList.add("pass");
+                        prevButton = prevButton.previousElementSibling;
+                    }
             }
             
             if(clickedButton.classList.contains("place-order-btn")){
@@ -129,6 +129,11 @@ function updateCartWithShippingTotal(subTotal){
     $('.cart-sum-total .price').text('$' + subTotal.toFixed(2));
 }
 
+//function getStoredTotal() {
+//    return sessionStorage.getItem('cartTotal');
+//}
+
+
 window.getShipping = function(){
     var selectedValue = parseFloat($('input[name="shipping-method"]:checked').val());
     var totalString = $('.cart-sum-total .price').text();
@@ -171,6 +176,8 @@ function addToCart() {
     return false;
 }
 
+
+
 // Display Cart 
  $(document).ready(function() {
     function fetchCartItemsAndUpdateTotal() {
@@ -181,7 +188,6 @@ function addToCart() {
             success: function(data) {
                 var tbody = $('.cart-table tbody');
                 var sumSubtotal = 0; 
-                var cartItemQuantities = {};
                 $.each(data, function(index, item) {
                     var minusButton = $('<button>').addClass('minus-btn').attr({id:'minus-btn_' + item.cartId, 'data-cart-id': item.cartId}).append(
                         $('<img>').attr('src', 'assets/icons/Minus.png')
@@ -203,11 +209,11 @@ function addToCart() {
                         removeCartItem(item.cartId);
                     });
 
-                    var row = $('<tr>').addClass('cart-item').attr({id: 'cartItem_' + item.cartId});
+                    var row = $('<tr>').addClass('cart-item').attr({id: 'cartItem_' + item.cartId, 'data-pro-id': item.productId });
 
                     var productDetailsColumn = $('<td>').append(
                         $('<div>').addClass('cart-product-details').append(
-                            $('<img>').attr('src', 'assets/' + item.productImage).addClass('pro-img'),
+                            $('<img>').attr('src', contextPath + '/uploads/' + item.productImage).addClass('pro-img'),
                             $('<div>').addClass('pro-details').append(
                                 $('<h3>').text(item.productName),
                                 $('<span>').text('Color: Black'),
@@ -247,10 +253,11 @@ function addToCart() {
                     row.append(productDetailsColumn, quantityColumn, priceColumn, subtotalColumn);
                     tbody.append(row);
 
-                    cartItemQuantities[item.cartId] = item.quantity;
                 });
+                
                 $('.cart-sum-sub-total .price').text('$' + sumSubtotal.toFixed(2));
                 $('.cart-sum-total .price').text('$' + sumSubtotal.toFixed(2));
+                
             },
             error: function() {
                 alert('Error fetching cart items.');
@@ -258,10 +265,160 @@ function addToCart() {
         });
     }
     
+    
+    function fetchOrderSummary(){
+        $.ajax({
+            url: 'OrderSummaryServlet',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                var orderSummaryList = $('.order-summary-list');
+                var sumSubtotal = 0;
+                var shippingMethod = "";
+                var total = 0;
+
+                orderSummaryList.empty();
+
+                $.each(data, function(index, item) {
+                    var product = $('<div>').addClass('list-item').append( 
+                        $('<div>').addClass('product').append(
+                            $('<img>').addClass('pro-img').attr('src', contextPath + '/uploads/' + item.productImg),
+                            $('<div>').addClass('details').append(
+                                $('<h3>').text(item.productName),
+                                $('<span>').text('Quantity: ' + item.quantity)
+                            )
+                        ),
+                        $('<div>').addClass('price').css('display', 'none').text('$' + item.productPrice.toFixed(2)),
+                        $('<div>').addClass('sub-total').text('$' + (item.productPrice * item.quantity).toFixed(2)), 
+                        $('<input>').attr({
+                        type: 'hidden',
+                        class: 'order-id',
+                        id: 'order-id',
+                        value: item.orderId 
+                    })
+                    );
+
+                    orderSummaryList.append(product);
+
+                    sumSubtotal += item.productPrice * item.quantity;
+                    total = item.total;
+
+                    shippingMethod = item.shippingMethod;
+
+                });
+
+                // Add classes to shipping, subtotal, and total elements
+                orderSummaryList.append(
+                    $('<div>').addClass('shipping').append(
+                        $('<span>').addClass('text').text('Shipping'),
+                        $('<span>').addClass('value').text(shippingMethod)
+                    ),
+                    $('<div>').addClass('shipping').append(
+                        $('<span>').addClass('text').text('SubTotal'),
+                        $('<span>').addClass('value').text('$' + sumSubtotal.toFixed(2))
+                    ),
+                    $('<div>').addClass('total-cost').append(
+                        $('<span>').addClass('text').text('Total'),
+                        $('<span>').addClass('value').text('$' + total.toFixed(2))
+                    )
+                );
+            },
+            error: function() {
+                alert('Error fetching cart items.');
+            }
+    });
+    
+}
+    
+    function fetchContactInformation() {
+        $.ajax({
+            url: 'ContactInformation',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if (data.length > 0) {
+                    var contactInfo = data[0];
+
+                    $('#fname').val(contactInfo.firstName);
+                    $('#lname').val(contactInfo.lastName);
+                    $('#email').val(contactInfo.email); 
+                    $('#phone').val(contactInfo.phoneNo); 
+                }
+            },
+            error: function() {
+                alert('Error fetching contact information.');
+            }
+        });
+    }
+    
+    function fetchAddressInformation(){
+        $.ajax({
+            url: 'AddressInfoServlet',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){
+                if(data.length > 0){
+                    var addressInfo = data[0];
+                    
+                    $('#street').val(addressInfo.streetAddress);
+                    $('#city').val(addressInfo.city);
+                    $('#state').val(addressInfo.state);
+                    $('#postalCode').val(addressInfo.postalCode);
+                    $('#db-country').text(addressInfo.country);
+                }
+            },
+            error: function(){
+                alert('Error fetching contact information.');
+            }
+        });
+    }
+
+    function fetchOrderComplete() {
+    $.ajax({
+        url: 'OrderCompleteServlet',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            var orderCode = '';
+            var orderedDate = '';
+            var total;
+            var paymentMethod = '';
+
+            var orderedItems = $('.ordered-items');
+            orderedItems.empty();
+
+            $.each(data, function(index, item) {
+                var orderedItem = $('<div>').addClass('ordered-item').append(
+                    $('<span>').addClass('circle').text(item.quantity),
+                    $('<img>').attr('src', contextPath + '/uploads/' + item.productImg)
+                );
+                orderedItems.append(orderedItem);
+                
+                orderCode = item.orderCode;
+                orderedDate = item.orderedDate;
+                total = item.total;
+                paymentMethod = item.paymentMethod;
+            });
+            
+            $('.order-details .details li:nth-child(1)').text(orderCode);
+            $('.order-details .details li:nth-child(2)').text(orderedDate);
+            $('.order-details .details li:nth-child(3)').text('$' + total.toFixed(2));
+            $('.order-details .details li:nth-child(4)').text(paymentMethod);
+        },
+        error: function() {
+            alert('Error fetching order details.');
+        }
+    });
+}
+    
     fetchCartItemsAndUpdateTotal();
+    fetchOrderSummary();
+    fetchContactInformation();
+    fetchAddressInformation();
+    fetchOrderComplete();
+     
  });
- 
- 
+    
 //Remove Cart Item
 function removeCartItem(cartId) {
     $.ajax({
@@ -277,3 +434,96 @@ function removeCartItem(cartId) {
     });
 }
 
+//Send Cart Data
+function sendData() {
+    var total = $('.cart-sum-total .price').text().trim();
+    var total = total.replace('$', '');
+    var cartItems = [];
+    var shipping = parseInt($('input[name=shipping-method]:checked').val());
+    if(shipping === 15){
+        shippingMethod = 'Express Shipping';
+    }else {
+        shippingMethod = "Free Shiping";
+    }
+
+    $('.cart-item').each(function() {
+      var cartId = $(this).attr('id').split('_')[1];
+      var proId = $(this).data('pro-id');
+      var quantity = parseInt($('input[id^=quantity_]', this).val()); 
+
+      cartItems.push({
+        cartId: cartId,
+        productId: proId,
+        quantity: quantity
+      });
+    });
+    
+    console.log(JSON.stringify(cartItems));
+    $.ajax({
+        url: contextPath + '/CartDetailsServlet',
+        type: 'POST',
+        data: {
+            total_price: total,
+            cart_items: JSON.stringify(cartItems), 
+            shipping_method: shippingMethod
+        },
+        success: function(response) {
+            if (response.startsWith("Success")) {
+                window.location.href = 'checkout.jsp';
+            } else {
+                console.error("Error in processing order:", response);
+                alert("Error in processing order. Please try again later.");
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX Error:", textStatus, errorThrown);
+            alert("Error sending data. Please try again later.");
+        }
+    });
+}
+
+
+//Send CheckOut Data 
+function sendCheckoutData(){
+    var firstName = $('#fname').val();
+    var lastName = $('#lname').val();
+    var email = $('#email').val(); 
+    var phoneNo = $('#phone').val();
+    var street = $('#street').val();
+    var city = $('#city').val();
+    var state = $('#state').val();
+    var postalCode = $('#postalCode').val();
+    var country = $('#country').val();
+    var orderId = $('#order-id').val();
+    var paymentMethod = $('input[name=payment-method]:checked').val();
+    
+    $.ajax({
+        url: 'CheckoutDetailsServlet',
+        type: 'POST',
+        data: {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phoneNo: phoneNo,
+            street: street,
+            city: city,
+            state: state,
+            postalCode: postalCode,
+            country: country,
+            orderId: orderId,
+            paymentMethod: paymentMethod
+        },
+        success: function(response) {
+            if (response.startsWith("Success")) {
+                window.location.href = 'orderComplete.jsp';
+            } else {
+                console.error("Error in processing order:", response);
+                alert("Error in processing order. Please try again later.");
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX Error:", textStatus, errorThrown);
+            alert("Error sending data. Please try again later.");
+        }
+    });
+}

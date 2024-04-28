@@ -12,13 +12,13 @@
                             <div class="col-md-6">
                                 <div class="input-box">
                                     <label>First Name</label>
-                                    <input type="text" placeholder="First Name" name="fname"/>
+                                    <input type="text" placeholder="First Name" name="fname" id="fname"/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="input-box">
                                     <label>Last Name</label>
-                                    <input type="text" placeholder="Last Name" name="lname"/>
+                                    <input type="text" placeholder="Last Name" name="lname" id="lname"/>
                                 </div>
                             </div>
                         </div>
@@ -27,13 +27,13 @@
                     <div class="input-wrapper">
                         <div class="input-box">
                             <label>Phone Number</label>
-                            <input type="text" placeholder="Phone Number" name="pno"/>
+                            <input type="text" placeholder="Phone Number" name="pno" id="phone"/>
                         </div>
                     </div>
                     <div class="input-wrapper">
                         <div class="input-box">
                             <label>Email Address</label>
-                            <input type="text" placeholder="Email Address" name="email"/>
+                            <input type="text" placeholder="Email Address" name="email" id="email"/>
                         </div>
                     </div>
                 </div>
@@ -44,23 +44,23 @@
                     <div class="input-wrapper">
                         <div class="input-box">
                             <label>Street Address*</label>
-                            <input type="text" placeholder="Street Address" name="address" required/>
+                            <input type="text" placeholder="Street Address" name="address" id="street" required/>
                         </div>
                     </div>
                     <div class="input-wrapper">
                         <div class="input-box">
                             <label>Country*</label>
-                            <select>
-                                <option>Country</option>
-                                <option>Srilanka</option>
-                                <option>India</option>
+                            <select id="country">
+                                <option id="db-country">Country</option>
+                                <option value="sri-lanka">Srilanka</option>
+                                <option value="india">India</option>
                             </select>
                         </div>
                     </div>
                     <div class="input-wrapper">
                         <div class="input-box">
                             <label>Town/city*</label>
-                            <input type="text" placeholder="Town/city" name="city" required/>
+                            <input type="text" placeholder="Town/city" name="city" id="city" required/>
                         </div>
                     </div>
                     <div class="input-wrapper">
@@ -68,13 +68,13 @@
                             <div class="col-md-6">
                                 <div class="input-box">
                                     <label>State</label>
-                                    <input type="text" placeholder="State" name="state"/>
+                                    <input type="text" placeholder="State" id="state" name="state"/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="input-box">
                                     <label>Zip Code</label>
-                                    <input type="text" placeholder="Zip Code" name="zipcode"/>
+                                    <input type="text" placeholder="Zip Code" id="postalCode" name="zipcode"/>
                                 </div>
                             </div>
                         </div>
@@ -86,14 +86,14 @@
                     
                     <div class="radio-inputs-wrapper">
                         <div class="radio-input">
-                            <input type="radio" name="payment-method" id="credit-card" onclick="showPaymentInfo('credit-card')"/>
+                            <input type="radio" name="payment-method" id="credit-card" value="credit card" onclick="showPaymentInfo('credit-card')"/>
                             <label>Pay by Card Credit</label>
                         </div>
                         <p><img src="assets/icons/money.png"/></p>
                     </div>
                     <div class="radio-inputs-wrapper">
                         <div class="radio-input">
-                            <input type="radio" name="payment-method" id="paypal" onclick="showPaymentInfo('paypal')" />
+                            <input type="radio" name="payment-method" id="paypal" value="paypal" onclick="showPaymentInfo('paypal')" />
                             <label>Paypal</label>
                         </div>                      
                     </div>
@@ -118,10 +118,8 @@
                             <div class='details'>
                                 <h3>Tray Table</h3>
                                 <span>Color: Black</span>
-                                <div class="quantity-wrapper">
-                                    <button class="minus-btn" id="minus-btn" onclick="minus()"><img src="assets/icons/Minus.png" /></button>
-                                    <input type="text" value="2" id="quantity"/>
-                                    <button class="add-btn" id="add-btn" onclick="add()"><img src="assets/icons/Add.png" /></button>
+                                <div>
+                                    x2
                                 </div>
                             </div>
                         </div>
@@ -148,7 +146,7 @@
                 </div>
             </div>
         </div>
-        <div class="place-order-btn" onclick="loadContent('includes/cartPage/orderCompleteSection.jsp', this)">
+        <div class="place-order-btn" onclick="sendCheckoutData()">
             <b:Button rounded="false" outlined="false" text="Place Order" name="order"/>
         </div>
     </div>
