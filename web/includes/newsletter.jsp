@@ -1,3 +1,4 @@
+<!--News Letter-->
 <div class="newsletter">
     <div class="newsletter-content">
         <h1>Join Our Newsletter</h1>
