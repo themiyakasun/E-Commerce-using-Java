@@ -33,8 +33,20 @@
                     
                     <div class="profile-dropdown" id="profile-dropdown">
                         <ul class="list" role="list">
-                            <li><a href="sign-up">Sign up</a></li>
-                            <li><a href="sign-in">Sign in</a></li>
+                            <%
+                              Integer userId = (Integer) session.getAttribute("userId");
+                              if (userId != null) {
+                            %>
+                                <li><a href="#">Profile</a></li>
+                                <li><a onClick="signOut()">Log Out</a></li>
+                            <%
+                              } else {
+                            %>
+                                <li><a href="signup.jsp">Sign Up</a></li>
+                                <li><a href="signin.jsp">Sign In</a></li>
+                            <%
+                              }
+                            %>
                         </ul>
                     </div>
                 </button>
