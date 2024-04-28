@@ -7,41 +7,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import myPackage.common.DatabaseConnection;
 
 public class AccountDao {
-
-    private String jdbcURL = "jdbc:mysql://localhost:3306/3legant?useSSL=false";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "";
-
+    
     private static final String SELECT_USER_BY_ID = "select first_name,last_name, display_name,email,password,billing_phone,billing_address,shipping_phone,shipping_address, billing_name, shipping_name from user where user_id =?";
     private static final String UPDATE_USERS_SQL = "update user set first_name=?, last_name=?, display_name=?, email=?, password=?  WHERE user_id=?";
     private static final String UPDATE_BILLING_ADDRESS = "update user set billing_name=?,billing_phone=?,billing_address=?  WHERE user_id=?";
     private static final String UPDATE_SHIPPING_ADDRESS = "update user set shipping_name=?,shipping_phone=?,shipping_address=?  WHERE user_id=?";
     private static final String SELECT_ALL_ORDERS = "SELECT * FROM orders WHERE user_id=?";
+    private final DatabaseConnection databaseConnection = new DatabaseConnection();
 
 
-    public AccountDao() {
-    }
+    public AccountDao() {}
 
-    protected Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
 
 //slect user by id
     public Account selectUser(int user_id) {
         Account account = null;
-        try (Connection connection = getConnection();
+        try (Connection connection = databaseConnection.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
             preparedStatement.setInt(1, user_id);
             System.out.println(preparedStatement);
@@ -74,7 +58,7 @@ public class AccountDao {
         boolean rowUpdated;
         System.out.println("hi this is Dao");
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+        try (Connection connection = databaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
             statement.setString(1, account.getFirst_name());
             statement.setString(2, account.getLast_name());
             statement.setString(3, account.getDisplay_name());
@@ -93,7 +77,7 @@ public class AccountDao {
         boolean rowUpdated;
         System.out.println("hi this is Dao");
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_BILLING_ADDRESS);) {
+        try (Connection connection = databaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_BILLING_ADDRESS);) {
             statement.setString(1, account.getBilling_name());
             statement.setString(2, account.getBilling_phone());
             statement.setString(3, account.getBilling_address());
@@ -110,7 +94,7 @@ public class AccountDao {
         boolean rowUpdated;
         System.out.println("hi this is Dao");
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_SHIPPING_ADDRESS);) {
+        try (Connection connection = databaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_SHIPPING_ADDRESS);) {
             statement.setString(1, account.getShipping_name());
             statement.setString(2, account.getShipping_phone());
             statement.setString(3, account.getShipping_address());
@@ -125,7 +109,7 @@ public class AccountDao {
 
     public List<Order> selectAllOrders(int user_id) {
         List<Order> myorders = new ArrayList<>();
-        try (Connection connection = getConnection();
+        try (Connection connection = databaseConnection.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ORDERS)) {
             preparedStatement.setInt(1, user_id); // Set the user_id parameter
             ResultSet rs = preparedStatement.executeQuery();
