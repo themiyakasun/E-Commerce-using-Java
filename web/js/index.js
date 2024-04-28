@@ -559,7 +559,6 @@ function togglePasswordVisibility() {
 function signUp(){
     event.preventDefault();
     
-    var error;
     var firstName = $("#signup-fname").val();
     var lastName = $("#signup-lname").val();
     var email = $("#signup-email").val();
@@ -593,4 +592,54 @@ function signUp(){
         }
     });
         
+}
+
+function signIn(){
+    event.preventDefault();
+    
+    var email = $('#signin-email').val();
+    var password = $('#passwordInput').val();
+    
+    if(email.length === 0 || password.length === 0){
+        alert("Please fill in all fields and agree to the terms.");
+        return;
+    }
+    
+    var formData = $("#signin-form").serialize();
+    
+    $.ajax({
+        type: "GET",
+        url: "SigninServlet",
+        data: formData,
+        success: function (response) {
+            if(response === "Authentication successful as admin!"){
+                window.location.href = "admin";
+            }else if(response === "Authentication successful"){
+                alert(response);
+                window.location.href = "index.jsp";
+            }else {
+                alert(response);
+            }
+
+        },
+        error: function (xhr, status, error) {
+            alert("Error occurred: " + error);
+        }
+    });
+    
+}
+
+function signOut() {
+    $.ajax({
+        type: "GET",
+        url: "SignoutServlet",
+        success: function(response) {
+            if(response === 'Sign out Succesfully'){
+                window.location.href = "signin.jsp";
+            }
+        },
+        error: function(xhr, status, error) {
+            alert("Error occurred: " + error);
+        }
+    });
 }

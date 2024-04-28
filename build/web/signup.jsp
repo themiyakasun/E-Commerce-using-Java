@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-md-6 authentication-img">
                     <img src="assets/authentication.png" />
-                    <img src="assets/logo.png" class="logo">
+                    <a href="index.jsp" class="logo"><img src="assets/logo.png"></a>
                 </div>
                 <div class="col-md-6">
                     <form class="authentication-form" id="signup-form">

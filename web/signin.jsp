@@ -25,27 +25,15 @@
                     <a href="index.jsp" class="logo"><img src="assets/logo.png"></a>
                 </div>
                 <div class="col-md-6">
-                    <form class="authentication-form" id="signup-form">
-                        <h3>Sign up</h3>
-                        <p>Already have an account? <a href="signin.jsp">Sign in</a></p>
+                    <form class="authentication-form" id="signin-form">
+                        <h3>Sign In</h3>
+                        <p>Don’t have an accout yet? <a href="signup.jsp">Sign Up</a></p>
                         <p class="error" id="error"></p>
                         
                         
                         <div class="outlined-input">
                             <div class="input-wrapper">
-                                <input type="text" placeholder="First Name" name="fname" id="signup-fname" style="color: #000"/>
-                            </div>
-                        </div>
-                        
-                        <div class="outlined-input">
-                            <div class="input-wrapper">
-                                <input type="text" placeholder="Last Name" name="lname" id="signup-lname" style="color: #000"/>
-                            </div>
-                        </div>
-                        
-                        <div class="outlined-input">
-                            <div class="input-wrapper">
-                                <input type="email" placeholder="Email Address" name="email" id="signup-email" style="color: #000"/>
+                                <input type="email" placeholder="Email Address" name="email" id="signin-email" style="color: #000"/>
                             </div>
                         </div>
                         <div class="outlined-input">
@@ -54,17 +42,8 @@
                             </div>
                             <button onclick="togglePasswordVisibility()"><img src="assets/icons/eye.png" /></button>
                         </div>
-                        <div class="outlined-input">
-                            <div class="input-wrapper">
-                                <input type="text" placeholder="Phone Number" name="pno" id="signup-pno" style="color: #000"/>
-                            </div>
-                        </div>
                         
-                        <div class="d-flex gap-2 justify-content-start">
-                            <input type="checkbox" id="signup-terms"/><span>I agree with Privacy Policy and Terms of Use</span>
-                        </div>
-                        
-                        <b:Button outlined="false" rounded="false" text="Sign Up" id="sign-up" onclick="signUp()"/>
+                        <b:Button outlined="false" rounded="false" text="Sign in" id="sign-in" onclick="signIn()"/>
                     </form>
                 </div>
             </div>
