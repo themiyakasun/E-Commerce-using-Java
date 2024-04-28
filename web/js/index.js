@@ -213,7 +213,7 @@ function addToCart() {
 
                     var productDetailsColumn = $('<td>').append(
                         $('<div>').addClass('cart-product-details').append(
-                            $('<img>').attr('src', 'assets/' + item.productImage).addClass('pro-img'),
+                            $('<img>').attr('src', contextPath + '/uploads/' + item.productImage).addClass('pro-img'),
                             $('<div>').addClass('pro-details').append(
                                 $('<h3>').text(item.productName),
                                 $('<span>').text('Color: Black'),
@@ -282,7 +282,7 @@ function addToCart() {
                 $.each(data, function(index, item) {
                     var product = $('<div>').addClass('list-item').append( 
                         $('<div>').addClass('product').append(
-                            $('<img>').addClass('pro-img').attr('src', 'assets/' + item.productImg),
+                            $('<img>').addClass('pro-img').attr('src', contextPath + '/uploads/' + item.productImg),
                             $('<div>').addClass('details').append(
                                 $('<h3>').text(item.productName),
                                 $('<span>').text('Quantity: ' + item.quantity)
@@ -390,7 +390,7 @@ function addToCart() {
             $.each(data, function(index, item) {
                 var orderedItem = $('<div>').addClass('ordered-item').append(
                     $('<span>').addClass('circle').text(item.quantity),
-                    $('<img>').attr('src', 'assets/' + item.productImg)
+                    $('<img>').attr('src', contextPath + '/uploads/' + item.productImg)
                 );
                 orderedItems.append(orderedItem);
                 
