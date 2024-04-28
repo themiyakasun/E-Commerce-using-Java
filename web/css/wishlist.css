@@ -1,0 +1,67 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 28, 2024, 10:17:45 PM
+    Author     : vimukthi
+*/
+.cart-section {
+    padding-bottom: 80px;  
+}
+.cart-section-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 64px;
+}
+.cart-table {
+    width: 643px;
+}
+.cart-table th{
+    padding-bottom: 24px;
+    border-bottom: 1px solid #6C7275;
+}
+.cart-table td {
+    padding: 24px 0;
+    border-bottom: 1px solid #E8ECEF;
+}
+.cart-product-details {
+    display: flex;
+    width: 316px;
+    align-items: center;
+    gap: 16px;
+}
+.cart-product-details .pro-img {
+    display: flex;
+    width: 80px;
+    height: 96px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+.cart-product-details .pro-details {
+    display: flex;
+    width: 210px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+}
+.cart-product-details .pro-details h3 {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    color: #141718;
+    text-transform: capitalize;
+}
+.cart-product-details .pro-details span {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    color: #6C7275;
+}
+
