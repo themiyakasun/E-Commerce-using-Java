@@ -1337,3 +1337,21 @@ footer {
         overflow: auto;
     }
 }
+
+
+/* Shop Page */
+.hero-shop {
+    background-image: url(../assets/shop-header.png);  
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 392px;
+    position: relative;
+}
+.hero-shop .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}

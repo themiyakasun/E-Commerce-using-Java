@@ -22,18 +22,19 @@
         <%@include file="includes/search.jsp" %>
         
         <div class="container">
-            <img id="hero-shop" src="assets/Elements/cover.png">
-            <div class="hero-content">
-                <p>Home > Shop</p>
-                <h1>Shop Page</h1>
-                <p>Let’s design the place you always imagined.</p>
+            <div class="hero-shop">
+                <div class="hero-content">
+                    <p>Home > Shop</p>
+                    <h1>Shop Page</h1>
+                    <p>Let’s design the place you always imagined.</p>
+                </div>
             </div>
         </div>
         
         <section>
             <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="productGrid"> 
-                    <div class="col-md-3">
+                <div class="row mt-5" id="productGrid"> 
+                <div class="col-md-3 mb-5">
                         <a href="#" class="pro-card-wrapper">
                             <div class="pro-card">
                                 <div class="pro-card-img">
@@ -42,7 +43,9 @@
                                             <input type="hidden" name="pro_id" value="1" id="pro_id" />
                                             <input type="hidden" name="quantity" value="1" id="quantity" />
                                             <input type="hidden" name="sub_total" value="199.10" id="sub_total" />
-                                            <b:Button text="Add To Cart" rounded="false" outlined="false" onclick="addToCart()"/>
+                                            <div id="add-to-cart">
+                                                <b:Button text="Add To Cart" rounded="false" outlined="false" onclick="addToCart()"/>
+                                            </div>
                                         </form>
                                     </div>
                                     <div class="new">new</div>
@@ -63,9 +66,7 @@
                             </div>
                         </a>
                     </div>
-  
-                    <!--Show more btn-->
-                    <button class="shm-btn">Show More</button>
+                                        
                 </div>
             </div>
         </section>
@@ -73,12 +74,12 @@
         <%@include file="includes/newsletter.jsp" %>
         <%@include file="includes/footer.jsp" %>
         
-        <!--<script>
+        <script>
             var contextPath = "${pageContext.request.contextPath}";
-        </script>-->
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="js/index.js"></script>
-        <!--<script src="../js/shop.js"></script>-->
+        <script src="js/shop.js"></script>
         
 
         

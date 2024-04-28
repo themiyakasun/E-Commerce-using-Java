@@ -1,4 +1,4 @@
-/*package myPackage.shop;
+package myPackage.shop;
 
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -40,12 +40,15 @@ public class ShopServlet extends HttpServlet {
            try(ResultSet rs = statement.executeQuery()){
                while(rs.next()){
                    int proId = rs.getInt("pro_id");
+                   int catId = rs.getInt("cat_id");
                    String proName = rs.getString("pro_name");
-                   double discountPrice = rs.getDouble("discount_price");
                    double proPrice = rs.getDouble("pro_price");
                    String proImg = rs.getString("pro_img");
+                   String proDesc = rs.getString("pro_desc");
+                   double proReviews = rs.getDouble("reviews");
+                   String proDate = rs.getString("date");
                    
-                   shops.add(new Shop(proId, proName, discountPrice, proPrice, proImg));
+                   shops.add(new Shop(proId, proName, proPrice, proImg, proReviews));
                }
            }
         } catch (SQLException e) {
@@ -54,4 +57,4 @@ public class ShopServlet extends HttpServlet {
         
         return shops;
     }
-}*/
+}

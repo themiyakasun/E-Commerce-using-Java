@@ -3,16 +3,19 @@ package myPackage.shop;
 public class Shop {
     int proId;
     String proName;
-    double discountPrice;
+//    double discountPrice;
     double proPrice;
     String proImg;
+    double proReviews;
     
-    public Shop (int proId, String proName, double discountPrice, double proPrice, String proImg) {
+    public Shop (int proId, String proName, double proPrice, String proImg, double proReviews) {
         this.proId = proId;
         this.proName = proName;
-        this.discountPrice = discountPrice;
+//        this.discountPrice = discountPrice;
         this.proPrice = proPrice;
         this.proImg = proImg;
+        this.proReviews = proReviews;
+        
     }
     
     public int getProId(){
@@ -31,13 +34,13 @@ public class Shop {
         this.proName = proName;
     }
     
-    public double getDiscountPrice(){
-        return discountPrice;
-    }
-    
-    public void setDiscountPrice(double discountPrice){
-        this.discountPrice = discountPrice;
-    }
+//    public double getDiscountPrice(){
+//        return discountPrice;
+//    }
+//    
+//    public void setDiscountPrice(double discountPrice){
+//        this.discountPrice = discountPrice;
+//    }
     
     public double getProPrice(){
         return proPrice;
@@ -53,5 +56,13 @@ public class Shop {
     
     public void setProImg(String proImg){
         this.proImg = proImg;
+    }
+    
+    public double getProReviews(){
+        return proReviews;
+    }
+    
+    public void setProReviews(double proReviews){
+        this.proReviews = proReviews;
     }
 }
