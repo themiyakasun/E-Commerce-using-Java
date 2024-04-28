@@ -1,8 +1,3 @@
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="b" uri="/WEB-INF/tlds/buttonTags" %>
 <!DOCTYPE html>
@@ -37,18 +32,7 @@
         
         <section>
             <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <% 
-                       try {
-                           Class.forName("com.mysql.cj.jdbc.Driver");
-                          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/3legant?useSSL=false", "root", "");
-                          Statement st = con.createStatement();
-            
-                          String str = "SELECT * FROM products";
-                          ResultSet rs = st.executeQuery(str);
-            
-                          while(rs.next()) {     
-                    %> 
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="productGrid"> 
                     <div class="col-md-3">
                         <a href="#" class="pro-card-wrapper">
                             <div class="pro-card">
@@ -64,46 +48,38 @@
                                     <div class="new">new</div>
                                     <div class="discount">-50%</div>
                                     <button class="add-to-wishlist"><img src="assets/icons/wishlist.png" /></button>
-                                    <img src="assets/Elements/<%= rs.getString("image") %>" />
+                                    <img src="assets/Elements/product1.png" />
                                 </div>
                                 <div class="pro-card-details">
                                     <div class="rating">
                                        <img src="assets/icons/star.png" />
                                     </div>
-                                    <h2><%= rs.getString("name") %></h2>
+                                    <h2>Loving Sofa</h2>
                                     <div class="prices">
-                                       <span class="discount-price">$<%= rs.getString("discount_price") %></span>
-                                       <span class="price"><s>$<%= rs.getString("price") %></s></span>
+                                       <span class="discount-price">$200.00</span>
+                                       <span class="price"><s>$400.00</s></span>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <% 
-                        }
-                        rs.close();
-                        st.close();
-                        con.close();
-            
-                        } catch(SQLException e) {
-                           e.printStackTrace();
-                        }
-                    %> 
-                    
+  
                     <!--Show more btn-->
-                    <button class="sm-btn">Show More</button>
+                    <button class="shm-btn">Show More</button>
                 </div>
             </div>
         </section>
         
         <%@include file="includes/newsletter.jsp" %>
+        <%@include file="includes/footer.jsp" %>
         
-        <script>
+        <!--<script>
             var contextPath = "${pageContext.request.contextPath}";
-        </script>
+        </script>-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="js/index.js"></script>
-
+        <!--<script src="../js/shop.js"></script>-->
+        
 
         
     </body>

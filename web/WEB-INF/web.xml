@@ -64,6 +64,14 @@
         <servlet-name>GetProductServlet</servlet-name>
         <servlet-class>myPackage.admin.GetProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateProductServlet</servlet-name>
+        <servlet-class>myPackage.admin.UpdateProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrdersServelt</servlet-name>
+        <servlet-class>myPackage.admin.OrdersServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/CartServlet</url-pattern>
@@ -127,6 +135,14 @@
     <servlet-mapping>
         <servlet-name>GetProductServlet</servlet-name>
         <url-pattern>/GetProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductServlet</servlet-name>
+        <url-pattern>/UpdateProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrdersServelt</servlet-name>
+        <url-pattern>/OrdersServelt</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -23,7 +23,6 @@ $(document).ready(function() {
             var tbody = $('#categoriesTableBody');
             var dropdown = $('#pro_cat');
             tbody.empty(); 
-            dropdown.empty();
             
             if (categories.length === 0) {
                 tbody.append('<tr><td colspan="5" class="text-center">No categories available</td></tr>');
@@ -107,8 +106,52 @@ $(document).ready(function() {
         }
     }
     
+    function fetchOrders() {
+        $.ajax({
+            url: contextPath + '/OrdersServlet',
+            type: 'GET',
+            dataType: 'json',
+            success: function(orders) {
+                console.log(orders);
+                var tbody = $('#ordersTableBody');
+                tbody.empty();
+
+                if (orders.length === 0) {
+                    tbody.append('<tr><td colspan="6" class="text-center">No orders available</td></tr>');
+                } else {
+                    $.each(orders, function(index, order) {
+                        var row = $('<tr>');
+                        row.append($('<td>').text(order.orderCode));
+                        row.append($('<td>').text(order.userName));
+                        row.append($('<td>').text('$' + order.total.toFixed(2)));
+                        row.append($('<td>').html('<span class="'+ getStatusBadgeClass(order.status) + '">' + order.status + '</span>'));
+                        row.append($('<td>').text(order.date));
+                        tbody.append(row);
+                    });
+                }
+            },
+            error: function() {
+                alert('Error fetching orders.');
+            }
+        });
+    }
+
+    function getStatusBadgeClass(status) {
+        switch (status) {
+            case 'Received':
+                return 'alert-success';
+            case 'Cancelled':
+                return 'alert-danger';
+            case 'Pending':
+                return 'alert-warning';
+            default:
+                return '';
+        }
+    }
+    
     fetchCategories();
     fetchProducts();
+    fetchOrders();
 });
 
 var editMode = false;
@@ -219,26 +262,50 @@ function deleteProduct(proId){
     });
 }
 
-function editProducts(proId) {
-    $.ajax({
-        url: contextPath + '/GetProductServlet',
-        type: 'GET',
-        data: { proId: proId },
-        dataType: 'json',
-        success: function(category) {
-            console.log(category);
-            var catId = category[0].catId;
-            var catName = category[0].catName;
-            var catSlug = category[0].catSlug;
-            $('#catId').val(catId);
-            $('#catName').val(catName);
-            $('#catSlug').val(catSlug);
-            switchMode(catId);
-        },
-        error: function() {
-            alert('Error fetching products data.');
-        }
-    });
+function editProduct(proId) {
+    window.location.href = contextPath + '/admin/editProduct.jsp?proId=' + proId;
 }
 
+function changeImage(){
+    event.preventDefault();
+    var imgInput = $('#image_input');
+    var imageBox = $('#image_box');
+    imageBox.addClass('hidden');
+    imgInput.removeClass('hidden');
+    imgInput.addClass('active');
+}
+
+function cancelImageChange(){
+    event.preventDefault();
+    var imgInput = $('#image_input');
+    var imageBox = $('#image_box');
+    imgInput.removeClass("active");
+    imgInput.addClass("hidden");
+    imageBox.removeClass("hidden");
+    imageBox.addClass("active");    
+}
+
+function updateProduct(){
+    event.preventDefault();
+    var formData = $("#editProductForm").serialize();
+    var proNewImg = $("#pro_img").val();
+    
+    if (proNewImg) {
+        formData += "&pro_img=" + proNewImg;
+    } else {
+        var proImg = $("#img_input").val();
+        formData += "&pro_img=" + proImg;
+    }
+
+
+    $.ajax({
+        type: "POST",
+        url: contextPath + "/UpdateProductServlet",
+        data: formData,
+        success: function(response) {
+            window.location.href = contextPath +'/admin/products.jsp';
+       }
+    });
+    return false;
+}
 
