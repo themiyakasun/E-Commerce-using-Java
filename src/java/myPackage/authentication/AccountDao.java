@@ -89,6 +89,31 @@ public class AccountDao {
         return address;
     }
     
+    public Address selectShippingAddress(int user_id) {
+        Address address = null;
+        try (Connection connection = DbUtil.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ADDRESS);) {
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.setString(2, "shipping");
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                String streetAddress = rs.getString("street_address");
+                String city = rs.getString("city");
+                String state = rs.getString("state");
+                String postalCode = rs.getString("postal_code");
+                String country = rs.getString("country");
+                String user_name = rs.getString("user_name");
+                String phone_no = rs.getString("phone_no");                
+                address = new Address("shipping", streetAddress, city,
+                state, postalCode, country, user_name, phone_no);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return address;
+    }
+    
     public boolean updateAddress(Address address, int user_id) throws SQLException {
         boolean rowUpdated =false;
         System.out.println("hi this is Dao");
@@ -96,8 +121,8 @@ public class AccountDao {
         try{
             Connection connection = DbUtil.getConnection(); 
             PreparedStatement selectStatement  = connection.prepareStatement(SELECT_ADDRESS);
-            selectStatement.setInt(1, user_id); // Replace userId with the actual user ID
-            selectStatement.setString(2, address.getAddressType()); // Replace addressType with the actual address type
+            selectStatement.setInt(1, user_id); 
+            selectStatement.setString(2, address.getAddressType()); 
             ResultSet resultSet = selectStatement.executeQuery();
 
              if (resultSet.next()) {

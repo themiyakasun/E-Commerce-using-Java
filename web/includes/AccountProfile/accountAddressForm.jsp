@@ -38,7 +38,7 @@
                 <div class="col-md-4">
                     <div class="card custom-card">
                         <div class="card-header">
-                            <h3 class="card-title">Billing Address</h3>
+                            <h3 class="card-title">Billig Address</h3>
                         </div>
                         <div class="card-body">
                             <form action="myaccount" method="post" class="custom-form">
@@ -69,7 +69,7 @@
                                 <div class="form-group">
                                     <label for="billingPostalCode">Postal Code:</label>
                                     <input type="text" class="form-control" id="billing_phone" name="billing_postal_code" value="${billing_address.postalCode}" >
-                                </divbilling_address
+                                </div>
                                 <div class="form-group">
                                     <label for="billingCountry">Country:</label>
                                     <input type="text" class="form-control" id="billing_phone" name="billing_country" value="${billing_address.country}" >
@@ -89,37 +89,37 @@
                         <div class="card-body">
                             <form action="myaccount" method="post" class="custom-form">
                                 <input type="hidden" name="requestType" value="up_shipping_addr"/>
-                                <input type="hidden" name="user_id" value="${user.user_id}"/>
+                                <input type="hidden" name="user_id" value="${currentUserId}"/>
                                 <!-- Address Fields -->
                                 <div class="form-group">
                                     <label for="shippingName">Name:</label>
-                                    <input type="text" class="form-control" id="shipping_name" name="shipping_name" value="${user.shipping_name}" >
+                                    <input type="text" class="form-control" id="shipping_name" name="shipping_name" value="${shipping_address.user_name}">
 
                                 </div>
                                 <div class="form-group">
                                     <label for="shippingPhone">Phone Number:</label>
-                                    <input type="text" class="form-control" id="shipping_phone" name="shipping_phone" value="${user.shipping_phone}" >
+                                    <input type="text" class="form-control" id="shipping_phone" name="shipping_phone" value="${shipping_address.phone_no}" >
                                 </div>
                                 <div class="form-group">
                                     <label for="shippingStreet">Street Address:</label>
-                                    <input type="text" class="form-control" id="billing_phone" name="billing_phone" value="${user.billing_phone}" >
+                                    <input type="text" class="form-control" id="shipping_phone" name="shipping_street" value="${shipping_address.streetAddress}" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="shippingStreet">City:</label>
-                                    <input type="text" class="form-control" id="billing_phone" name="billing_phone" value="${user.billing_phone}" >
+                                    <label for="shippingCity">City:</label>
+                                    <input type="text" class="form-control" id="shipping_phone" name="shipping_city" value="${shipping_address.city}" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="shippingStreet">State:</label>
-                                    <input type="text" class="form-control" id="billing_phone" name="billing_phone" value="${user.billing_phone}" >
+                                    <label for="shippingState">State:</label>
+                                    <input type="text" class="form-control" id="shipping_phone" name="shipping_state" value="${shipping_address.state}" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="shippingStreet">Postal Code:</label>
-                                    <input type="text" class="form-control" id="billing_phone" name="billing_phone" value="${user.billing_phone}" >
+                                    <label for="shippingPostalCode">Postal Code:</label>
+                                    <input type="text" class="form-control" id="shipping_phone" name="shipping_postal_code" value="${shipping_address.postalCode}" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="shippingStreet">Country:</label>
-                                    <input type="text" class="form-control" id="billing_phone" name="billing_phone" value="${user.billing_phone}" >
-                                </div>     
+                                    <label for="shippingCountry">Country:</label>
+                                    <input type="text" class="form-control" id="shipping_phone" name="shipping_country" value="${shipping_address.country}" >
+                                </div>       
                                 <button type="submit" class="custom-submit-btn">Save Address</button>
                             </form>
 
