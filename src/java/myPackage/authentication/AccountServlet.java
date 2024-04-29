@@ -1,6 +1,8 @@
 package myPackage.authentication;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/myaccount")
 public class AccountServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static int currentUserId=1;
+    private static int currentUserId=5;
     private AccountDao accountDao;
 
     public AccountServlet() {
@@ -34,11 +36,11 @@ public class AccountServlet extends HttpServlet {
         if(userId != null) {
             currentUserId = userId;
         } else {
-            currentUserId=1;
+            currentUserId=5;
             // Handle case where "userId" attribute is not found in session
         }
     } else {
-         currentUserId=1;
+         currentUserId=5;
         // Handle case where session is not available
     }
     String requestType = request.getParameter("requestType");
@@ -133,8 +135,19 @@ public class AccountServlet extends HttpServlet {
         String confirmPassword = request.getParameter("confirm_password");
         String real_password = request.getParameter("real_password");
         String old_password = request.getParameter("old_password");
+        
+        String hashed_old_password = hashPassword(old_password);
+        String hashed_new_password = hashPassword(new_password);
+        
+        System.out.println("ABC");
+        System.out.println(hashed_old_password);     
+        System.out.println("ABC");
+        System.out.println("XYZ");
+        System.out.println(real_password);     
+        System.out.println("XYZ");
 
-        if (!real_password.equals(old_password)) {
+
+        if (!real_password.equals(hashed_old_password)) {
            request.setAttribute("error", "Old password is incorrect!");
            RequestDispatcher dispatcher = request.getRequestDispatcher("includes/AccountProfile/accountProfileForm.jsp");
             try {
@@ -155,7 +168,7 @@ public class AccountServlet extends HttpServlet {
             return;
         }
         System.out.println("hi this is servlet");
-        Account account = new Account(user_id,first_name, last_name, display_name, email,new_password);
+        Account account = new Account(user_id,first_name, last_name, display_name, email,hashed_new_password);
         accountDao.updateUser(account);
         response.sendRedirect("myaccount?action=details"); 
     }
@@ -184,5 +197,24 @@ public class AccountServlet extends HttpServlet {
         System.out.println("this is servlet and after making object");
         accountDao.updateShippingAddress(account);
         response.sendRedirect("myaccount?action=address");
+    }
+    
+    private String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = digest.digest(password.getBytes());
+            return bytesToHex(hashedBytes);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    private String bytesToHex(byte[] bytes) {
+        StringBuilder result = new StringBuilder();
+        for (byte b : bytes) {
+            result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+        }
+        return result.toString();
     }
 }
