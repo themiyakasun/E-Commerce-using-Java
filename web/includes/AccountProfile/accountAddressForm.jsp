@@ -10,27 +10,7 @@
         <link rel="stylesheet" type="text/css" href="css/accountAddress.css"> 
     </head>
     <body>
-
-        <span class="openbtn" onclick="toggleNav()">&#9776;</span>
-
-
-        <div id="mySidenav" class="sidenav">
-
-            <div class="profile">
-                <img src="includes/AccountProfile/logo1.png"  class="sidenavimg" >
-            </div>
-
-
-            <a href="#" class="active">Dashboard</a>
-            <a href="myaccount?action=details">Account</a>
-            <a href="myaccount?action=address">Address</a>
-            <a href="#">Orders</a>
-            <a href="#">Wishlist</a>
-            <a href="#">Logout</a> </div>
-
-
-
-
+        <%@include file="sideNav.jsp" %>
 
         <div class="container mt-5">
             <h1 class="header">ADDRESS</h1>

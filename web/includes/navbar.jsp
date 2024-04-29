@@ -37,7 +37,7 @@
                               Integer userId = (Integer) session.getAttribute("userId");
                               if (userId != null) {
                             %>
-                                <li><a href="#">Profile</a></li>
+                                <li><a href="http://localhost:8080/E-Commerce_with_Java/myaccount?action=details">Profile</a></li>
                                 <li><a onClick="signOut()">Log Out</a></li>
                             <%
                               } else {
