@@ -11,8 +11,9 @@ import myPackage.DbUtil;
 
 public class AccountDao {
     
-    private static final String SELECT_USER_BY_ID = "select first_name,last_name, display_name,email,password,billing_phone,billing_address,shipping_phone,shipping_address, billing_name, shipping_name from user where user_id =?";
-    private static final String UPDATE_USERS_SQL = "update user set first_name=?, last_name=?, display_name=?, email=?, password=?  WHERE user_id=?";
+//    private static final String SELECT_USER_BY_ID = "select first_name,last_name, display_name,email,password,billing_phone,billing_address,shipping_phone,shipping_address, billing_name, shipping_name from user where user_id =?";
+    private static final String SELECT_USER_BY_ID = "select * from users where user_id =?";
+    private static final String UPDATE_USERS_SQL = "update users set user_fname=?, user_lname=?, user_display_name=?, user_email=?, user_password=?  WHERE user_id=?";
     private static final String UPDATE_BILLING_ADDRESS = "update user set billing_name=?,billing_phone=?,billing_address=?  WHERE user_id=?";
     private static final String UPDATE_SHIPPING_ADDRESS = "update user set shipping_name=?,shipping_phone=?,shipping_address=?  WHERE user_id=?";
     private static final String SELECT_ALL_ORDERS = "SELECT * FROM orders WHERE user_id=?";
@@ -29,22 +30,20 @@ public class AccountDao {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                String first_name = rs.getString("first_name");
-                String last_name = rs.getString("last_name");
-                String display_name = rs.getString("display_name");
-                String email = rs.getString("email");
-                String password = rs.getString("password");
-                String billing_phone = rs.getString("billing_phone");
-                String billing_address = rs.getString("billing_address");
-                String shipping_phone = rs.getString("shipping_phone");
-                String shipping_address = rs.getString("shipping_address");
-                String billing_name = rs.getString("billing_name");
-                String shipping_name = rs.getString("shipping_name");
+                String first_name = rs.getString("user_fname");
+                String last_name = rs.getString("user_lname");
+                String display_name = rs.getString("user_display_name");
+                String email = rs.getString("user_email");
+                String password = rs.getString("user_password");
+//                String billing_phone = rs.getString("billing_phone");
+//                String billing_address = rs.getString("billing_address");
+//                String shipping_phone = rs.getString("shipping_phone");
+//                String shipping_address = rs.getString("shipping_address");
+//                String billing_name = rs.getString("billing_name");
+//                String shipping_name = rs.getString("shipping_name");
 
                 System.out.println("first_name: " + first_name);
-                System.out.println("billing_name: " + billing_name);
-                System.out.println("shipping_name: " + shipping_name);
-                account = new Account(user_id, first_name, last_name, display_name, email, password, billing_phone, billing_address, shipping_phone, shipping_address, billing_name, shipping_name);
+                account = new Account(user_id, first_name, last_name, display_name, email, password);
             }
         } catch (SQLException e) {
             printSQLException(e);
