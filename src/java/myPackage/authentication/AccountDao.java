@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import myPackage.common.DatabaseConnection;
+import myPackage.DbUtil;
 
 public class AccountDao {
     
@@ -16,8 +16,6 @@ public class AccountDao {
     private static final String UPDATE_BILLING_ADDRESS = "update user set billing_name=?,billing_phone=?,billing_address=?  WHERE user_id=?";
     private static final String UPDATE_SHIPPING_ADDRESS = "update user set shipping_name=?,shipping_phone=?,shipping_address=?  WHERE user_id=?";
     private static final String SELECT_ALL_ORDERS = "SELECT * FROM orders WHERE user_id=?";
-    private final DatabaseConnection databaseConnection = new DatabaseConnection();
-
 
     public AccountDao() {}
 
@@ -25,7 +23,7 @@ public class AccountDao {
 //slect user by id
     public Account selectUser(int user_id) {
         Account account = null;
-        try (Connection connection = databaseConnection.getConnection();
+        try (Connection connection = DbUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
             preparedStatement.setInt(1, user_id);
             System.out.println(preparedStatement);
@@ -58,7 +56,7 @@ public class AccountDao {
         boolean rowUpdated;
         System.out.println("hi this is Dao");
 
-        try (Connection connection = databaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+        try (Connection connection = DbUtil.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
             statement.setString(1, account.getFirst_name());
             statement.setString(2, account.getLast_name());
             statement.setString(3, account.getDisplay_name());
@@ -77,7 +75,7 @@ public class AccountDao {
         boolean rowUpdated;
         System.out.println("hi this is Dao");
 
-        try (Connection connection = databaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_BILLING_ADDRESS);) {
+        try (Connection connection = DbUtil.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_BILLING_ADDRESS);) {
             statement.setString(1, account.getBilling_name());
             statement.setString(2, account.getBilling_phone());
             statement.setString(3, account.getBilling_address());
@@ -94,7 +92,7 @@ public class AccountDao {
         boolean rowUpdated;
         System.out.println("hi this is Dao");
 
-        try (Connection connection = databaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_SHIPPING_ADDRESS);) {
+        try (Connection connection = DbUtil.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_SHIPPING_ADDRESS);) {
             statement.setString(1, account.getShipping_name());
             statement.setString(2, account.getShipping_phone());
             statement.setString(3, account.getShipping_address());
@@ -109,7 +107,7 @@ public class AccountDao {
 
     public List<Order> selectAllOrders(int user_id) {
         List<Order> myorders = new ArrayList<>();
-        try (Connection connection = databaseConnection.getConnection();
+        try (Connection connection = DbUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ORDERS)) {
             preparedStatement.setInt(1, user_id); // Set the user_id parameter
             ResultSet rs = preparedStatement.executeQuery();

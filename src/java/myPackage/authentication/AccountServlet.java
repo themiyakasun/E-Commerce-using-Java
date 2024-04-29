@@ -21,7 +21,6 @@ public class AccountServlet extends HttpServlet {
     private static int currentUserId=1;
     private AccountDao accountDao;
 
-
     public AccountServlet() {
         this.accountDao = new AccountDao();
     }
