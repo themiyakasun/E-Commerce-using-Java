@@ -189,7 +189,7 @@ public class AccountDao {
                 String order_code = rs.getString("order_code");
                 float total = rs.getFloat("total"); // Assuming total is a float type in the database
                 String shipping_method = rs.getString("shipping_method");
-                String order_date = rs.getString("order_date");
+                String order_date = rs.getString("ordered_date");
 
                 // Create a new Order object and add it to the list
                 Order order = new Order(order_id, order_code, total, shipping_method, order_date);
